@@ -32,21 +32,25 @@ namespace swap_book.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         [HttpGet]
-        public ActionResult Buy(int id)
+        public ActionResult Exchange(int id)
         {
             ViewBag.BookId = id;
             return View();
         }
-        [HttpPost]
-        public string Buy(Exchange exchange)
+
+        [HttpPost] // Додано атрибут, оскільки це POST-запит
+        public ActionResult PerformExchange(Exchange exchange)
         {
             exchange.Date = DateTime.Now;
             // Додаємо інформацію про покупку в базу даних
             db.Exchanges.Add(exchange);
             // Зберігаємо в БД всі зміни
             db.SaveChanges();
-            return "Спасибі," + exchange.Person + ", запит на обмін успішно надіслано!";
+            ViewBag.Message = "Спасибі, " + exchange.Person + ", запит на обмін успішно надіслано!";
+            return View("ExchangeConfirmation");
         }
+
     }
 }
