@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "SwapBook";
+   
+}
+
+<body>
+    <div class="container my-5">
+        <div class="text-center mx-auto">
+            <h3>Книги для обміну</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Назва книги</th>
+                        <th>Автор</th>
+                        <th>Бали</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in ViewBag.Books)
+                    {
+                        <tr>
+                            <td>@b.Name</td>
+                            <td>@b.Author</td>
+                            <td>@b.Points</td>
+                            <td><a href="/Home/Buy/@b.Id">Обміняти</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>

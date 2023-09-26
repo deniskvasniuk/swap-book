@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Header</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.png" alt="Логотип" width="150" height="75">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Головна <span class="sr-only">(поточна)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Про нас</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Послуги</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакти</a>
+                </li>
+            </ul>
+        </div>
+    
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Пошук">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Пошук</button>
+    </form>
+    
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="img/example_img.jpg" alt="Фото профілю" width="30" height="30" class="rounded-circle">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Мій профіль</a>
+                <a class="dropdown-item" href="#">Налаштування</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Вийти</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Про нас</h5>
+                    <p>SwapBook - це сервіс для обміну книжками, де ви можете знайти нові книги та поділитися своїми улюбленими.</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Зв'яжіться з нами</h5>
+                    <address>
+                        <p>Адреса: 123 Вулиця, Місто, Країна</p>
+                        <p>Email: info@swapbook.com</p>
+                        <p>Телефон: +1234567890</p>
+                    </address>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>&copy; 2023 SwapBook. Всі права захищені.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
