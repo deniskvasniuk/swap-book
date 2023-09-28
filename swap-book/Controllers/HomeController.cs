@@ -22,10 +22,7 @@ namespace swap_book.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -40,14 +37,15 @@ namespace swap_book.Controllers
             return View();
         }
 
-        [HttpPost] // Додано атрибут, оскільки це POST-запит
+        [HttpPost] 
         public ActionResult PerformExchange(Exchange exchange)
         {
             exchange.Date = DateTime.Now;
-            // Додаємо інформацію про покупку в базу даних
+            
             db.Exchanges.Add(exchange);
-            // Зберігаємо в БД всі зміни
+           
             db.SaveChanges();
+
             ViewBag.Message = "Спасибі, " + exchange.Person + ", запит на обмін успішно надіслано!";
             return View("ExchangeConfirmation");
         }

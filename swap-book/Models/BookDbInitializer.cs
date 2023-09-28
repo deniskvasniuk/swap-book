@@ -11,5 +11,5 @@ namespace swap_book.Models
             db.Books.Add(new Book { Name = "Кайдашева сім'я", Author = "Іван Нечуй-Левицький", Points = 30 });
             base.Seed(db);
         }
-        }
+    }
 }
