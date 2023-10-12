@@ -6,25 +6,25 @@ namespace swap_book.Controllers
 {
     public class HomeController : Controller
     {
-        BookContext db = new BookContext();
+        private readonly BookContext db;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BookContext context)
         {
             _logger = logger;
+            db = context;
         }
 
         public IActionResult Index()
         {
- 
-            IEnumerable<Book> books = db.Books;
-            ViewBag.Books = books;
+	        
             return View();
         }
 
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
