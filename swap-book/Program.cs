@@ -1,10 +1,17 @@
+
 using swap_book.Models;
 using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
+
+string connection = builder.Configuration.GetConnectionString("BookContext");
+
+builder.Services.AddDbContext<BookContext>(options => options.UseSqlServer(connection));
 
 var app = builder.Build();
 
@@ -27,6 +34,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-Database.SetInitializer(new BookDbInitializer());
+
 
 app.Run();
