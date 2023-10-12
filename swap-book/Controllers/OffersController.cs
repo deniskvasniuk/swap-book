@@ -90,7 +90,7 @@ namespace swap_book.Controllers
             Book book = db.Books.Find(id);
             return View(book);
         }
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteBook")]
         public ActionResult DeleteConfirmed(int? id)
         {
             if (id == null)
