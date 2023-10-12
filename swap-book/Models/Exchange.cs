@@ -1,4 +1,6 @@
-﻿namespace swap_book.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace swap_book.Models
 {
     public class Exchange
     {
@@ -8,9 +10,9 @@
         public string Person { get; set; }
       
         public string Address { get; set; }
-       
+
         public int BookId { get; set; }
-        
+
         public DateTime Date { get; set; }
     }
 }
