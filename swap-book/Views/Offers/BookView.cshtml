@@ -1,0 +1,33 @@
+﻿@using swap_book.Models
+@model swap_book.Models.Book
+@{
+    ViewData["Title"] = "SwapBook";
+}
+
+<body>
+
+ <div class="container mt-5">
+        <h2>Книга № @Model.BookId</h2>
+        <table class="table">
+            <tr>
+                <td><strong>Назва:</strong></td>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <td><strong>Автор:</strong></td>
+                <td>@Model.Author</td>
+            </tr>
+            <tr>
+                <td><strong>Зображення:</strong></td>
+                <td><img src="@Model.ImageUrl" alt="Book Image" class="img-thumbnail" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a href="/offers/exchange/@Model.BookId" class="btn btn-primary">Обміняти</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+
+</body>

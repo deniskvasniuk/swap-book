@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model swap_book.Models.Book
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center">Видалення книги</h2>
+
+            <dl>
+                <dt>Назва</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt>Автор</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Author)
+                </dd>
+                <dt>Ціна</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ImageUrl)
+                </dd>
+            </dl>
+
+            @using (Html.BeginForm("Delete", "Offers", FormMethod.Post, new { @class = "form-inline" }))
+            {
+            <input type="submit" value="Видалити" class="btn btn-danger" />
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@using swap_book.Models
+@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "SwapBook";
+   
+}
+
+<body>
+<div class="container my-5">
+    <div class="text-center mx-auto">
+        <h3>Книги для обміну</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Назва книги</th>
+                <th>Автор</th>
+                <th>Зображення</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (Book b in Model)
+            {
+                <tr>
+                    <td>@(b.Name ?? "N/A")</td>
+                    <td>@(b.Author ?? "N/A")</td>
+                    <td>@(b.ImageUrl ?? "N/A")</td>
+                            <td><p><a href="/offers/exchange/@b.BookId">Обміняти</a></p></td>
+                    <td><p><a href="/offers/bookview/@b.BookId">Перегляд</a></p></td>
+                    <td><p><a href="/offers/editbook/@b.BookId">Редагувати</a></p></td>
+                    <td><p><a href="/offers/addbook/@b.BookId">Додати</a></p></td>
+                    <td><p><a href="/offers/deletebook/@b.BookId">Видалити</a></p></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>

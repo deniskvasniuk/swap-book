@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "EditBook";
+}
+
+@model swap_book.Models.Book
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="text-center">
+                <h2>Книга № @Model.BookId</h2>
+            </div>
+
+            <form action="@Url.Action("EditBook", "Offers")" method="post">
+                <div>
+                    <input type="hidden" name="BookId" value="@Model.BookId" />
+
+                    <div class="form-group">
+                        <label for="Name">Назва книги</label>
+                        <input type="text" name="Name" id="Name" class="form-control" value="@Model.Name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Author">Автор</label>
+                        <input type="text" name="Author" id="Author" class="form-control" value="@Model.Author" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ImageUrl">Фото</label>
+                        <input type="text" name="ImageUrl" id="ImageUrl" class="form-control" value="@Model.ImageUrl" />
+                    </div>
+
+                    <div class="text-center" style="margin-top: 10px; margin-bottom: 20px;">
+                        <button type="submit" class="btn btn-primary">Відправити</button>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
