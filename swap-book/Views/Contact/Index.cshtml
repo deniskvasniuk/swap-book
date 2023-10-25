@@ -10,12 +10,12 @@
                 <div class="intro-excerpt">
                     <h1>Contact</h1>
                     <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-                    <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+                    <p><a href="" class="btn btn-secondary me-2">Exchange Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="hero-img-wrap">
-                    <img src="images/couch.png" class="img-fluid">
+                    <img class="img-fluid">
                 </div>
             </div>
         </div>
@@ -73,33 +73,32 @@
                             </div> <!-- /.service -->
                         </div>
                     </div>
-
-                    <form>
+                    <form method="post" action="">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label class="text-black" for="fname">First name</label>
-                                    <input type="text" class="form-control" id="fname">
+                                        <input name="FirstName" type="text" class="form-control" id="fname">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label class="text-black" for="lname">Last name</label>
-                                    <input type="text" class="form-control" id="lname">
+                                        <input name="LastName" type="text" class="form-control" id="lname">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="text-black" for="email">Email address</label>
-                            <input type="email" class="form-control" id="email">
+                            <input name="Email" type="email" class="form-control" id="email">
                         </div>
 
                         <div class="form-group mb-5">
                             <label class="text-black" for="message">Message</label>
-                            <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
+                            <textarea name="Msg" class="form-control" id="message" cols="30" rows="5"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary-hover-outline">Send Message</button>
+                            <button type="submit" formaction="/mail/feedback" formmethod="post" class="btn btn-primary-hover-outline">Send Message</button>
                     </form>
 
                 </div>
