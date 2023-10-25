@@ -2,6 +2,7 @@
 using swap_book.Models;
 using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
+using swap_book.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,10 @@ builder.Services.AddControllersWithViews();
 string connection = builder.Configuration.GetConnectionString("BookContext");
 
 builder.Services.AddDbContext<BookContext>(options => options.UseSqlServer(connection));
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+
+
 
 var app = builder.Build();
 
