@@ -13,7 +13,8 @@ builder.Services.AddControllersWithViews();
 string connection = builder.Configuration.GetConnectionString("BookContext");
 
 builder.Services.AddDbContext<BookContext>(options => options.UseSqlServer(connection));
-builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IEmailSender, MailService>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 
 

@@ -3,28 +3,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h1>Нова книга</h1>
+
 <div class="container mt-5">
-    <h2 class="text-center">Нова книга</h2>
-
-    @using (Html.BeginForm())
-    {
+    <form asp-action="AddBook" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, "Назва книги")
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            <label asp-for="ImageFile" class="control-label">Фото</label>
+            <input asp-for="ImageFile" type="file" class="form-control" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Author, "Автор")
-            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+            <label asp-for="Name" class="control-label">Назва книги</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.ImageUrl, "Фото")
-            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+            <label asp-for="Author" class="control-label">Автор</label>
+            <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
         </div>
-
         <div class="text-center" style="margin-top: 10px; margin-bottom: 20px;">
             <button type="submit" class="btn btn-primary">Відправити</button>
         </div>
-    }
+    </form>
 </div>

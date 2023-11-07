@@ -11,12 +11,12 @@ namespace swap_book.Services
         void SendMail(string firstname, string lastname, string email, string msg);
     }
 
-    public class EmailSender : IEmailSender
+    public class MailService : IEmailSender
     {
-        readonly ILogger<EmailSender> _logger;
+        readonly ILogger<MailService> _logger;
         readonly IConfiguration _configuration;
 
-        public EmailSender(IConfiguration configuration, ILogger<EmailSender> logger)
+        public MailService(IConfiguration configuration, ILogger<MailService> logger)
         {
             _configuration = configuration;
             _logger = logger;

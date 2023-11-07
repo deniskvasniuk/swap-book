@@ -1,0 +1,56 @@
+﻿@using swap_book.Models
+@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "SwapBook";
+}
+<body>
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Exchange</h1>
+                    <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+                    <p><a href="" class="btn btn-secondary me-2">Exchange Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    <img class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shell">
+    <div class="container">
+        <div class="row">
+            @foreach (var items in Model)
+            {
+                <div class="col-md-3">
+                    <div class="wsk-cp-product">
+                        <div class="wsk-cp-img">
+                            <img src="~/Uploads/@items.ImageUrl" alt="Product" class="img-responsive"/>
+                        </div>
+                        <div class="wsk-cp-text">
+                            <div class="category">
+                                <span>@items.Name</span>
+                            </div>
+                            <div class="title-product">
+                                <h3>@items.Author</h3>
+                            </div>
+                            <div class="description-prod">
+                                <p>@items.Name</p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="wcf-left"><span class="price">test</span></div>
+                                <div class="wcf-right"><a href="#" class="buy-btn"><i class="zmdi zmdi-shopping-basket"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+</body>
