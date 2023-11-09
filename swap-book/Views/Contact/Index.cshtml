@@ -73,33 +73,34 @@
                             </div> <!-- /.service -->
                         </div>
                     </div>
-                    <form method="post" action="">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="text-black" for="fname">First name</label>
-                                        <input name="FirstName" type="text" class="form-control" id="fname">
+                        <form method="post" action="">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="text-black" for="fname">First name</label>
+                                        <input name="FirstName" type="text" class="form-control" id="fname" required minlength="3" RegularExpression="^[^0-9a-zA-Z]+$">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="text-black" for="lname">Last name</label>
+                                        <input name="LastName" type="text" class="form-control" id="lname" required minlength="3" RegularExpression="^[^0-9a-zA-Z]+$">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label class="text-black" for="lname">Last name</label>
-                                        <input name="LastName" type="text" class="form-control" id="lname">
-                                </div>
+                            <div class="form-group">
+                                <label class="text-black" for="email">Email address</label>
+                                <input name="Email" type="email" class="form-control" id="email" required>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-black" for="email">Email address</label>
-                            <input name="Email" type="email" class="form-control" id="email">
-                        </div>
 
-                        <div class="form-group mb-5">
-                            <label class="text-black" for="message">Message</label>
-                            <textarea name="Msg" class="form-control" id="message" cols="30" rows="5"></textarea>
-                        </div>
+                            <div class="form-group mb-5">
+                                <label class="text-black" for="message">Message</label>
+                                <textarea name="Msg" class="form-control" id="message" cols="30" rows="5" required minlength="10"></textarea>
+                            </div>
 
                             <button type="submit" formaction="/mail/feedback" formmethod="post" class="btn btn-primary-hover-outline">Send Message</button>
-                    </form>
+                        </form>
+
 
                 </div>
 

@@ -3,28 +3,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Нова книга</h1>
+<h1 class="text-center">Нова книга</h1>
 
 <div class="container mt-5">
+
     <form asp-action="AddBook" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
         <div class="form-group">
-            <label asp-for="ImageFile" class="control-label">Фото</label>
-            <input asp-for="ImageFile" type="file" class="form-control" />
-            <span asp-validation-for="ImageFile" class="text-danger"></span>
+            <label asp-for="ImageFile" class="control-label">Оголошення</label>
+            <input asp-for="ImageFile" type="file" Required="true" class="form-control" />
         </div>
+
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+
         <div class="form-group">
-            <label asp-for="Name" class="control-label">Назва книги</label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <label asp-for="Name" class="control-label" >Назва книги</label>
+            <input asp-for="Name" type="text" Required="true" MinLength="3" class="form-control" />
         </div>
+
+        <span asp-validation-for="Name" class="text-danger"></span>
+
         <div class="form-group">
             <label asp-for="Author" class="control-label">Автор</label>
-            <input asp-for="Author" class="form-control" />
-            <span asp-validation-for="Author" class="text-danger"></span>
+            <input asp-for="Author" type="text" class="form-control" Required="true" RegularExpression="^[a-zA-Z ]+$  />
         </div>
+
+        <span asp-validation-for="Author" class="text-danger"></span>
+
         <div class="text-center" style="margin-top: 10px; margin-bottom: 20px;">
             <button type="submit" class="btn btn-primary">Відправити</button>
         </div>
+
     </form>
 </div>
