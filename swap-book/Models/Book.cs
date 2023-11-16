@@ -6,12 +6,15 @@ namespace swap_book.Models
 
     public class Book
     {
-
+        [ScaffoldColumn(false)]
         public int BookId { get; set; }
 
-       
+        [Required]
+        [Display(Name = "Назва")]
         public string Name { get; set; }
-        
+
+        [Required]
+        [Display(Name = "Автор")]
         public string Author { get; set; }
         
         public string? ImageUrl { get; set; }

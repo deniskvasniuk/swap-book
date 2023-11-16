@@ -11,9 +11,9 @@ namespace swap_book.Controllers
 
 	public class OffersController : Controller
 	{
-        private readonly BookContext _context;
+        private readonly DatabaseContext _context;
         private readonly IFileService _fileService;
-        public OffersController(BookContext context, IFileService fileService)
+        public OffersController(DatabaseContext context, IFileService fileService)
         {
             _context = context;
             _fileService = fileService;

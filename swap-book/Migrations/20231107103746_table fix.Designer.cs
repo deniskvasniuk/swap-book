@@ -10,7 +10,7 @@ using swap_book.Models;
 
 namespace swap_book.Migrations
 {
-    [DbContext(typeof(BookContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20231107103746_table fix")]
     partial class tablefix
     {

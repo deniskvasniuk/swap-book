@@ -38,6 +38,7 @@
 					<li><a class="nav-link" asp-controller="services" asp-action="index">Services</a></li>
 					<li><a class="nav-link" asp-controller="offers" asp-action="index">Offers</a></li>
 					<li><a class="nav-link" asp-controller="contact" asp-action="index">Contact us</a></li>
+					<li class="nav-link"> @await Html.PartialAsync("LanguageSelector")</li>
 				</ul>
 
 				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">

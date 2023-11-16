@@ -2,9 +2,9 @@
 
 namespace swap_book.Models
 {
-    public class BookContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public BookContext(DbContextOptions<BookContext> options) : base(options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
 
         }

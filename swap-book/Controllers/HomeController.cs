@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using swap_book.Models;
 using System.Diagnostics;
 
@@ -6,11 +7,11 @@ namespace swap_book.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BookContext db;
+        private readonly DatabaseContext db;
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, BookContext context)
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context)
         {
             _logger = logger;
             db = context;
@@ -50,5 +51,16 @@ namespace swap_book.Controllers
             return View("ExchangeConfirmation");
         }
 
+        [HttpPost]
+        public IActionResult SetLang(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
+        }
     }
 }

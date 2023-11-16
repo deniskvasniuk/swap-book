@@ -11,7 +11,7 @@ using swap_book.Models;
 
 namespace swap_book.Migrations
 {
-    [DbContext(typeof(BookContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20231107102818_Table update")]
     partial class Tableupdate
     {
