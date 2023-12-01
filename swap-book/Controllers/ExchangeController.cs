@@ -5,9 +5,9 @@ namespace swap_book.Controllers
 {
 	public class ExchangeController : Controller
 	{
-        private readonly BookContext _context;
+        private readonly DatabaseContext _context;
 
-        public ExchangeController(BookContext context)
+        public ExchangeController(DatabaseContext context)
         {
 			_context=context;
         }

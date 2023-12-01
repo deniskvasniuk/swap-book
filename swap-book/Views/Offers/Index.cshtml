@@ -1,31 +1,9 @@
 ﻿@using swap_book.Models
 @model IEnumerable<Book>
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "SwapBook";
-   
 }
-
-<body>
-    <!-- Start Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-5">
-                    <div class="intro-excerpt">
-                        <h1>Offers</h1>
-                        <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-                        <p><a href="" class="btn btn-secondary me-2">Exchange Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="hero-img-wrap">
-                        <img class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- End Hero Section -->
 
 <div class="container my-5">
     <div class="text-center mx-auto">
@@ -37,35 +15,38 @@
                 <th>Зображення</th>
                 <th>Назва</th>
                 <th>Автор</th>
-                <th>Назва фото</th>
+                <th>Власник</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-                @foreach (Book b in Model)
-                {
-                    <tr>
-                        <td>
-                            <img src="/Uploads/@b.ImageUrl" height="150px" width="175px"/>
-                        </td>
-
-                        <td>@(b.Name ?? "N/A")</td>
-                        <td>@(b.Author ?? "N/A")</td>
-                        <td>@(b.ImageUrl ?? "N/A")</td>
-                        <td>
-                            <p><a href="/offers/exchange/@b.BookId">Обміняти</a></p></td>
-                        <td>
-                            <p><a href="/offers/bookview/@b.BookId">Перегляд</a></p></td>
-                        <td>
-                            <p><a href="/offers/editbook/@b.BookId">Редагувати</a></p></td>
-                        <td>
-                            <p><a href="/offers/addbook/@b.BookId">Додати</a></p></td>
-                        <td>
-                            <p><a href="/offers/deletebook/@b.BookId">Видалити</a></p></td>
-                    </tr>
-                }
+            @foreach (Book book in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="/Uploads/@book.ImageUrl" height="150px" width="175px" />
+                    </td>
+                    <td>@(book.Name ?? "N/A")</td>
+                    <td>@(book.Author ?? "N/A")</td>
+                    <td>@(book.Owner?.Name ?? "N/A")</td>
+                    <td>
+                        <p><a href="/offers/exchange/@book.BookId">Обміняти</a></p>
+                    </td>
+                    <td>
+                        <p><a href="/offers/bookview/@book.BookId">Перегляд</a></p>
+                    </td>
+                    <td>
+                        <p><a href="/offers/editbook/@book.BookId">Редагувати</a></p>
+                    </td>
+                    <td>
+                        <p><a href="/offers/addbook/@book.BookId">Додати</a></p>
+                    </td>
+                    <td>
+                        <p><a href="/offers/deletebook/@book.BookId">Видалити</a></p>
+                    </td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>
 </div>
-</body>

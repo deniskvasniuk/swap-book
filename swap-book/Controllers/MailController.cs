@@ -35,7 +35,6 @@ namespace swap_book.Controllers
             }
 
             return RedirectToAction("Index", "Home");
-
         }
     }
 }
