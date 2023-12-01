@@ -5,6 +5,7 @@
 @using Microsoft.AspNetCore.Identity
 @using swap_book.Models
 
+@model swap_book.Models.Subscriber
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -319,12 +320,12 @@
 						</div>
 						<div class="newsletter__block text-center">
 							<p>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</p>
-							<form action="#">
-								<div class="newsletter__box">
-									<input type="email" placeholder="Enter your e-mail">
-									<button>Subscribe</button>
-								</div>
-							</form>
+                            <form asp-action="SubscribeUser" method="post">
+                                <div class="newsletter__box">
+                                    <input type="email" name="SubscriberEmail" placeholder="Enter your e-mail">
+                                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                                </div>
+                            </form>
 						</div>
 					</div>
 				</div>

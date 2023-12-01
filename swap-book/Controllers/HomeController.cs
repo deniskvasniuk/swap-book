@@ -2,19 +2,22 @@
 using Microsoft.AspNetCore.Mvc;
 using swap_book.Models;
 using System.Diagnostics;
+using swap_book.Services;
 
 namespace swap_book.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly DatabaseContext db;
+        private readonly DatabaseContext _context;
+        private readonly IEmailSender _emailSender;
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, DatabaseContext context)
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context, IEmailSender emailSender)
         {
             _logger = logger;
-            db = context;
+            _context = context;
+            _emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -43,9 +46,9 @@ namespace swap_book.Controllers
         {
             exchange.Date = DateTime.Now;
             
-            db.Exchanges.Add(exchange);
+            _context.Exchanges.Add(exchange);
            
-            db.SaveChanges();
+            _context.SaveChanges();
 
             ViewBag.Message = "Спасибі, " + exchange.Person + ", запит на обмін успішно надіслано!";
             return View("ExchangeConfirmation");
@@ -61,6 +64,56 @@ namespace swap_book.Controllers
             );
 
             return LocalRedirect(returnUrl);
+        }
+        [HttpPost]
+        public IActionResult SubscribeUser(Subscriber model)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingSubscriber =
+                    _context.Subscribers.FirstOrDefault(s => s.SubscriberEmail == model.SubscriberEmail);
+
+                if (existingSubscriber == null)
+                {
+                    model.SubscribitionTime = DateTime.Now;
+                    model.Confirmed = false;
+                    model.ConfirmationToken = GenerateToken();
+                    _context.Subscribers.Add(model);
+                    _context.SaveChanges();
+
+                    // Send a confirmation email to the subscriber
+                    _emailSender.SendConfirmationEmail(model.SubscriberEmail, model.ConfirmationToken);
+                }
+            }
+
+            // Return appropriate response, e.g., redirect to a thank you page
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet("/confirm-subscription")]
+        public IActionResult ConfirmSubscription([FromQuery] string token)
+        {
+            if (!string.IsNullOrEmpty(token))
+            {
+                var subscription = _context.Subscribers.FirstOrDefault(s => s.ConfirmationToken == token);
+
+                if (subscription != null)
+                {
+                    subscription.Confirmed = true;
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            return View("Error");
+        }
+        private string GenerateToken()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var random = new Random();
+            var token = new string(Enumerable.Repeat(chars, 32)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            return token;
         }
     }
 }

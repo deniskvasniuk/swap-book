@@ -7,20 +7,19 @@ namespace swap_book.Models
 	{
 		public DbSet<Book> Books { get; set; }
 		public DbSet<Exchange> Exchanges { get; set; }
+		public DbSet<Subscriber> Subscribers { get; set; }
 
-		public DatabaseContext(DbContextOptions<DatabaseContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
 			: base(options)
 		{
 		}
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			base.OnModelCreating(modelBuilder);
 
-			modelBuilder.Entity<Book>()
-				.HasOne(b => b.Owner)
-				.WithMany(u => u.Books)
-				.HasForeignKey(b => b.OwnerId);
-		}
-	}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
+        }
+
+
+    }
 }

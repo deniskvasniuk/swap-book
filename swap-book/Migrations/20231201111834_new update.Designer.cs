@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using swap_book.Models;
 
@@ -11,9 +12,11 @@ using swap_book.Models;
 namespace swap_book.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class BookContextModelSnapshot : ModelSnapshot
+    [Migration("20231201111834_new update")]
+    partial class newupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,7 +252,12 @@ namespace swap_book.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("BookId");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Books");
                 });
@@ -279,6 +287,33 @@ namespace swap_book.Migrations
                     b.HasKey("ExchangeId");
 
                     b.ToTable("Exchanges");
+                });
+
+            modelBuilder.Entity("swap_book.Models.Subscriber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConfirmationToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SubscriberEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SubscribitionTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subscribers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -330,6 +365,20 @@ namespace swap_book.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("swap_book.Models.Book", b =>
+                {
+                    b.HasOne("swap_book.Models.ApplicationUser", "Owner")
+                        .WithMany("Books")
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("swap_book.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

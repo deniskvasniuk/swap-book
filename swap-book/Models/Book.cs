@@ -23,8 +23,8 @@ namespace swap_book.Models
 		public IFormFile ImageFile { get; set; }
 
 		[Display(Name = "Власник")]
-		public string OwnerId { get; set; }
+		public string? OwnerId { get; set; }
 
-		public ApplicationUser Owner { get; set; }
+		public ApplicationUser? Owner { get; set; }
 	}
 }
