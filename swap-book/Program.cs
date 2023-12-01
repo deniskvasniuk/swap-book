@@ -37,6 +37,7 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(c
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultUI()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IEmailSender, MailService>();
@@ -80,8 +81,15 @@ app.Use((context, next) =>
 });
 
 app.MapControllerRoute(
+    name: "publicProfile",
+    pattern: "User/{publicProfileLink}",
+    defaults: new { controller = "User", action = "PublicProfile" }
+);
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 using (var scope = app.Services.CreateScope())
 {

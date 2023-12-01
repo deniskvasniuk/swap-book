@@ -26,5 +26,6 @@ namespace swap_book.Models
 		public string? OwnerId { get; set; }
 
 		public ApplicationUser? Owner { get; set; }
-	}
+        public List<Wishlist> Wishlists { get; set; }
+    }
 }

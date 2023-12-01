@@ -39,7 +39,7 @@
 									<h2>Exchange <span>your </span></h2>
 									<h2>used <span>Book </span></h2>
                                     <h2>from <span>Here </span></h2>
-                                    @if (SignInManager.IsS)
+                                    @if (SignInManager.IsSignedIn(User))
                                     {
 										
                                         <a class="shopbtn" href="#">exchange now</a>

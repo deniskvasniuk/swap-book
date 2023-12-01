@@ -20,6 +20,5 @@ namespace swap_book.Models
             optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
         }
 
-
     }
 }
