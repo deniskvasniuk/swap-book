@@ -2,71 +2,56 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="main">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h2>Create a new account.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.Email">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password">Password</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-            </form>
-        </div>
-        <div class="col-md-6 col-md-offset-2">
-            <section>
-                <h3>Use another service to register.</h3>
-                <hr />
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
-                        <div>
-                            <p>
-                                There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
-                                    article
-                                    about setting up this ASP.NET application to support logging in via external services
-                                </a>.
-                            </p>
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="POST" class="register-form" id="register-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        <div class="form-group">
+                            <input asp-for="Input.Name" autocomplete="username" aria-required="true" placeholder="First Last" />
+                            <label asp-for="Input.Name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
                         </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins!)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
-                }
-            </section>
+                        <div class="form-group">
+                            <input asp-for="Input.Email" type="email" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.Email"><i class="zmdi zmdi-email"></i></label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password"><i class="zmdi zmdi-lock"></i></label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="Input.ConfirmPassword" type="password" autocomplete="new-password" aria-required="true" placeholder="Repeat your password" />
+                            <label asp-for="Input.ConfirmPassword"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" required="true" id="agree-term" class="agree-term"/>
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="~/images/signup-image.jpg" alt="sing up image"></figure>
+                    <a href="~/Identity/Account/Login" class="signup-image-link">I am already member</a>
+                </div>
+            </div>
         </div>
-    </div>
-
+    </section>
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -35,10 +35,13 @@ string connection = builder.Configuration.GetConnectionString("BookContext");
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<DatabaseContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IEmailSender, MailService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddRazorPages();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog();
@@ -80,6 +83,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
+using (var scope = app.Services.CreateScope())
+{
+    await DbSeeder.SeedRolesAndAdminAsync(scope.ServiceProvider);
+}
 app.MapRazorPages();
 app.Run();
