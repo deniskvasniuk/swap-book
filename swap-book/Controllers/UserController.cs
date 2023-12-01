@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using swap_book.Models;
 
 namespace swap_book.Controllers
@@ -8,17 +9,16 @@ namespace swap_book.Controllers
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserController()
+        public UserController(UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
+        }
 
-        }
-        public IActionResult Index()
+
+        public async Task<IActionResult> PublicProfile(string publicProfileLink)
         {
-            return View();
-        }
-        public async Task<IActionResult> PublicProfile(Guid publicProfileLink)
-        {
-            ApplicationUser user = await _userManager.FindByPublicProfileLinkAsync(publicProfileLink.ToString());
+            var result = await _userManager.Users.FirstOrDefaultAsync(u => u.PublicProfileLink == new Guid(publicProfileLink));
+            ApplicationUser user = result;
 
             if (user == null)
             {
@@ -27,6 +27,8 @@ namespace swap_book.Controllers
 
             return View(user);
         }
+
+
 
     }
 }
