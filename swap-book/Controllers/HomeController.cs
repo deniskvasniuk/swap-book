@@ -25,10 +25,19 @@ namespace swap_book.Controllers
 	        
             return View();
         }
+        public IActionResult Contact()
+        {
 
+            return View("~/Views/Contact/Index.cshtml");
+        }
 
+        public IActionResult UserProfile()
+        {
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+            return View("~/Views/User/PublicProfile.cshtml");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
