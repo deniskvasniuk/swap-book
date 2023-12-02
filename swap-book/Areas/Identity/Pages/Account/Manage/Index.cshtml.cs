@@ -28,7 +28,7 @@ namespace swap_book.Areas.Identity.Pages.Account.Manage
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            this._fileService= fileService;
+            this._fileService = fileService;
         }
 
         /// <summary>
@@ -65,10 +65,15 @@ namespace swap_book.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
-            [Display(Name = "Name")]
-            public string Name { get; set; }
+            [Display(Name = "Name")] public string Name { get; set; }
             public string ProfilePicture { get; set; }
             public IFormFile ImageFile { get; set; }
+
+            [Display(Name = "Description")] public string Description { get; set; }
+
+            [Display(Name = "Date of Birth")] public DateTime? DateOfBirth { get; set; }
+
+            [Display(Name = "Facebook")] public string Facebook { get; set; }
 
         }
 
@@ -83,9 +88,13 @@ namespace swap_book.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 Name = user.Name,
-                ProfilePicture = user.ProfilePicture
+                ProfilePicture = user.ProfilePicture,
+                Description = user.Description,
+                DateOfBirth = user.DateOfBirth,
+                Facebook = user.Facebook
             };
         }
+
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -127,7 +136,25 @@ namespace swap_book.Areas.Identity.Pages.Account.Manage
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
-               await _userManager.UpdateAsync(user);
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.Description != user.Description)
+            {
+                user.Description = Input.Description;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.DateOfBirth != user.DateOfBirth)
+            {
+                user.DateOfBirth = Input.DateOfBirth;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.Facebook != user.Facebook)
+            {
+                user.Facebook = Input.Facebook;
+                await _userManager.UpdateAsync(user);
             }
 
             if (Input.ImageFile != null)
@@ -141,6 +168,7 @@ namespace swap_book.Areas.Identity.Pages.Account.Manage
                     var deleteResult = _fileService.DeleteImage(oldImage);
                 }
             }
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
