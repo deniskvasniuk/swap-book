@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace swap_book.Models
 {
@@ -30,5 +31,14 @@ namespace swap_book.Models
         public List<Wishlist> Wishlists { get; set; }
 
         public List<BookCategory> BookCategories { get; set; }
-    }
+        public Guid? BookLink { get; set; }
+        public string? Description { get; set; }
+        public void LoadCategories(DatabaseContext context)
+        {
+	        this.BookCategories = context.BookCategories
+		        .Where(bc => bc.BookId == BookId)
+		        .Include(bc => bc.Category)
+		        .ToList();
+        }
+	}
 }

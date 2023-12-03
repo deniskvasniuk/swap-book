@@ -32,7 +32,7 @@ namespace swap_book.Controllers
             }
             else
             {
-                var currentUserBooks = _context.Books.Where(b => b.OwnerId == User.Identity.Name);
+                var currentUserBooks = _context.Books.Where(b => b.OwnerId == _userManager.GetUserId(User));
                 return View(currentUserBooks);
             }
         }
@@ -59,7 +59,7 @@ namespace swap_book.Controllers
 
            var book = _context.Books.Find(id);
             // Check if the user is an administrator or the owner of the book
-            if (!User.IsInRole("Admin") && book?.OwnerId != User.Identity.Name)
+            if (!User.IsInRole("Admin") && book?.OwnerId != _userManager.GetUserId(User))
             {
                 return Forbid(); // Return 403 Forbidden if not authorized
             }
@@ -83,7 +83,7 @@ namespace swap_book.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditBook(Book book)
         {
-            if (!User.IsInRole("Admin") && book?.OwnerId != User.Identity.Name)
+            if (!User.IsInRole("Admin") && book?.OwnerId != _userManager.GetUserId(User))
             {
                 return Forbid(); 
             }
@@ -136,6 +136,7 @@ namespace swap_book.Controllers
         public ActionResult AddBook(Book book)
         {
             book.OwnerId = _userManager.GetUserId(User);
+            book.BookLink = Guid.NewGuid();
 
             try
             {
@@ -205,6 +206,25 @@ namespace swap_book.Controllers
             _context.Books.Remove(book);
             _context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [Route("book/{bookUrl}")]
+		public ActionResult BookPage(string bookUrl)
+        {
+	        var book = _context.Books.FirstOrDefault(b => b.BookLink == new Guid(bookUrl));
+	        book.LoadCategories(_context);
+			Book result = book;
+			if (bookUrl == null)
+	        {
+		        return NotFound();
+	        }
+
+	        if (book == null)
+	        {
+		        return NotFound();
+	        }
+
+			return View(result);
         }
     }
 }

@@ -82,7 +82,7 @@ app.Use((context, next) =>
 
 app.MapControllerRoute(
     name: "publicProfile",
-    pattern: "User/{publicProfileLink}",
+    pattern: "user/{publicProfileLink}",
     defaults: new { controller = "User", action = "PublicProfile" }
 );
 
@@ -90,6 +90,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+	name: "default",
+	pattern: "book/{bookUrl}",
+	defaults: new { controller = "Offers", action = "BookPage" }
+);
 
 using (var scope = app.Services.CreateScope())
 {
