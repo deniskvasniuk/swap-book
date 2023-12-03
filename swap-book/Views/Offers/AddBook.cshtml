@@ -6,10 +6,14 @@
 <h1 class="text-center">Нова книга</h1>
 
 <div class="container mt-5">
-
     <form asp-action="AddBook" enctype="multipart/form-data">
 
         <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="BookCategories" class="control-label">Категорії</label>
+            <select name="BookCategories" asp-items="new SelectList(ViewBag.Categories, nameof(Category.CategoryId), nameof(Category.CategoryName))" class="form-control" multiple></select>
+        </div>
+
 
         <div class="form-group">
             <label asp-for="ImageFile" class="control-label">Оголошення</label>
@@ -19,7 +23,7 @@
         <span asp-validation-for="ImageFile" class="text-danger"></span>
 
         <div class="form-group">
-            <label asp-for="Name" class="control-label" >Назва книги</label>
+            <label asp-for="Name" class="control-label">Назва книги</label>
             <input asp-for="Name" type="text" Required="true" MinLength="3" class="form-control" />
         </div>
 
@@ -27,7 +31,7 @@
 
         <div class="form-group">
             <label asp-for="Author" class="control-label">Автор</label>
-            <input asp-for="Author" type="text" class="form-control" Required="true" RegularExpression="^[a-zA-Z ]+$  />
+            <input asp-for="Author" type="text" class="form-control" Required="true" RegularExpression="^[a-zA-Z ]+$" />
         </div>
 
         <span asp-validation-for="Author" class="text-danger"></span>
@@ -35,6 +39,5 @@
         <div class="text-center" style="margin-top: 10px; margin-bottom: 20px;">
             <button type="submit" class="btn btn-primary">Відправити</button>
         </div>
-
     </form>
 </div>

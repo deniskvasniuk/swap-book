@@ -6,26 +6,29 @@ namespace swap_book.Models
 
 	public class Book
 	{
-		[ScaffoldColumn(false)]
-		public int BookId { get; set; }
+        [ScaffoldColumn(false)]
+        public int BookId { get; set; }
 
-		[Required]
-		[Display(Name = "Назва")]
-		public string Name { get; set; }
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
 
-		[Required]
-		[Display(Name = "Автор")]
-		public string Author { get; set; }
+        [Required]
+        [Display(Name = "Author")]
+        public string Author { get; set; }
 
-		public string? ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
-		[NotMapped]
-		public IFormFile ImageFile { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
 
-		[Display(Name = "Власник")]
-		public string? OwnerId { get; set; }
+        [Display(Name = "Owner")]
+        public string? OwnerId { get; set; }
 
-		public ApplicationUser? Owner { get; set; }
+        public ApplicationUser? Owner { get; set; }
+
         public List<Wishlist> Wishlists { get; set; }
+
+        public List<BookCategory> BookCategories { get; set; }
     }
 }

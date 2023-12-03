@@ -1,52 +1,62 @@
 ﻿@using swap_book.Models
-@model IEnumerable<Book>
+@model IEnumerable<swap_book.Models.Book>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "SwapBook";
 }
 
-<div class="container my-5">
-    <div class="text-center mx-auto">
-        <h3>Книги для обміну</h3>
+<div class="container" style="margin-top:100px">
+    @if (!Model.Any())
+    {
+        <p>Denis, you have no books on offer yet. Add one now!</p>
+        <ol>
+            <li>Use the SwapBook Search Bar to find the book you want to offer.</li>
+            <li>Open the book entry.</li>
+            <li>Click "Offer this book".</li>
+            <li>For the first 10 books on offer, you will receive an additional 10 points that you can exchange for the books you want!</li>
+        </ol>
+    }
+    else
+    {
+        <div class="text-center mx-auto">
+            <h3 style="margin:22px 0">Your offers</h3>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Зображення</th>
-                <th>Назва</th>
-                <th>Автор</th>
-                <th>Власник</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (Book book in Model)
-            {
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>
-                        <img src="/Uploads/@book.ImageUrl" height="150px" width="175px" />
-                    </td>
-                    <td>@(book.Name ?? "N/A")</td>
-                    <td>@(book.Author ?? "N/A")</td>
-                    <td>@(book.Owner?.Name ?? "N/A")</td>
-                    <td>
-                        <p><a href="/offers/exchange/@book.BookId">Обміняти</a></p>
-                    </td>
-                    <td>
-                        <p><a href="/offers/bookview/@book.BookId">Перегляд</a></p>
-                    </td>
-                    <td>
-                        <p><a href="/offers/editbook/@book.BookId">Редагувати</a></p>
-                    </td>
-                    <td>
-                        <p><a href="/offers/addbook/@book.BookId">Додати</a></p>
-                    </td>
-                    <td>
-                        <p><a href="/offers/deletebook/@book.BookId">Видалити</a></p>
-                    </td>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Аuthor</th>
+                    <th>Owner</th>
+                    <th></th>
                 </tr>
-            }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                @foreach (Book book in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="/Uploads/@book.ImageUrl" height="150px" width="175px"/>
+                        </td>
+                        <td>@(book.Name ?? "N/A")</td>
+                        <td>@(book.Author ?? "N/A")</td>
+                        <td>@(book.Owner?.Name ?? "N/A")</td>
+                        <td>
+                            <p><a href="/offers/bookview/@book.BookId">View</a></p>
+                        </td>
+                        <td>
+                            <p><a href="/offers/editbook/@book.BookId">Edit</a></p>
+                        </td>
+                        <td>
+                            <p><a href="/offers/addbook/@book.BookId">Add</a></p>
+                        </td>
+                        <td>
+                            <p><a href="/offers/deletebook/@book.BookId">Delete</a></p>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
 </div>

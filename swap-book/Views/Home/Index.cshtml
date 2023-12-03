@@ -21,7 +21,15 @@
 									<h2>Exchange <span>your </span></h2>
 									<h2>used <span>Book </span></h2>
 									<h2>from <span>Here </span></h2>
-									<a class="shopbtn" href="#">shop now</a>
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+										
+                                        <a class="shopbtn" href="#">exchange now</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="shopbtn" href="~/Identity/Account/Login">exchange now</a>
+                                    }
 								</div>
 							</div>
 						</div>
@@ -46,7 +54,7 @@
                                     }
                                     else
                                     {
-								<a class="shopbtn" href="~/Identity/Account/Login">exchange now</a>
+								        <a class="shopbtn" href="~/Identity/Account/Login">exchange now</a>
                                     }
 								</div>
 							</div>
