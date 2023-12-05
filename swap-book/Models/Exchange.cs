@@ -3,16 +3,31 @@ namespace swap_book.Models
 {
     public class Exchange
     {
-        
-        public int ExchangeId { get; set; }
-        
-        public string Person { get; set; }
-      
-        public string Address { get; set; }
+        public int ExchangeId { get; set; } 
 
         public int BookId { get; set; }
 
-        public DateTime Date { get; set; }
+        public string UserId { get; set; }
+
+        public int ExchangedBookId { get; set; }
+
+        public ExchangeStatus Status { get; set; } = ExchangeStatus.Pending;
+
+        public Book Book { get; set; }
+
+        public ApplicationUser User { get; set; }
+
+        public Book ExchangedBook { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public enum ExchangeStatus
+        {
+            Pending,
+            Accepted,
+            Rejected
+        }
     }
+
 }
 

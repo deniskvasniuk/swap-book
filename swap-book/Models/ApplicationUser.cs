@@ -11,8 +11,8 @@ namespace swap_book.Models
         public string? Facebook { get; set; }
         public DateTime RegistrationDate { get; set; }
         public string? Description { get; set; }
-
         public List<Book> Books { get; set; }
         public List<Wishlist> Wishlists { get; set; }
+        public List<Exchange> Exchanges { get; set; }
     }
 }

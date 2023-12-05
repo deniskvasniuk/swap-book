@@ -40,6 +40,19 @@ namespace swap_book.Models
                 .HasOne(bc => bc.Category)
                 .WithMany(c => c.BookCategories)
                 .HasForeignKey(bc => bc.CategoryId);
+
+            modelBuilder.Entity<Exchange>()
+                .HasOne(e => e.Book)
+                .WithMany(b => b.Exchanges)
+                .HasForeignKey(e => e.BookId);
+
+            modelBuilder.Entity<Exchange>()
+                .Ignore(e => e.ExchangedBook); 
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.Exchanges)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId);
         }
     }
 }

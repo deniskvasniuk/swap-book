@@ -35,6 +35,8 @@ namespace swap_book.Models
         public Guid? BookLink { get; set; }
         public string? Description { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public List<Exchange> Exchanges { get; set; }
+        public bool? Exchangeable { get; set; }
         public void LoadCategories(DatabaseContext context)
         {
 	        this.BookCategories = context.BookCategories

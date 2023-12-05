@@ -74,14 +74,14 @@ namespace swap_book.Controllers
         [HttpPost] 
         public ActionResult PerformExchange(Exchange exchange)
         {
-            exchange.Date = DateTime.Now;
+            //exchange.Date = DateTime.Now;
             
-            _context.Exchanges.Add(exchange);
+            //_context.Exchanges.Add(exchange);
            
-            _context.SaveChanges();
+            //_context.SaveChanges();
 
-            ViewBag.Message = "Спасибі, " + exchange.Person + ", запит на обмін успішно надіслано!";
-            return View("ExchangeConfirmation");
+            //ViewBag.Message = "Спасибі, " + exchange.Person + ", запит на обмін успішно надіслано!";
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
