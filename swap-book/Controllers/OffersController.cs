@@ -78,49 +78,59 @@ namespace swap_book.Controllers
             return View(book);
 
         }
-        [Authorize(Roles = "Admin, User")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditBook(Book book)
-        {
-            if (!User.IsInRole("Admin") && book?.OwnerId != _userManager.GetUserId(User))
-            {
-                return Forbid(); 
-            }
+		[Authorize(Roles = "Admin, User")]
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> EditBook(Book book)
+		{
+			if (!User.IsInRole("Admin") && book?.OwnerId != _userManager.GetUserId(User))
+			{
+				return Forbid();
+			}
 
-            try
-            {
-                if (book.ImageFile != null)
-                {
-                    var saveImageResult = _fileService.SaveImage(book.ImageFile);
-                    if (saveImageResult.Item1 == 1)
-                    {
-                        var oldImage = book.ImageUrl;
-                        book.ImageUrl = saveImageResult.Item2;
-                        var deleteResult = _fileService.DeleteImage(oldImage);
-                    }
-                }
-                else
-                {
-                    var existingBook = await _context.Books.FindAsync(book.BookId);
-                    _context.Entry(existingBook).State = Microsoft.EntityFrameworkCore.EntityState.Detached; 
-                    book.ImageUrl = existingBook.ImageUrl;
-                }
+			Book existingBook;
 
-                _context.Attach(book); 
-                _context.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Modified; 
+			try
+			{
+				existingBook = await _context.Books.FindAsync(book.BookId);
 
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                
-            }
+				if (existingBook == null)
+				{
+					return NotFound();
+				}
 
-            return RedirectToAction(nameof(Index));
-        }
+				if (book.ImageFile != null)
+				{
+					var saveImageResult = _fileService.SaveImage(book.ImageFile);
+					if (saveImageResult.Item1 == 1)
+					{
+						var oldImage = book.ImageUrl;
+						book.ImageUrl = saveImageResult.Item2;
+						_fileService.DeleteImage(oldImage);
+					}
+				}
+				else
+				{
+					book.ImageUrl = existingBook.ImageUrl;
+				}
 
-        [Authorize(Roles = "Admin,User")]
+				book.OwnerId = existingBook.OwnerId;
+				book.CreatedAt = existingBook.CreatedAt;
+				book.BookLink = existingBook.BookLink;
+
+				_context.Attach(book);
+				_context.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+				await _context.SaveChangesAsync();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+
+			}
+
+			return RedirectToAction(nameof(Index));
+		}
+		[Authorize(Roles = "Admin,User")]
         [HttpGet]
         public ActionResult AddBook()
         {

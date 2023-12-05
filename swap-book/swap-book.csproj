@@ -38,4 +38,8 @@
     <ProjectReference Include="..\swap-book.Services\swap-book.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>

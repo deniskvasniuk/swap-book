@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using swap_book.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using swap_book.Services;
-using swap_book.ViewModels;
+using swap_book.Models;
 
 namespace swap_book.Controllers
 {
@@ -12,17 +13,19 @@ namespace swap_book.Controllers
     {
         private readonly DatabaseContext _context;
         private readonly IEmailSender _emailSender;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        private readonly ILogger<HomeController> _logger;
+		private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, DatabaseContext context, IEmailSender emailSender)
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _context = context;
             _emailSender = emailSender;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
 		   
@@ -34,10 +37,12 @@ namespace swap_book.Controllers
 		   // Select the latest books
 		   var latestBooks = books
 			   .OrderByDescending(b => b.CreatedAt)
-			   .Take(10);
+			   .Take(10).ToList();
 
-		   // Prepare an instance of the ViewModel
-		   var viewModel = new IndexViewModel(books, latestBooks, User.Identity.Name);
+		   var currentUser = await _userManager.GetUserAsync(User);
+
+			// Prepare an instance of the ViewModel
+			var viewModel = new IndexViewModel(books, latestBooks, currentUser);
 
 		   return View(viewModel);
 		}
