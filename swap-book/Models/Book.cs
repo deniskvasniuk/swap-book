@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices.JavaScript;
 using Microsoft.EntityFrameworkCore;
 
 namespace swap_book.Models
@@ -33,6 +34,7 @@ namespace swap_book.Models
         public List<BookCategory> BookCategories { get; set; }
         public Guid? BookLink { get; set; }
         public string? Description { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public void LoadCategories(DatabaseContext context)
         {
 	        this.BookCategories = context.BookCategories

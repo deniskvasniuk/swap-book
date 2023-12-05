@@ -145,6 +145,7 @@ namespace swap_book.Controllers
                 var bookCategories = selectedCategoryIds.Select(categoryId => new BookCategory { BookId = book.BookId, CategoryId = categoryId });
 
                 book.BookCategories = bookCategories.ToList();
+                book.CreatedAt = DateTime.Now;
 
                 var saveImageResult = _fileService.SaveImage(book.ImageFile);
                 if (saveImageResult.Item1 == 1)

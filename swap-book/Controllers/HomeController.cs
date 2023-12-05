@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using swap_book.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using swap_book.Services;
+using swap_book.ViewModels;
 
 namespace swap_book.Controllers
 {
@@ -22,9 +24,23 @@ namespace swap_book.Controllers
 
         public IActionResult Index()
         {
-	        
-            return View();
-        }
+
+		   
+		   var books = _context.Books
+			   .Include(b => b.Owner)
+			   .Include(b => b.Wishlists)
+			   .ToList();
+
+		   // Select the latest books
+		   var latestBooks = books
+			   .OrderByDescending(b => b.CreatedAt)
+			   .Take(10);
+
+		   // Prepare an instance of the ViewModel
+		   var viewModel = new IndexViewModel(books, latestBooks, User.Identity.Name);
+
+		   return View(viewModel);
+		}
         public IActionResult Contact()
         {
 
