@@ -14,5 +14,6 @@ namespace swap_book.Models
         public List<Book> Books { get; set; }
         public List<Wishlist> Wishlists { get; set; }
         public List<Exchange> Exchanges { get; set; }
-    }
+
+	}
 }

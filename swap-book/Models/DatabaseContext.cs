@@ -54,6 +54,7 @@ namespace swap_book.Models
                 .HasMany(u => u.Exchanges)
                 .WithOne(e => e.User)
                 .HasForeignKey(e => e.UserId);
-        }
+
+		}
     }
 }

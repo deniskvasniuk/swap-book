@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using swap_book.Models;
 
@@ -11,9 +12,11 @@ using swap_book.Models;
 namespace swap_book.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231206134509_update wishlist model")]
+    partial class updatewishlistmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace swap_book.Migrations
 
                     b.HasIndex("WishlistsId");
 
-                    b.ToTable("BookWishlist", (string)null);
+                    b.ToTable("BookWishlist");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -294,7 +297,7 @@ namespace swap_book.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("swap_book.Models.BookCategory", b =>
@@ -309,7 +312,7 @@ namespace swap_book.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("BookCategories", (string)null);
+                    b.ToTable("BookCategories");
                 });
 
             modelBuilder.Entity("swap_book.Models.Category", b =>
@@ -326,7 +329,7 @@ namespace swap_book.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -506,7 +509,7 @@ namespace swap_book.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Exchanges", (string)null);
+                    b.ToTable("Exchanges");
                 });
 
             modelBuilder.Entity("swap_book.Models.Subscriber", b =>
@@ -532,7 +535,7 @@ namespace swap_book.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subscribers", (string)null);
+                    b.ToTable("Subscribers");
                 });
 
             modelBuilder.Entity("swap_book.Models.Wishlist", b =>
@@ -553,7 +556,7 @@ namespace swap_book.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Wishlists", (string)null);
+                    b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("BookWishlist", b =>
