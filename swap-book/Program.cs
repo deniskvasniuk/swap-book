@@ -42,6 +42,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 
 builder.Services.AddScoped<IEmailSender, MailService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddRazorPages();
 
 builder.Logging.ClearProviders();

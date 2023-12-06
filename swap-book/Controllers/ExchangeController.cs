@@ -2,6 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using swap_book.Models;
+using swap_book.Services;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using swap_book.Models;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace swap_book.Controllers
 {
@@ -9,13 +19,17 @@ namespace swap_book.Controllers
 	{
         private readonly DatabaseContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+		private readonly IMessageService _messageService;
+		private readonly IUrlHelper _urlHelper;
 
-        public ExchangeController(DatabaseContext context, UserManager<ApplicationUser> userManager)
-        {
-			_context=context;
-            _userManager=userManager;
-        }
-        public IActionResult Index()
+		public ExchangeController(DatabaseContext context, UserManager<ApplicationUser> userManager, IMessageService messageService, IUrlHelper urlHelper)
+		{
+			_context = context;
+			_userManager = userManager;
+			this._messageService = messageService;
+			_urlHelper = urlHelper;
+		}
+		public IActionResult Index()
 		{
 			return View(_context.Books);
 		}
@@ -78,5 +92,25 @@ namespace swap_book.Controllers
   
             return RedirectToAction("Index", "Home");
         }
-    }
+		public async Task SendConfirmMessage(Exchange exchange)
+		{
+			if (exchange.Status != Exchange.ExchangeStatus.Pending)
+			{
+				throw new ArgumentException("Exchange must be in Pending status.");
+			}
+
+			var sender = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == exchange.UserId);
+			var recipient = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == exchange.ExchangedBook.OwnerId);
+
+			var message = new Message
+			{
+				SenderId = sender.Id,
+				RecipientId = recipient.Id,
+				Content = $"You have received a book exchange request from {sender.Name}.\n\nWould you like to accept the exchange?\n\nClick the link below to confirm.\n\n{_urlHelper.Action("ConfirmExchange", "Exchanges", new { id = exchange.ExchangeId })}",
+				SentDate = DateTime.UtcNow
+			};
+
+			await _messageService.SendMessage(sender, recipient, message);
+		}
+	}
 }

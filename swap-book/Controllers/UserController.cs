@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using swap_book.Models;
-using System.Data.Entity;
+using swap_book.Services;
 
 namespace swap_book.Controllers
 {
@@ -11,10 +11,12 @@ namespace swap_book.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
 		private readonly DatabaseContext _context;
-		public UserController(UserManager<ApplicationUser> userManager, DatabaseContext context)
+		private readonly IMessageService _messageService;
+		public UserController(UserManager<ApplicationUser> userManager, DatabaseContext context, IMessageService messageService)
 		{
 			_userManager = userManager;
 			_context = context;
+			this._messageService = messageService;
 		}
 
 
@@ -31,20 +33,13 @@ namespace swap_book.Controllers
             return View(user);
         }
 
-		public async Task<IActionResult> GetWishlist(string userId)
+		public async Task<IActionResult> GetMessages()
 		{
-			var user = await _userManager.FindByIdAsync(userId);
+			var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
-			if (user == null)
-			{
-				return NotFound();
-			}
+			var messages = await _messageService.GetMessages(currentUser);
 
-			var booksInWishlist = await _context.Books
-			.Where(b => b.Wishlists.Any(w => w.UserId == user.Id))
-			.ToListAsync();
-
-			return View(booksInWishlist);
+			return View(messages);
 		}
 
 	}
