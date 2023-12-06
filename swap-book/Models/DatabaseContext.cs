@@ -9,7 +9,8 @@ namespace swap_book.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<Exchange> Exchanges { get; set; }
         public DbSet<Subscriber> Subscribers { get; set; }
-        public DbSet<Category> Categories { get; set; }
+		public DbSet<Wishlist> Wishlists { get; set; }
+		public DbSet<Category> Categories { get; set; }
         public DbSet<BookCategory> BookCategories { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)

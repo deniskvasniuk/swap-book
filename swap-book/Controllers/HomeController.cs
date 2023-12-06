@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.Razor;
 using swap_book.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using swap_book.Services;
 using swap_book.Models;
+using System.Web;
+
 
 namespace swap_book.Controllers
 {
@@ -145,5 +149,35 @@ namespace swap_book.Controllers
                 .Select(s => s[random.Next(s.Length)]).ToArray());
             return token;
         }
-    }
+		[HttpGet]
+		public ActionResult AddToWishlist(int bookId)
+		{
+            var currentUserId = _userManager.GetUserId(User);
+
+			var wishlist =  _context.Wishlists
+				.Where(w => w.BookId == bookId && w.UserId == currentUserId)
+				.FirstOrDefault();
+			var book = _context.Books.FirstOrDefault(b => b.BookId == bookId);
+			if (wishlist == null)
+			{
+				var newWishlist = new Wishlist
+				{
+					BookId = bookId,
+					UserId = currentUserId,
+				};
+
+				_context.Wishlists.Add(newWishlist);
+				_context.SaveChanges();
+				// Отримуємо назву книги
+				
+				TempData["SuccessMessage"] = "Book is successfully added to your wishlist!";
+				return RedirectToAction("Index", "Home");
+			}
+			else
+			{
+				TempData["AlertMessage"] = "Book is successfully added to your wishlist!";
+				return RedirectToAction("Index", "Home");
+			}
+		}
+	}
 }
