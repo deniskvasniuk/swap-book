@@ -181,5 +181,16 @@ namespace swap_book.Controllers
 				return RedirectToAction("Index", "Home");
 			}
 		}
-	}
+        public IActionResult SetCultureCookie(string cltr, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cltr)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            // Redirect to the return URL
+            return Redirect(returnUrl);
+        }
+    }
 }

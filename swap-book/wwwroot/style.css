@@ -6405,3 +6405,6 @@ section.wn_contact_area {
         content: "...";
     }
 }
+.border {
+    border: none;
+}

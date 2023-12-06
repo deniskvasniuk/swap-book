@@ -7,29 +7,42 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Serilog;
 using Microsoft.AspNetCore.Identity;
+using XLocalizer.Routing;
+using XLocalizer.Xml;
+using XLocalizer;
+using XLocalizer.Translate;
+using XLocalizer.Translate.MyMemoryTranslate;
+using swap_book.LocalizationResources;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews()
+    .AddXLocalizer<LocSource, MyMemoryTranslateService>(ops =>
+    {
+        ops.ResourcesPath = "LocalizationResources";
+        ops.AutoAddKeys = true;
+        ops.AutoTranslate = true;
+        ops.TranslateFromCulture = "en";
+        ops.UseExpressMemoryCache = true;
+    })
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization(options => {
         options.DataAnnotationLocalizerProvider = (type, factory) =>
             factory.Create(typeof(LangResource));
     });
 
-builder.Services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
-builder.Services.Configure<RequestLocalizationOptions>(options =>
+builder.Services.Configure<RequestLocalizationOptions>(ops =>
 {
-    var supportedCultures = new[]
-    {
-        new CultureInfo("en"),
-        new CultureInfo("uk"),
-    };
-    options.DefaultRequestCulture = new RequestCulture("en");
-    options.SupportedCultures = supportedCultures;
-    options.SupportedUICultures = supportedCultures;
+	var cultures = new CultureInfo[] {
+		new CultureInfo("en"),
+		new CultureInfo("uk"),
+		   }; ops.SupportedCultures = cultures;
+	ops.SupportedUICultures = cultures;
+	ops.DefaultRequestCulture = new RequestCulture("en");
+    ops.RequestCultureProviders.Insert(0, new RouteSegmentRequestCultureProvider(cultures));
 });
+
 string connection = builder.Configuration.GetConnectionString("BookContext");
 
 
@@ -43,7 +56,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 builder.Services.AddScoped<IEmailSender, MailService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
+builder.Services.AddSingleton<IXResourceProvider, XmlResourceProvider>();
 builder.Services.AddRazorPages();
+builder.Services.AddHttpClient<ITranslator, MyMemoryTranslateService>();
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog();
@@ -96,6 +111,7 @@ app.MapControllerRoute(
 	pattern: "book/{bookUrl}",
 	defaults: new { controller = "Offers", action = "BookPage" }
 );
+
 
 using (var scope = app.Services.CreateScope())
 {

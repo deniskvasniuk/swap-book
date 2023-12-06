@@ -93,6 +93,7 @@ namespace swap_book.Areas.Identity.Pages.Account.Manage
                 DateOfBirth = user.DateOfBirth,
                 Facebook = user.Facebook
             };
+
         }
 
 

@@ -20,14 +20,14 @@ namespace swap_book.Controllers
         private readonly DatabaseContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 		private readonly IMessageService _messageService;
-		private readonly IUrlHelper _urlHelper;
 
-		public ExchangeController(DatabaseContext context, UserManager<ApplicationUser> userManager, IMessageService messageService, IUrlHelper urlHelper)
+
+		public ExchangeController(DatabaseContext context, UserManager<ApplicationUser> userManager, IMessageService messageService)
 		{
 			_context = context;
 			_userManager = userManager;
 			this._messageService = messageService;
-			_urlHelper = urlHelper;
+
 		}
 		public IActionResult Index()
 		{
@@ -106,7 +106,7 @@ namespace swap_book.Controllers
 			{
 				SenderId = sender.Id,
 				RecipientId = recipient.Id,
-				Content = $"You have received a book exchange request from {sender.Name}.\n\nWould you like to accept the exchange?\n\nClick the link below to confirm.\n\n{_urlHelper.Action("ConfirmExchange", "Exchanges", new { id = exchange.ExchangeId })}",
+				//Content = $"You have received a book exchange request from {sender.Name}.\n\nWould you like to accept the exchange?\n\nClick the link below to confirm.\n\n{_urlHelper.Action("ConfirmExchange", "Exchanges", new { id = exchange.ExchangeId })}",
 				SentDate = DateTime.UtcNow
 			};
 

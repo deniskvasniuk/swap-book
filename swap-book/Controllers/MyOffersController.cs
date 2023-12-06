@@ -20,6 +20,8 @@ namespace swap_book.Controllers
 			var currentUser = await _userManager.GetUserAsync(User);
 			var myOffers = _context.Books.Where(b => b.OwnerId == currentUser.Id).ToList();
 			return View(myOffers);
+
 		}
-	}
+
+    }
 }

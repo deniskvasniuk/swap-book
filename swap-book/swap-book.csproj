@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="LazZiya.TagHelpers" Version="6.0.2" />
     <PackageReference Include="MailKit" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.12" />
@@ -33,6 +34,10 @@
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System-Web-Helpers.dll" Version="1.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="XLocalizer" Version="1.0.3" />
+    <PackageReference Include="XLocalizer.TagHelpers" Version="1.1.0" />
+    <PackageReference Include="XLocalizer.Translate" Version="1.0.0" />
+    <PackageReference Include="XLocalizer.Translate.MyMemoryTranslate" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

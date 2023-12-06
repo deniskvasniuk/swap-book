@@ -135,17 +135,12 @@ else if(TempData["SuccessMessage"] != null){
 
         function ShowExchangeModal(BookId)
         {
-
             $.ajax({
                 url: "/Exchange/GetAllBooksForUser",
                 type: "GET",
                 dataType: "json",
                 success: function (data)
                 {
-					if(data.length==0){
-						swal("Oops!", "You dont have available books", "error");
-											event.preventDefault();
-					}
 					var books = data;
                     var form = $("<form action='/Exchange/Create' method='post'></form>");
 					var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");

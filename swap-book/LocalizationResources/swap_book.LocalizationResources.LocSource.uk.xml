@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root">
+      <xsd:complexType>
+        <xsd:sequence>
+          <xsd:element name="data" maxOccurs="unbounded" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="key">
+                  <xsd:complexType>
+                    <xsd:simpleContent>
+                      <xsd:extension base="xsd:string">
+                        <xsd:attribute type="xsd:string" name="isActive" use="optional" />
+                      </xsd:extension>
+                    </xsd:simpleContent>
+                  </xsd:complexType>
+                </xsd:element>
+                <xsd:element type="xsd:string" name="value" />
+                <xsd:element type="xsd:string" name="comment" />
+              </xsd:sequence>
+              <xsd:attribute type="xsd:string" name="isActive" use="optional" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <data isActive="false">
+    <key>Home</key>
+    <value>Головна</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Books</key>
+    <value>Книги</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Pages</key>
+    <value>Сторінки</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>About Page</key>
+    <value>Про Сторінка</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Portfolio</key>
+    <value>Портфоліо</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Portfolio Details</key>
+    <value>Деталі портфоліо</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>My Account</key>
+    <value>Мій обліковий запис</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Cart Page</key>
+    <value>Сторінка кошика</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Checkout Page</key>
+    <value>Сторінка перевірки</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Wishlist Page</key>
+    <value>Cписок бажань</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>404 Page</key>
+    <value>Сторінка 404</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Faq Page</key>
+    <value>Сторінка поширених запитань</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Team Page</key>
+    <value>Сторінка команди</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Exchanges</key>
+    <value>Обмінів</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Blog Details</key>
+    <value>Деталі Блогу</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Contact</key>
+    <value>Контакт</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Logout</key>
+    <value>Вихід</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Shop</key>
+    <value>Витрачайте бали</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Shop Grid</key>
+    <value>Магазинна сітка</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Single Product</key>
+    <value>Єдиний продукт</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Blog</key>
+    <value>Блог</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Blog Page</key>
+    <value>Сторінка блоґу</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</key>
+    <value>Існує багато варіацій уривків Lorem Ipsum, але більшість з них зазнали змін у сутінках варіацій уривків</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Trending</key>
+    <value>Наявність трендів</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Best Seller</key>
+    <value>Бестселлер</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>All Product</key>
+    <value>Переглянути весь товар</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Wishlist</key>
+    <value>В список обраного</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+</root>
