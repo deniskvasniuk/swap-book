@@ -149,39 +149,42 @@ namespace swap_book.Controllers
                 .Select(s => s[random.Next(s.Length)]).ToArray());
             return token;
         }
-		[HttpGet]
-		public ActionResult AddToWishlist(int bookId)
-		{
+        [HttpGet]
+        public ActionResult AddToWishlist(int bookId)
+        {
             var currentUserId = _userManager.GetUserId(User);
 
-			var wishlist =  _context.Wishlists
-				.Where(w => w.BookId == bookId && w.UserId == currentUserId)
-				.FirstOrDefault();
-			var book = _context.Books.FirstOrDefault(b => b.BookId == bookId);
-            
-			if (wishlist == null)
-			{
-				var newWishlist = new Wishlist
-				{
-					BookId = bookId,
-					UserId = currentUserId,
-                    
-				};
+            var existingWishlist = _context.Wishlists
+                .Where(w => w.UserId == currentUserId)
+                .FirstOrDefault();
 
-				_context.Wishlists.Add(newWishlist);
-				_context.SaveChanges();
-				// Отримуємо назву книги
-				
-				TempData["SuccessMessage"] = ($"Book '{book.Name}' is successfully added to your wishlist!");
-				return RedirectToAction("Index", "Home");
-			}
-			else
-			{
-				TempData["AlertMessage"] = ($"Book '{book.Name}' isn`t successfully added to your wishlist!");
-				return RedirectToAction("Index", "Home");
-			}
-		}
-        public IActionResult SetCultureCookie(string cltr, string returnUrl)
+            if (existingWishlist == null)
+            {
+                var newWishlist = new Wishlist
+                {
+                    UserId = currentUserId,
+                    Books = new List<Book>()
+                };
+
+                newWishlist.Books.Add(_context.Books.FirstOrDefault(b => b.BookId == bookId));
+                _context.Wishlists.Add(newWishlist);
+                _context.SaveChanges();
+
+                UpdateBookWishlist(newWishlist);
+
+                TempData["SuccessMessage"] = ($"Book '{book.Name}' is successfully added to your wishlist!");
+            }
+            else
+            {
+                existingWishlist.Books.Add(_context.Books.FirstOrDefault(b => b.BookId == bookId));
+                UpdateBookWishlist(existingWishlist);
+
+                TempData["SuccessMessage"] = ($"Book '{book.Name}' is successfully added to your existing wishlist!");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult SetCultureCookie(string cltr)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
@@ -190,7 +193,22 @@ namespace swap_book.Controllers
             );
 
             // Redirect to the return URL
-            return Redirect(returnUrl);
+            return LocalRedirect("/");
+        }
+        public void UpdateBookWishlist(Wishlist wishlist)
+        {
+            if (wishlist.Books != null)
+            {
+                foreach (var book in wishlist.Books)
+                {
+                    _context.Add(new BookWishlist
+                    {
+                        BookId = book.BookId,
+                        WishlistId = wishlist.Id
+                    });
+                }
+                _context.SaveChanges();
+            }
         }
     }
 }

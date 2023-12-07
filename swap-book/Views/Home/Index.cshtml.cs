@@ -8,7 +8,7 @@ namespace swap_book.Views.Home
 {
     public class Index:PageModel
     {
-        public IActionResult OnGetSetCultureCookie(string cltr, string returnUrl)
+        public IActionResult SetCultureCookie(string cltr, string returnUrl)
         {
             HttpContext.Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,

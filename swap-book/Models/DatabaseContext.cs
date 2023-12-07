@@ -13,6 +13,7 @@ namespace swap_book.Models
 		public DbSet<Wishlist> Wishlists { get; set; }
 		public DbSet<Category> Categories { get; set; }
         public DbSet<BookCategory> BookCategories { get; set; }
+        public DbSet<BookWishlist> BookWishlists { get; set; }
         public DbSet<Message> Messages { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)

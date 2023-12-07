@@ -162,4 +162,244 @@
     <value>В список обраного</value>
     <comment>Created by XLocalizer</comment>
   </data>
+  <data isActive="false">
+    <key>Login</key>
+    <value>Увійти</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Register</key>
+    <value>Зареєструватися</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>your</key>
+    <value>ваш</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Exchange &lt;span&gt;ваш&lt;/span&gt;</key>
+    <value>Обміняти &lt;span&gt;ваш&lt;/span&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Book</key>
+    <value>Книга</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>used &lt;span&gt;Книга&lt;/span&gt;</key>
+    <value>used &lt;span&gt;Книга&lt;/span&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Here</key>
+    <value>Тут</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>from &lt;span&gt;Тут&lt;/span&gt;</key>
+    <value>від &lt;span&gt;Тут&lt;/span&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>exchange now</key>
+    <value>обміняти зараз</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Offers</key>
+    <value>Пропозиції</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>New &lt;span class="color--theme"&gt;Пропозиції&lt;/span&gt;</key>
+    <value>Нова &lt;span class="color--theme"&gt;Пропозиція&lt;/span&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>a variety of books for exchange</key>
+    <value>різноманітні книги для обміну</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>There are offers from our users waiting for you! Our users have listed &lt;span style="color:#ef365f"&gt;різноманітні книги для обміну&lt;/span&gt;, ranging from popular novels to obscure gems.</key>
+    <value>INVALID LANGUAGE PAIR SPECIFIED. EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>test6</key>
+    <value>test6</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>About 1 days</key>
+    <value>Близько 1 дня</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;span style="color:#ef365f"&gt;Близько 1 дня&lt;/span&gt; ago</key>
+    <value>INVALID LANGUAGE PAIR SPECIFIED. EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>test4</key>
+    <value>test4</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>test5</key>
+    <value>test5</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>test3</key>
+    <value>test3</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>test2</key>
+    <value>test2</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>test</key>
+    <value>тест</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Stay With Us</key>
+    <value>Залишайтеся з нами</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</key>
+    <value>Підпишіться на наші інформаційні бюлетені зараз і будьте в курсі нових колекцій, останніх лукбуків та ексклюзивних пропозицій.</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Subscribe</key>
+    <value>Підписатися</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Products</key>
+    <value>Товари</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>All &lt;span class="color--theme"&gt;Товари&lt;/span&gt;</key>
+    <value>All &lt;span class="color--theme"&gt;Товари&lt;/span&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</key>
+    <value>Існує багато варіантів уривків Lorem Ipsum, але більшість з них зазнали зміни лебміди в певній формі</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>ALL</key>
+    <value>ВСІ</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>BIOGRAPHIC</key>
+    <value>БІОГРАФІЯ</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>ADVENTURE</key>
+    <value>ПРИГОДИ</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>CHILDREN</key>
+    <value>ДІТИ</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>COOK</key>
+    <value>COOK</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Choose Book for Exchange</key>
+    <value>Вибрати книгу для обміну</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Cancel</key>
+    <value>Скасувати</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Submit</key>
+    <value>Надіслати</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h2&gt;Exchange &lt;span &gt;your &lt;/span&gt;&lt;/h2&gt; &lt;h2 &gt;used &lt;span &gt;Book &lt;/span&gt;&lt;/h2&gt; &lt;h2&gt;from &lt;span &gt;Here &lt;/span&gt;&lt;/h2&gt;</key>
+    <value>&lt;h2&gt;&lt;span &gt;Обміняйте &lt;/span&gt;&lt;/h2&gt; &lt;h2 &gt;використані &lt;span &gt;книги &lt;/span&gt;&lt;/h2&gt; &lt;h2&gt; &lt;span &gt;тут &lt;/span&gt;&lt;/h2&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h2&gt;Exchange &lt;span&gt;your &lt;/span&gt;&lt;/h2&gt; &lt;h2&gt;used &lt;span&gt;Book &lt;/span&gt;&lt;/h2&gt; &lt;h2&gt;from &lt;span&gt;Here &lt;/span&gt;&lt;/h2&gt;</key>
+    <value>&lt;h2&gt;&lt;span&gt;Обміняйте &lt;/span&gt;&lt;/h2&gt; &lt;h2&gt;використані &lt;span&gt;книги &lt;/span&gt;&lt;/h2&gt; &lt;h2&gt; &lt;span&gt;тут &lt;/span&gt;&lt;/h2&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;p &gt; There are offers from our users waiting for you! Our users have listed &lt;span style="color:#ef365f"&gt;a variety of books for exchange&lt;/span&gt;, ranging from popular novels to obscure gems. &lt;/p&gt;</key>
+    <value>&lt;p &gt; На вас чекають пропозиції від наших користувачів! Наші користувачі перерахували &lt;span style="color:#ef365f"&gt;різноманітні книги для обміну&lt;/span&gt;, починаючи від популярних романів і закінчуючи незрозумілими перлинами. &lt;/p&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;test6&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test6&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>&lt;h4&gt;&lt;a href="single-product.html"&gt;test6&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test6&lt;/li&gt; &lt;/ul&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;ul class="prize d-flex"&gt; &lt;p &gt;&lt;span style="color:#ef365f"&gt;About 1 days&lt;/span&gt; ago&lt;/p&gt; &lt;/ul&gt;</key>
+    <value>INVALID LANGUAGE PAIR SPECIFIED. EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;test4&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test4&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>&lt;h4&gt;&lt;a href="single-product.html"&gt;test4&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test4&lt;/li&gt; &lt;/ul&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;test5&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test5&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>&lt;h4&gt;&lt;a href="single-product.html"&gt;test5&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test5&lt;/li&gt; &lt;/ul&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;test3&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test3&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>&lt;h4&gt;&lt;a href="single-product.html"&gt;test3&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test3&lt;/li&gt; &lt;/ul&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;test2&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test2&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>&lt;h4&gt;&lt;a href="single-product.html"&gt;test2&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test2&lt;/li&gt; &lt;/ul&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;test&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;test&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>&lt;h4&gt;&lt;a href="single-product.html"&gt;тест&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;тест&lt;/li&gt; &lt;/ul&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>There are offers from our users waiting for you! Our users have listed &lt;span style="color:#ef365f"&gt;a variety of books for exchange&lt;/span&gt;, ranging from popular novels to obscure gems.</key>
+    <value>На вас чекають пропозиції від наших користувачів! Наші користувачі перерахували &lt;span style="color:#ef365f"&gt;різноманітні книги для обміну&lt;/span&gt;, починаючи від популярних романів і закінчуючи незрозумілими перлинами.</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Language</key>
+    <value>Мова</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>My Wishlist</key>
+    <value>Мій список Обраного</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
 </root>

@@ -39,6 +39,7 @@
 @{
     var routeData = ViewContext.RouteData.Values;
     routeData["culture"] = "{0}";
+    Console.WriteLine(routeData);
 }
 <body>
 
@@ -79,8 +80,8 @@
                                 <li><a localize-content href="portfolio-details.html">Portfolio Details</a></li>
                             </ul>
                         </li>
-                                            <li><a localize-content href="my-account.html">My Account</a></li>
-                                            <li><a localize-content href="cart.html">Cart Page</a></li>
+                        <li><a localize-content href="my-account.html">My Account</a></li>
+                        <li><a localize-content href="cart.html">Cart Page</a></li>
                         <li><a localize-content href="checkout.html">Checkout Page</a></li>
                         <li><a localize-content href="wishlist.html">Wishlist Page</a></li>
                         <li><a localize-content href="error404.html">404 Page</a></li>
@@ -97,10 +98,10 @@
                         <li><a localize-content href="blog-details.html">Blog Details</a></li>
                     </ul>
                 </div>
-            </li>
-            <li><a localize-content asp-controller="home" asp-action="contact">Contact</a></li>
+            </li>            <li><a localize-content asp-controller="home" asp-action="contact">Contact</a></li>
                                 <li class="drop with--one--item">
-                                    <language-nav style="display: flex;align-items: center;" ></language-nav>
+                                    <language-nav redirect-to-url="@(Url.RouteUrl(routeData))" style="display: flex;align-items: center;" cookie-handler-url="@Url.Action("SetCultureCookie", "Home", new { cltr = routeData["culture"] })">
+                                    </language-nav>
                                 </li>
         </ul>
     </nav>
@@ -192,7 +193,7 @@
                 <div class="content-inner">
                     <div class="switcher-currency">
                         <strong class="label switcher-label">
-                            <span>Language</span>
+                                                <span localize-content>Language</span>
                         </strong>
                         <div class="switcher-options">
                             <div class="switcher-currency-trigger">
@@ -218,10 +219,10 @@
                                         var user = await SignInManager.UserManager.GetUserAsync(User);
                                         if (user != null && user.PublicProfileLink != null)
                                         {
-                                                                <span localize-content> <a asp-controller="User" asp-action="PublicProfile" asp-route-publicProfileLink="@user.PublicProfileLink">My Account</a></span>
+                                            <span localize-content> <a asp-controller="User" asp-action="PublicProfile" asp-route-publicProfileLink="@user.PublicProfileLink">My Account</a></span>
                                         }
 
-                                        <span><a href="#">My Wishlist</a></span>
+                                                            <span><a localize-content href="#">My Wishlist</a></span>
                                         <span>
                                             <a>
                                                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

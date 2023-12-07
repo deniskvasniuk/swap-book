@@ -36,17 +36,19 @@ else if(TempData["SuccessMessage"] != null){
 						<div class="col-lg-12">
 							<div class="slider__content">
 								<div class="contentbox">
-									<h2>Exchange <span>your </span></h2>
-									<h2>used <span>Book </span></h2>
-									<h2>from <span>Here </span></h2>
+							<localize>
+								<h2>Exchange <span>your </span></h2>
+								<h2>used <span>Book </span></h2>
+								<h2>from <span>Here </span></h2>
+							</localize>
                                     @if (SignInManager.IsSignedIn(User))
                                     {
 										
-                                        <a class="shopbtn" href="#">exchange now</a>
+                                        <a localize-content class="shopbtn" href="#">exchange now</a>
                                     }
                                     else
                                     {
-                                        <a class="shopbtn" href="~/Identity/Account/Login">exchange now</a>
+								<a localize-content class="shopbtn" href="~/Identity/Account/Login">exchange now</a>
                                     }
 								</div>
 							</div>
@@ -61,20 +63,23 @@ else if(TempData["SuccessMessage"] != null){
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="slider__content">
-								<div class="contentbox">
-									<h2>Exchange <span>your </span></h2>
-									<h2>used <span>Book </span></h2>
-                                    <h2>from <span>Here </span></h2>
+                                <div class="contentbox">
+
+                                    <localize>
+                                        <h2>Exchange <span >your </span></h2>
+                                        <h2 >used <span >Book </span></h2>
+                                        <h2>from <span >Here </span></h2>
+                                    </localize>
                                     @if (SignInManager.IsSignedIn(User))
                                     {
-										
-                                        <a class="shopbtn" href="#">exchange now</a>
+
+                                        <a localize-content class="shopbtn" href="#">exchange now</a>
                                     }
                                     else
                                     {
-								        <a class="shopbtn" href="~/Identity/Account/Login">exchange now</a>
+                                        <a localize-content class="shopbtn" href="~/Identity/Account/Login">exchange now</a>
                                     }
-								</div>
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -89,10 +94,11 @@ else if(TempData["SuccessMessage"] != null){
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="section__title text-center">
-					<h2 class="title__be--2">New <span class="color--theme">Offers</span></h2>
-					<p>There are offers from our users waiting for you!
-                        Our users have listed <span style="color:#ef365f">a variety of books for exchange</span>, ranging from popular novels to obscure gems. 
-                     </p>
+                    <h2 localize-content class="title__be--2">New <span localize-content class="color--theme">Offers</span></h2>
+                        <p localize-content>
+                            There are offers from our users waiting for you!
+						Our users have listed <span  style="color:#ef365f">a variety of books for exchange</span>, ranging from popular novels to obscure gems.
+                        </p>
 				</div>
 			</div>
 		</div>
@@ -164,20 +170,25 @@ else if(TempData["SuccessMessage"] != null){
                     $("#ExchangeModal").modal("show");
                     $("#ExchangeModal").find(".modal-body").html(form);
 
-                }
+                },
+					error: function (xhr, ajaxOptions, thrownError) {
+					console.error("Error:", xhr.status, thrownError);
+					swal("Oops","An error occurred while loading books. Please try again later.", "error");
+				}
             });
         }
 
     </script>
                     <div class="product__content content--center">
-                        <h4><a href="single-product.html">@book.Name</a></h4>
-                        <ul class="prize d-flex">
-                            <li>@book.Author</li>
-                        </ul>
-                        <ul class="prize d-flex">
-                            <p><span style="color:#ef365f">About @timeAgo</span> ago</p>
-                            
-                        </ul>
+                        <localize>
+                            <h4><a href="single-product.html">@book.Name</a></h4>
+                            <ul class="prize d-flex">
+                                <li>@book.Author</li>
+                            </ul>
+                        </localize>
+                            <ul class="prize d-flex">
+                                <p ><span  style="color:#ef365f">About @timeAgo</span> ago</p>
+                            </ul>
 
                         <div class="action">
                             <div class="actions_inner">
@@ -245,14 +256,14 @@ else if(TempData["SuccessMessage"] != null){
 				<div class="row">
 					<div class="col-lg-7 offset-lg-5 col-md-12 col-12 ptb--150">
 						<div class="section__title text-center">
-							<h2>Stay With Us</h2>
+							<h2 localize-content>Stay With Us</h2>
 						</div>
 						<div class="newsletter__block text-center">
-							<p>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</p>
+							<p localize-content>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</p>
                             <form asp-action="SubscribeUser" method="post">
                                 <div class="newsletter__box">
                                     <input type="email" name="SubscriberEmail" placeholder="Enter your e-mail">
-                                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                                    <button localize-content type="submit" class="btn btn-primary">Subscribe</button>
                                 </div>
                             </form>
 						</div>
@@ -267,19 +278,19 @@ else if(TempData["SuccessMessage"] != null){
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="section__title text-center">
-							<h2 class="title__be--2">All <span class="color--theme">Products</span></h2>
-							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+							<h2 localize-content class="title__be--2">All <span localize-content class="color--theme">Products</span></h2>
+							<p localize-content>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
 						</div>
 					</div>
 				</div>
 				<div class="row mt--50">
 					<div class="col-md-12 col-lg-12 col-sm-12">
 						<div class="product__nav nav justify-content-center" role="tablist">
-							<a class="nav-item nav-link active" data-toggle="tab" href="#nav-all" role="tab">ALL</a>
-							<a class="nav-item nav-link" data-toggle="tab" href="#nav-biographic" role="tab">BIOGRAPHIC</a>
-							<a class="nav-item nav-link" data-toggle="tab" href="#nav-adventure" role="tab">ADVENTURE</a>
-							<a class="nav-item nav-link" data-toggle="tab" href="#nav-children" role="tab">CHILDREN</a>
-							<a class="nav-item nav-link" data-toggle="tab" href="#nav-cook" role="tab">COOK</a>
+							<a localize-content class="nav-item nav-link active" data-toggle="tab" href="#nav-all" role="tab">ALL</a>
+							<a  localize-content class="nav-item nav-link" data-toggle="tab" href="#nav-biographic" role="tab">BIOGRAPHIC</a>
+							<a localize-content class="nav-item nav-link" data-toggle="tab" href="#nav-adventure" role="tab">ADVENTURE</a>
+							<a localize-content class="nav-item nav-link" data-toggle="tab" href="#nav-children" role="tab">CHILDREN</a>
+							<a localize-content class="nav-item nav-link" data-toggle="tab" href="#nav-cook" role="tab">COOK</a>
 						</div>
 					</div>
 				</div>
@@ -295,7 +306,7 @@ else if(TempData["SuccessMessage"] != null){
 											<a class="first__img" href="single-product.html"><img src="images/books/1.jpg" alt="product image"></a>
 											<a class="second__img animation1" href="single-product.html"><img src="images/books/2.jpg" alt="product image"></a>
 											<div class="hot__box">
-												<span class="hot-label">BEST SALER</span>
+												<span  class="hot-label">BEST SALER</span>
 											</div>
 										</div>
 										<div class="product__content content--center content--center">
@@ -2628,14 +2639,14 @@ else if(TempData["SuccessMessage"] != null){
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="ExchangeModalLabel">Choose Book for Exchange</h5>
+            <h5 localize-content class="modal-title" id="ExchangeModalLabel">Choose Book for Exchange</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary" form="exchangeForm">Submit</button>
+            <button  localize-content type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button localize-content type="submit" class="btn btn-primary" form="exchangeForm">Submit</button>
         </div>
     </div>
 </div>
