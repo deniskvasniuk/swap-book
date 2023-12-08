@@ -35,7 +35,6 @@ namespace swap_book.Controllers
 		   
 		   var books = _context.Books
 			   .Include(b => b.Owner)
-			   .Include(b => b.Wishlists)
 			   .ToList();
 
 		   // Select the latest books
@@ -154,36 +153,39 @@ namespace swap_book.Controllers
         {
             var currentUserId = _userManager.GetUserId(User);
 
-            var existingWishlist = _context.Wishlists
-                .Where(w => w.UserId == currentUserId)
-                .FirstOrDefault();
+            var book = _context.Books.FirstOrDefault(b => b.BookId == bookId);
 
-            if (existingWishlist == null)
+            var existingWishlistEntry = _context.Wishlists
+                .FirstOrDefault(w => w.UserId == currentUserId && w.BookId == bookId);
+
+            if (existingWishlistEntry == null)
             {
+                // Створити новий вішліст, якщо він не існує
                 var newWishlist = new Wishlist
                 {
                     UserId = currentUserId,
-                    Books = new List<Book>()
+                    BookId = bookId
                 };
 
-                newWishlist.Books.Add(_context.Books.FirstOrDefault(b => b.BookId == bookId));
                 _context.Wishlists.Add(newWishlist);
                 _context.SaveChanges();
 
+
+                book.Wishlists.Add(newWishlist);
+                _context.SaveChangesAsync();
+
                 UpdateBookWishlist(newWishlist);
 
-                TempData["SuccessMessage"] = ($"Book '{book.Name}' is successfully added to your wishlist!");
+                TempData["SuccessMessage"] = ($"Book is successfully added to your wishlist!");
             }
             else
             {
-                existingWishlist.Books.Add(_context.Books.FirstOrDefault(b => b.BookId == bookId));
-                UpdateBookWishlist(existingWishlist);
-
-                TempData["SuccessMessage"] = ($"Book '{book.Name}' is successfully added to your existing wishlist!");
+                // Книга вже є у вішлісті, відобразити відповідне повідомлення
+                TempData["AlertMessage"] = ($"Book is already in your wishlist!");
             }
 
-            return RedirectToAction("Index", "Home");
-        }
+			return Redirect(HttpContext.Request.Headers["Referer"].ToString());
+		}
         public IActionResult SetCultureCookie(string cltr)
         {
             Response.Cookies.Append(
@@ -197,18 +199,13 @@ namespace swap_book.Controllers
         }
         public void UpdateBookWishlist(Wishlist wishlist)
         {
-            if (wishlist.Books != null)
-            {
-                foreach (var book in wishlist.Books)
-                {
-                    _context.Add(new BookWishlist
-                    {
-                        BookId = book.BookId,
-                        WishlistId = wishlist.Id
-                    });
-                }
-                _context.SaveChanges();
-            }
+            //_context.BookWishlist.Add(new BookWishlist
+            //{
+            //    BookId = wishlist.BookId,
+            //    WishlistId = wishlist.Id
+            //});
+
+            _context.SaveChanges();
         }
     }
 }

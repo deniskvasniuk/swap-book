@@ -75,7 +75,7 @@ namespace swap_book.Controllers
 			if (bookOwnerId == exchangedBookOwnerId)
 			{
 				TempData["AlertMessage"] = "Book owners cannot exchange books with themselves.";
-				return RedirectToAction("Index", "Home");
+				return Redirect(HttpContext.Request.Headers["Referer"].ToString());
 			}
 			var exchange = new Exchange
             {
@@ -89,9 +89,9 @@ namespace swap_book.Controllers
             _context.Exchanges.Add(exchange);
             _context.SaveChanges();
 
-  
-            return RedirectToAction("Index", "Home");
-        }
+
+			return Redirect(HttpContext.Request.Headers["Referer"].ToString());
+		}
 		public async Task SendConfirmMessage(Exchange exchange)
 		{
 			if (exchange.Status != Exchange.ExchangeStatus.Pending)

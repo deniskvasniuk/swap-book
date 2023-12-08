@@ -402,4 +402,9 @@
     <value>Мій список Обраного</value>
     <comment>Created by XLocalizer</comment>
   </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;&amp;#x411;&amp;#x43E;&amp;#x436;&amp;#x435;&amp;#x441;&amp;#x442;&amp;#x432;&amp;#x435;&amp;#x43D;&amp;#x43D;&amp;#x430; &amp;#x43A;&amp;#x43E;&amp;#x43C;&amp;#x435;&amp;#x434;&amp;#x456;&amp;#x44F;&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;&amp;#x414;&amp;#x430;&amp;#x43D;&amp;#x442;&amp;#x435;&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>INVALID LANGUAGE PAIR SPECIFIED. EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
 </root>

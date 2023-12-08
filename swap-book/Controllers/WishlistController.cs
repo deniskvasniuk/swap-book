@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using swap_book.Models;
+using System.Linq;
+using System.Net;
 
 namespace swap_book.Controllers
 {
@@ -27,12 +29,27 @@ namespace swap_book.Controllers
 			{
 				return NotFound();
 			}
+            var wishlists = _context.Wishlists
+                .Where(w => w.UserId == userId)
+                .Include(w => w.Book);
 
-			var booksInWishlist = await _context.Books
-				.Where(b => b.Wishlists.Any(w => w.UserId == user.Id))
-				.ToListAsync();
+            var books = wishlists
+                .Select(w => w.Book)
+                .ToList();
 
-			return View("~/Views/User/GetWishlist.cshtml",booksInWishlist);
+            return View("~/Views/User/GetWishlist.cshtml", books);
+		}
+
+		public async Task<IActionResult> DeleteWish(int bookId)
+		{
+			var user = await _userManager.GetUserAsync(User);
+
+			var wishlistItem = await _context.Wishlists.FirstOrDefaultAsync(w => w.UserId == user.Id && w.BookId == bookId);
+
+			_context.Wishlists.Remove(wishlistItem);
+			await _context.SaveChangesAsync();
+
+			return RedirectToAction("GetWishlist", new { userId = user.Id });
 		}
 	}
 }

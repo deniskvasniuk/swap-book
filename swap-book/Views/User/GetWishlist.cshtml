@@ -1,17 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Wishlist";
 }
+@using Microsoft.AspNetCore.Identity
 @model IEnumerable<swap_book.Models.Book>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <div class="ht__bradcaump__area bg-image--5">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="bradcaump__inner text-center">
-                    <h2 class="bradcaump-title">Wishlist</h2>
+                    <h2 class="bradcaump-title " style="color: #2e2e2e">Wishlist</h2>
                     <nav class="bradcaump-content">
-                        <a class="breadcrumb_item" asp-controller="Home" asp-action="Index">Home</a>
-                        <span class="brd-separetor">/</span>
+                        <a class="breadcrumb_item" style="color: #2e2e2e" asp-controller="Home" asp-action="Index">Home</a>
+                        <span class="brd-separetor" style="color: #2e2e2e">/</span>
                         <span class="breadcrumb_item active">Wishlist</span>
                     </nav>
                 </div>
@@ -28,25 +31,39 @@
                         <div class="wishlist-table wnro__table table-responsive">
                             <table>
                                 <thead>
-                                    <tr>
-                                        <th class="product-remove"></th>
-                                        <th class="product-thumbnail"></th>
-                                        <th class="product-name"><span class="nobr">Book Name</span></th>
-                                        <th class="product-price"><span class="nobr"> Book Owner </span></th>
-                                        <th class="product-stock-stauts"><span class="nobr"> Exchange Status </span></th>
-                                        <th class="product-add-to-cart"></th>
-                                    </tr>
+                                <tr>
+                                    <th class="product-remove"></th>
+                                    <th class="product-thumbnail"></th>
+                                    <th class="product-name"><span class="nobr">Book Name</span></th>
+                                    <th class="product-price"><span class="nobr"> Book Owner </span></th>
+                                    <th class="product-stock-stauts"><span class="nobr"> Exchange Status </span></th>
+                                    <th class="product-add-to-cart"></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 @foreach (Book book in Model)
                                 {
+
                                     <tr>
-                                        <td class="product-remove"><a href="#">×</a></td>
-                                        <td class="product-thumbnail"><a href="#"><img src="~/Uploads/@book.ImageUrl" alt="book image"></a></td>
-                                            <td class="product-name"><a href="book/@book.BookLink">@book.Name</a></td>
-                                            <td class="product-price"><span class="amount"><a href="user/@book.Owner.ProfilePicture">@book.Owner.Name</a></span></td>
-                                        <td class="product-stock-status"><span class="wishlist-in-stock">@book.Exchangeable</span></td>
-                                        <td class="product-add-to-cart"><a href="#">Exchange</a></td>
+                                        <td class="product-remove">
+                                            <a href="#" onclick="deleteWish(@book.BookId)">×</a>
+                                        </td>
+                                        <td class="product-thumbnail"><a href="~/book/@book.BookLink"><img style="width:80px; height: 100px" src="~/Uploads/@book.ImageUrl" alt="book image"></a></td>
+                                        <td class="product-name"><a href="~/book/@book.BookLink">@book.Name</a></td>
+                                        <td class="product-price"><span class="amount"><a href="~/user/@book.Owner.PublicProfileLink">@book.Owner.Name</a></span></td>
+                                        <td class="product-stock-status">
+                                            @{
+                                                if (book.Exchangeable.Value==true)
+                                                {
+                                                    <span class="text-success">Exchangeable</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-danger">Not exchangeable</span>
+                                                }
+                                            }
+                                        </td>
+                                            <td class="product-add-to-cart"><a href="javascript:void(0);" onclick="ShowExchangeModal(@book.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal">Exchange</a></td>
                                     </tr>
                                 }
                                 </tbody>
@@ -58,3 +75,96 @@
         </div>
     </div>
 </div>
+<script>
+    function deleteWish(data) {
+        event.preventDefault();
+        var link = '@Url.Action("DeleteWish", "Wishlist", new { bookId = "-1" })'
+        link = link.replace("-1", data);
+        swal({
+            title: 'Ви впевнені?',
+            text: 'Ви впевнені, що хочете видалити книгу?',
+            icon: 'warning',
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: link,
+                    type: 'POST',
+                    data: data,
+                    success: function () {
+                        swal("Success!", "Book is succesfully deleted from your wishlist", "success")
+                    },
+                });
+            }
+        });
+    }
+    function ShowExchangeModal(BookId) {
+        $.ajax({
+            url: "/Exchange/GetAllBooksForUser",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                var books = data;
+                var form = $("<form action='/Exchange/Create' method='post'></form>");
+                var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
+
+                for (var i = 0; i < books.length; i++) {
+                    var book = books[i];
+                    var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
+                    select.append(option);
+                }
+
+                form.append(select);
+                var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
+                var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
+                form.append(button);
+                form.append(bookIdInput);
+                $("#ExchangeModal").on("click", ".btn-primary", function () {
+                    var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
+                });
+                $("#ExchangeModal").modal("show");
+                $("#ExchangeModal").find(".modal-body").html(form);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.error("Error:", xhr.status, thrownError);
+                swal("Oops", "An error occurred while loading books. Please try again later.", "error");
+            }
+        });
+    }
+</script>
+<div class="modal fade" id="ExchangeModal" tabindex="-1" aria-labelledby="ExchangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 localize-content class="modal-title" id="ExchangeModalLabel">Choose Book for Exchange</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button localize-content type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button localize-content type="submit" class="btn btn-primary" form="exchangeForm">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["AlertMessage"] != null)
+{
+    <script>
+        var msg = '@TempData["AlertMessage"]';
+        if (msg.length) {
+            swal("Oops!", msg, "error");
+        }
+    </script>
+}
+else if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        var msg = '@TempData["SuccessMessage"]';
+        if (msg.length) {
+            swal("Success!", msg, "success");
+        }
+    </script>
+}
+

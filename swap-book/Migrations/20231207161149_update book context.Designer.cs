@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using swap_book.Models;
 
@@ -11,9 +12,11 @@ using swap_book.Models;
 namespace swap_book.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20231207161149_update book context")]
+    partial class updatebookcontext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,12 +30,29 @@ namespace swap_book.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("WishlistId")
                         .HasColumnType("int");
 
-                    b.HasKey("BookId", "UserId");
+                    b.HasKey("BookId", "WishlistId");
+
+                    b.HasIndex("WishlistId");
 
                     b.ToTable("BookWishlist");
+                });
+
+            modelBuilder.Entity("BookWishlist1", b =>
+                {
+                    b.Property<int>("BooksBookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WishlistsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BooksBookId", "WishlistsId");
+
+                    b.HasIndex("WishlistsId");
+
+                    b.ToTable("BookWishlist1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -577,8 +597,6 @@ namespace swap_book.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Wishlists");
@@ -592,7 +610,30 @@ namespace swap_book.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("swap_book.Models.Wishlist", "Wishlist")
+                        .WithMany()
+                        .HasForeignKey("WishlistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Book");
+
+                    b.Navigation("Wishlist");
+                });
+
+            modelBuilder.Entity("BookWishlist1", b =>
+                {
+                    b.HasOne("swap_book.Models.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksBookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("swap_book.Models.Wishlist", null)
+                        .WithMany()
+                        .HasForeignKey("WishlistsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -695,17 +736,9 @@ namespace swap_book.Migrations
 
             modelBuilder.Entity("swap_book.Models.Wishlist", b =>
                 {
-                    b.HasOne("swap_book.Models.Book", "Book")
-                        .WithMany("Wishlists")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("swap_book.Models.ApplicationUser", "User")
                         .WithMany("Wishlists")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Book");
 
                     b.Navigation("User");
                 });
@@ -724,8 +757,6 @@ namespace swap_book.Migrations
                     b.Navigation("BookCategories");
 
                     b.Navigation("Exchanges");
-
-                    b.Navigation("Wishlists");
                 });
 
             modelBuilder.Entity("swap_book.Models.Category", b =>

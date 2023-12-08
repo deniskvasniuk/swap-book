@@ -117,6 +117,7 @@ namespace swap_book.Controllers
 				book.OwnerId = existingBook.OwnerId;
 				book.CreatedAt = existingBook.CreatedAt;
 				book.BookLink = existingBook.BookLink;
+                book.Exchangeable = existingBook.Exchangeable;
 
 				_context.Attach(book);
 				_context.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -156,6 +157,7 @@ namespace swap_book.Controllers
 
                 book.BookCategories = bookCategories.ToList();
                 book.CreatedAt = DateTime.Now;
+                book.Exchangeable = true;
 
                 var saveImageResult = _fileService.SaveImage(book.ImageFile);
                 if (saveImageResult.Item1 == 1)

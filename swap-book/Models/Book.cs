@@ -28,9 +28,7 @@ namespace swap_book.Models
         public string? OwnerId { get; set; }
 
         public ApplicationUser? Owner { get; set; }
-
-        public List<Wishlist> Wishlists { get; set; }
-
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
         public List<BookCategory> BookCategories { get; set; }
         public Guid? BookLink { get; set; }
         public string? Description { get; set; }

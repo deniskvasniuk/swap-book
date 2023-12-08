@@ -2,16 +2,17 @@
 @{
     ViewData["Title"] = "Book";
 }
+
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area bg-image--4">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="bradcaump__inner text-center">
-					<h2 class="bradcaump-title">Shop Single</h2>
+					<h2 class="bradcaump-title" style="color: #2e2e2e">@Model.Name</h2>
 					<nav class="bradcaump-content">
-						<a class="breadcrumb_item" asp-controller="Home" asp-action="Index">Home</a>
-						<span class="brd-separetor">/</span>
+						<a style="color: #2e2e2e" asp-controller="Home" asp-action="Index">Home</a>
+						<span class="brd-separetor" style="color: #2e2e2e">/</span>
 						<span class="breadcrumb_item active">Book page</span>
 					</nav>
 				</div>
@@ -48,15 +49,15 @@
                                     <span>@Model.Author</span>
                                 </div>
                                 <div class="product__overview">
-                                    <p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
-                                    <p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. </p>
+                                    <p>@Model.Description</p>
+                                   
                                 </div>
                                 <div class="box-tocart d-flex">
                                     <div class="addtocart__actions">
-                                        <button class="tocart" type="submit" title="Add to Cart">Swap</button>
+										<button class="tocart" onclick="ShowExchangeModal(@Model.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal" title="Swap">Swap</button>
                                     </div>
                                     <div class="product-addto-links clearfix">
-                                        <a class="wishlist" href="#"></a>
+										<a class="wishlist" asp-action="AddToWishlist" asp-controller="Home" asp-route-bookId="@Model.BookId"></a>
                                     </div>
                                 </div>
                                 <div class="product_meta">
@@ -120,7 +121,42 @@
                             window.open(shareLink, '_blank');
                         });
                     }
-                </script>
+						function ShowExchangeModal(BookId) {
+							$.ajax({
+								url: "/Exchange/GetAllBooksForUser",
+								type: "GET",
+								dataType: "json",
+								success: function (data) {
+									var books = data;
+									var form = $("<form action='/Exchange/Create' method='post'></form>");
+									var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
+
+									for (var i = 0; i < books.length; i++) {
+										var book = books[i];
+										var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
+										select.append(option);
+									}
+
+									form.append(select);
+									var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
+									var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
+									form.append(button);
+									form.append(bookIdInput);
+									$("#ExchangeModal").on("click", ".btn-primary", function () {
+										var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
+									});
+									$("#ExchangeModal").modal("show");
+									$("#ExchangeModal").find(".modal-body").html(form);
+
+								},
+								error: function (xhr, ajaxOptions, thrownError) {
+									console.error("Error:", xhr.status, thrownError);
+									swal("Oops", "An error occurred while loading books. Please try again later.", "error");
+								}
+							});
+						}
+				</script>
+
                 <div class="product__info__detailed">
                     <div class="pro_details_nav nav justify-content-start" role="tablist">
                         <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
@@ -129,12 +165,7 @@
                         <!-- Start Single Tab Content -->
                         <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
                             <div class="description__attribute">
-                                <p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
-                                <ul>
-                                    <li>• Two-tone gray heather hoodie.</li>
-                                    <li>• Drawstring-adjustable hood. </li>
-                                    <li>• Machine wash/dry.</li>
-                                </ul>
+                                <p>@Model.Description</p>
                             </div>
                         </div>
                     </div>
@@ -386,6 +417,7 @@
 	</div>
 </div>
 <!-- End main Content -->
+</div>
 <!-- Start Search Popup -->
 <div class="box-search-content search_active block-bg close__top">
 	<form id="search_mini_form--2" class="minisearch" action="#">
@@ -400,4 +432,36 @@
 		<span>close</span>
 	</div>
 </div>
-<!-- End Search Popup -->
+<div class="modal fade" id="ExchangeModal" tabindex="-1" aria-labelledby="ExchangeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 localize-content class="modal-title" id="ExchangeModalLabel">Choose Book for Exchange</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button localize-content type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button localize-content type="submit" class="btn btn-primary" form="exchangeForm">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["AlertMessage"] != null)
+{
+    <script>
+		var msg = '@TempData["AlertMessage"]';
+    if (msg.length) {
+			swal("Oops!", msg, "error");
+    }
+	</script>
+}
+else if(TempData["SuccessMessage"] != null){
+    <script>
+		var msg = '@TempData["SuccessMessage"]';
+    if (msg.length) {
+			swal("Success!", msg, "success");
+    }
+	</script>
+}
