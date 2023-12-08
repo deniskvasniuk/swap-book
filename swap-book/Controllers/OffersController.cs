@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using swap_book.Models;
-using System.Data.Entity;
+
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using swap_book.Services;
@@ -28,7 +28,11 @@ namespace swap_book.Controllers
 		{
             if (User.IsInRole("Admin"))
             {
-                return View(_context.Books);
+                var books = _context.Books
+                    .Include(b => b.Owner)
+                    .ToList();
+
+                return View(books);
             }
             else
             {
@@ -179,7 +183,7 @@ namespace swap_book.Controllers
                     Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "MyOffers");
         }
 
 

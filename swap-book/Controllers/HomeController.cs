@@ -158,6 +158,7 @@ namespace swap_book.Controllers
             var existingWishlistEntry = _context.Wishlists
                 .FirstOrDefault(w => w.UserId == currentUserId && w.BookId == bookId);
 
+
             if (existingWishlistEntry == null)
             {
                 // Створити новий вішліст, якщо він не існує

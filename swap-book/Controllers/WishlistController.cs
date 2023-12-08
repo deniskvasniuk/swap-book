@@ -29,6 +29,13 @@ namespace swap_book.Controllers
 			{
 				return NotFound();
 			}
+            var currentUserWishList = _context.Wishlists
+                .FirstOrDefault(w => w.UserId == userId);
+            if (currentUserWishList == null)
+            {
+                TempData["AlertMessage"] = ($"Your wishlist is empty! Add new books first!");
+                return Redirect(HttpContext.Request.Headers["Referer"].ToString());
+            }
             var wishlists = _context.Wishlists
                 .Where(w => w.UserId == userId)
                 .Include(w => w.Book);

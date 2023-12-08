@@ -1,8 +1,30 @@
 ﻿@model Book
 @{
     ViewData["Title"] = "Book";
+
+    DateTime registrationDate = @Model.Owner.RegistrationDate;
+    string formattedDate = registrationDate.ToString("dd.MM.yyyy");
 }
 
+<div class="popup-outer">
+    <div class="popup-box">
+        <i id="close" class="bx bx-x close"></i>
+        <div class="profile-text">
+            <a href="~/user/@Model.Owner.PublicProfileLink"><img src="~/Uploads/@Model.Owner.ProfilePicture" alt=""></a>
+            <div class="text">
+                <span class="name"><a href="~/user/@Model.Owner.PublicProfileLink">@Model.Owner.Name</a></span>
+                <span class="profession">User since: @formattedDate</span>
+            </div>
+        </div>
+        <form action="#">
+            <textarea spellcheck="false" placeholder="Enter your message"></textarea>
+            <div class="button">
+                <button id="close" class="cancel">Cancel</button>
+                <button class="send">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area bg-image--4">
 	<div class="container">
@@ -23,80 +45,80 @@
 <!-- End Bradcaump area -->
 <!-- Start main Content -->
 <div class="maincontent bg--white pt--80 pb--55">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-9 col-12">
-                <div class="wn__single__product">
-                    <div class="row">
-                        <div class="col-lg-6 col-12">
-                            <div class="wn__fotorama__wrapper">
-                                <div class="fotorama wn__fotorama__action" data-nav="thumbs">
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="product__info__main">
-                                <h1>@Model.Name</h1>
-                                <div class="price-box">
-                                    <span>@Model.Author</span>
-                                </div>
-                                <div class="product__overview">
-                                    <p>@Model.Description</p>
-                                   
-                                </div>
-                                <div class="box-tocart d-flex">
-                                    <div class="addtocart__actions">
-										<button class="tocart" onclick="ShowExchangeModal(@Model.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal" title="Swap">Swap</button>
-                                    </div>
-                                    <div class="product-addto-links clearfix">
-										<a class="wishlist" asp-action="AddToWishlist" asp-controller="Home" asp-route-bookId="@Model.BookId"></a>
-                                    </div>
-                                </div>
-                                <div class="product_meta">
-                                    <span class="posted_in">
-                                        Categories:
-                                        <ul class="custom_list">
-                                            @foreach (var category in Model.BookCategories)
-                                            {
-												<li><a href="#">@category.Category.CategoryName</a></li>
-                                            }
-                                        </ul>
-                                    </span>
-                                </div>
-                                <div class="product-share">
-                                    <ul>
-                                        <li class="categories-title">Share :</li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="icon-social-twitter icons" data-platform="twitter"></i>
-                                            </a>
-                                        </li>
+<div class="container">
+<div class="row">
+<div class="col-lg-9 col-12">
+<div class="wn__single__product">
+    <div class="row">
+        <div class="col-lg-6 col-12">
+            <div class="wn__fotorama__wrapper">
+                <div class="fotorama wn__fotorama__action" data-nav="thumbs">
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12">
+            <div class="product__info__main">
+                <h1>@Model.Name</h1>
+                <div class="price-box">
+                    <span>@Model.Author</span>
+                </div>
+                <div class="product__overview">
+                    <p>@Model.Description</p>
 
-                                        <li>
-                                            <a href="#">
-												<i class="icon-social-facebook icons" data-platform="facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="icon-social-linkedin icons" data-platform="linkedin"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="box-tocart d-flex">
+                    <div class="addtocart__actions">
+                        <button class="tocart" onclick="ShowExchangeModal(@Model.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal" title="Swap">Swap</button>
+                    </div>
+                    <div class="product-addto-links clearfix">
+                        <a class="wishlist" asp-action="AddToWishlist" asp-controller="Home" asp-route-bookId="@Model.BookId"></a>
                     </div>
                 </div>
-                <script>
+                <div class="product_meta">
+                    <span class="posted_in">
+                        Categories:
+                        <ul class="custom_list">
+                            @foreach (var category in Model.BookCategories)
+                            {
+                                <li><a href="#">@category.Category.CategoryName</a></li>
+                            }
+                        </ul>
+                    </span>
+                </div>
+                <div class="product-share">
+                    <ul>
+                        <li class="categories-title">Share :</li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-social-twitter icons" data-platform="twitter"></i>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="icon-social-facebook icons" data-platform="facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-social-linkedin icons" data-platform="linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
                     function generateShareLink(platform) {
                         const currentURL = window.location.href;
 
@@ -157,280 +179,299 @@
 						}
 				</script>
 
-                <div class="product__info__detailed">
-                    <div class="pro_details_nav nav justify-content-start" role="tablist">
-                        <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
-                    </div>
-                    <div class="tab__container">
-                        <!-- Start Single Tab Content -->
-                        <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
-                            <div class="description__attribute">
-                                <p>@Model.Description</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				<div class="wn__related__product pt--80 pb--50">
-					<div class="section__title text-center">
-						<h2 class="title__be--2">Related Products</h2>
-					</div>
-					<div class="row mt--60">
-						<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
-							<!-- Start Single Product -->
-							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-								<div class="product__thumb">
-									<a class="first__img" href="single-product.html"><img src="images/books/1.jpg" alt="product image"></a>
-									<a class="second__img animation1" href="single-product.html"><img src="images/books/2.jpg" alt="product image"></a>
-									<div class="hot__box">
-										<span class="hot-label">BEST SALLER</span>
-									</div>
-								</div>
-								<div class="product__content content--center">
-									<h4><a href="single-product.html">robin parrish</a></h4>
-									<ul class="prize d-flex">
-										<li>$35.00</li>
-										<li class="old_prize">$35.00</li>
-									</ul>
-									<div class="action">
-										<div class="actions_inner">
-											<ul class="add_to_links">
-												<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-												<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-												<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-												<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="product__hover--content">
-										<ul class="rating d-flex">
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- Start Single Product -->
-							<!-- Start Single Product -->
-							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-								<div class="product__thumb">
-									<a class="first__img" href="single-product.html"><img src="images/books/3.jpg" alt="product image"></a>
-									<a class="second__img animation1" href="single-product.html"><img src="images/books/4.jpg" alt="product image"></a>
-									<div class="hot__box color--2">
-										<span class="hot-label">HOT</span>
-									</div>
-								</div>
-								<div class="product__content content--center">
-									<h4><a href="single-product.html">The Remainng</a></h4>
-									<ul class="prize d-flex">
-										<li>$35.00</li>
-										<li class="old_prize">$35.00</li>
-									</ul>
-									<div class="action">
-										<div class="actions_inner">
-											<ul class="add_to_links">
-												<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-												<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-												<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-												<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="product__hover--content">
-										<ul class="rating d-flex">
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- Start Single Product -->
-							<!-- Start Single Product -->
-							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-								<div class="product__thumb">
-									<a class="first__img" href="single-product.html"><img src="images/books/7.jpg" alt="product image"></a>
-									<a class="second__img animation1" href="single-product.html"><img src="images/books/8.jpg" alt="product image"></a>
-									<div class="hot__box">
-										<span class="hot-label">HOT</span>
-									</div>
-								</div>
-								<div class="product__content content--center">
-									<h4><a href="single-product.html">Lando</a></h4>
-									<ul class="prize d-flex">
-										<li>$35.00</li>
-										<li class="old_prize">$50.00</li>
-									</ul>
-									<div class="action">
-										<div class="actions_inner">
-											<ul class="add_to_links">
-												<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-												<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-												<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-												<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="product__hover--content">
-										<ul class="rating d-flex">
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- Start Single Product -->
-							<!-- Start Single Product -->
-							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-								<div class="product__thumb">
-									<a class="first__img" href="single-product.html"><img src="images/books/9.jpg" alt="product image"></a>
-									<a class="second__img animation1" href="single-product.html"><img src="images/books/10.jpg" alt="product image"></a>
-									<div class="hot__box">
-										<span class="hot-label">HOT</span>
-									</div>
-								</div>
-								<div class="product__content content--center">
-									<h4><a href="single-product.html">Doctor Wldo</a></h4>
-									<ul class="prize d-flex">
-										<li>$35.00</li>
-										<li class="old_prize">$35.00</li>
-									</ul>
-									<div class="action">
-										<div class="actions_inner">
-											<ul class="add_to_links">
-												<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-												<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-												<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-												<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="product__hover--content">
-										<ul class="rating d-flex">
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- Start Single Product -->
-							<!-- Start Single Product -->
-							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-								<div class="product__thumb">
-									<a class="first__img" href="single-product.html"><img src="images/books/11.jpg" alt="product image"></a>
-									<a class="second__img animation1" href="single-product.html"><img src="images/books/2.jpg" alt="product image"></a>
-									<div class="hot__box">
-										<span class="hot-label">BEST SALER</span>
-									</div>
-								</div>
-								<div class="product__content content--center content--center">
-									<h4><a href="single-product.html">Animals Life</a></h4>
-									<ul class="prize d-flex">
-										<li>$50.00</li>
-										<li class="old_prize">$35.00</li>
-									</ul>
-									<div class="action">
-										<div class="actions_inner">
-											<ul class="add_to_links">
-												<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-												<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-												<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-												<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="product__hover--content">
-										<ul class="rating d-flex">
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- Start Single Product -->
-							<!-- Start Single Product -->
-							<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
-								<div class="product__thumb">
-									<a class="first__img" href="single-product.html"><img src="images/books/1.jpg" alt="product image"></a>
-									<a class="second__img animation1" href="single-product.html"><img src="images/books/6.jpg" alt="product image"></a>
-									<div class="hot__box">
-										<span class="hot-label">BEST SALER</span>
-									</div>
-								</div>
-								<div class="product__content content--center content--center">
-									<h4><a href="single-product.html">Olio Madu</a></h4>
-									<ul class="prize d-flex">
-										<li>$50.00</li>
-										<li class="old_prize">$35.00</li>
-									</ul>
-									<div class="action">
-										<div class="actions_inner">
-											<ul class="add_to_links">
-												<li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-												<li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-												<li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-												<li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="product__hover--content">
-										<ul class="rating d-flex">
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li class="on"><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-											<li><i class="fa fa-star-o"></i></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!-- Start Single Product -->
-						</div>
-					</div>
-				</div>
+<div class="product__info__detailed">
+    <div class="pro_details_nav nav justify-content-start" role="tablist">
+        <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
+    </div>
+    <div class="tab__container">
+        <!-- Start Single Tab Content -->
+        <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
+            <div class="description__attribute">
+                <p>@Model.Description</p>
             </div>
-			<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
-				<div class="shop__sidebar">
-					<aside class="wedget__categories poroduct--tag">
-						<h3 class="wedget__title">Product Tags</h3>
-						<ul>
-                            @for (int i = 0; i < Model.BookCategories.Count; i++) {
-                                <li><a href="#">@Model.BookCategories[i].Category.CategoryName</a></li>
-                            }
-						</ul>
-					</aside>
-				</div>
-			</div>
-	</div>
+        </div>
+    </div>
+</div>
+<div class="wn__related__product pt--80 pb--50">
+<div class="section__title text-center">
+    <h2 class="title__be--2">Related Products</h2>
+</div>
+<div class="row mt--60">
+<div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
+<!-- Start Single Product -->
+<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="product__thumb">
+        <a class="first__img" href="single-product.html"><img src="images/books/1.jpg" alt="product image"></a>
+        <a class="second__img animation1" href="single-product.html"><img src="images/books/2.jpg" alt="product image"></a>
+        <div class="hot__box">
+            <span class="hot-label">BEST SALLER</span>
+        </div>
+    </div>
+    <div class="product__content content--center">
+        <h4><a href="single-product.html">robin parrish</a></h4>
+        <ul class="prize d-flex">
+            <li>$35.00</li>
+            <li class="old_prize">$35.00</li>
+        </ul>
+        <div class="action">
+            <div class="actions_inner">
+                <ul class="add_to_links">
+                    <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                    <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                    <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                    <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product__hover--content">
+            <ul class="rating d-flex">
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Start Single Product -->
+<!-- Start Single Product -->
+<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="product__thumb">
+        <a class="first__img" href="single-product.html"><img src="images/books/3.jpg" alt="product image"></a>
+        <a class="second__img animation1" href="single-product.html"><img src="images/books/4.jpg" alt="product image"></a>
+        <div class="hot__box color--2">
+            <span class="hot-label">HOT</span>
+        </div>
+    </div>
+    <div class="product__content content--center">
+        <h4><a href="single-product.html">The Remainng</a></h4>
+        <ul class="prize d-flex">
+            <li>$35.00</li>
+            <li class="old_prize">$35.00</li>
+        </ul>
+        <div class="action">
+            <div class="actions_inner">
+                <ul class="add_to_links">
+                    <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                    <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                    <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                    <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product__hover--content">
+            <ul class="rating d-flex">
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Start Single Product -->
+<!-- Start Single Product -->
+<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="product__thumb">
+        <a class="first__img" href="single-product.html"><img src="images/books/7.jpg" alt="product image"></a>
+        <a class="second__img animation1" href="single-product.html"><img src="images/books/8.jpg" alt="product image"></a>
+        <div class="hot__box">
+            <span class="hot-label">HOT</span>
+        </div>
+    </div>
+    <div class="product__content content--center">
+        <h4><a href="single-product.html">Lando</a></h4>
+        <ul class="prize d-flex">
+            <li>$35.00</li>
+            <li class="old_prize">$50.00</li>
+        </ul>
+        <div class="action">
+            <div class="actions_inner">
+                <ul class="add_to_links">
+                    <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                    <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                    <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                    <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product__hover--content">
+            <ul class="rating d-flex">
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Start Single Product -->
+<!-- Start Single Product -->
+<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="product__thumb">
+        <a class="first__img" href="single-product.html"><img src="images/books/9.jpg" alt="product image"></a>
+        <a class="second__img animation1" href="single-product.html"><img src="images/books/10.jpg" alt="product image"></a>
+        <div class="hot__box">
+            <span class="hot-label">HOT</span>
+        </div>
+    </div>
+    <div class="product__content content--center">
+        <h4><a href="single-product.html">Doctor Wldo</a></h4>
+        <ul class="prize d-flex">
+            <li>$35.00</li>
+            <li class="old_prize">$35.00</li>
+        </ul>
+        <div class="action">
+            <div class="actions_inner">
+                <ul class="add_to_links">
+                    <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                    <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                    <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                    <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product__hover--content">
+            <ul class="rating d-flex">
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Start Single Product -->
+<!-- Start Single Product -->
+<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="product__thumb">
+        <a class="first__img" href="single-product.html"><img src="images/books/11.jpg" alt="product image"></a>
+        <a class="second__img animation1" href="single-product.html"><img src="images/books/2.jpg" alt="product image"></a>
+        <div class="hot__box">
+            <span class="hot-label">BEST SALER</span>
+        </div>
+    </div>
+    <div class="product__content content--center content--center">
+        <h4><a href="single-product.html">Animals Life</a></h4>
+        <ul class="prize d-flex">
+            <li>$50.00</li>
+            <li class="old_prize">$35.00</li>
+        </ul>
+        <div class="action">
+            <div class="actions_inner">
+                <ul class="add_to_links">
+                    <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                    <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                    <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                    <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product__hover--content">
+            <ul class="rating d-flex">
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Start Single Product -->
+<!-- Start Single Product -->
+<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+    <div class="product__thumb">
+        <a class="first__img" href="single-product.html"><img src="images/books/1.jpg" alt="product image"></a>
+        <a class="second__img animation1" href="single-product.html"><img src="images/books/6.jpg" alt="product image"></a>
+        <div class="hot__box">
+            <span class="hot-label">BEST SALER</span>
+        </div>
+    </div>
+    <div class="product__content content--center content--center">
+        <h4><a href="single-product.html">Olio Madu</a></h4>
+        <ul class="prize d-flex">
+            <li>$50.00</li>
+            <li class="old_prize">$35.00</li>
+        </ul>
+        <div class="action">
+            <div class="actions_inner">
+                <ul class="add_to_links">
+                    <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                    <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                    <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                    <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="product__hover--content">
+            <ul class="rating d-flex">
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li class="on"><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Start Single Product -->
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-12 md-mt-40 sm-mt-40">
+    <section>
+        <div class="profile">
+            <div class="profile-img">
+                <a href="~/user/@Model.Owner.PublicProfileLink"><img src="~/Uploads/@Model.Owner.ProfilePicture" alt=""></a>
+            </div>
+            <div class="profile-descr">
+                <span class="name"><a href="~/user/@Model.Owner.PublicProfileLink">@Model.Owner.Name</a></span>
+                <span class="profession">User since: @formattedDate</span>
+                <div id="hireBtn" class="button">
+                    <i class="bx bxs-envelope"></i>
+                    <button>Send message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="shop__sidebar">
+        <aside class="wedget__categories poroduct--tag">
+            <h3 class="wedget__title">Product Tags</h3>
+            <ul>
+                @for (int i = 0; i < Model.BookCategories.Count; i++)
+                {
+                    <li><a href="#">@Model.BookCategories[i].Category.CategoryName</a></li>
+                }
+            </ul>
+        </aside>
+    </div>
+</div>
+</div>
+
+<!-- popup box start -->
+
 </div>
 <!-- End main Content -->
 </div>
 <!-- Start Search Popup -->
 <div class="box-search-content search_active block-bg close__top">
-	<form id="search_mini_form--2" class="minisearch" action="#">
-		<div class="field__search">
-			<input type="text" placeholder="Search entire store here...">
-			<div class="action">
-				<a href="#"><i class="zmdi zmdi-search"></i></a>
-			</div>
-		</div>
-	</form>
-	<div class="close__wrap">
-		<span>close</span>
-	</div>
+    <form id="search_mini_form--2" class="minisearch" action="#">
+        <div class="field__search">
+            <input type="text" placeholder="Search entire store here...">
+            <div class="action">
+                <a href="#"><i class="zmdi zmdi-search"></i></a>
+            </div>
+        </div>
+    </form>
+    <div class="close__wrap">
+        <span>close</span>
+    </div>
 </div>
 <div class="modal fade" id="ExchangeModal" tabindex="-1" aria-labelledby="ExchangeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -465,3 +506,22 @@ else if(TempData["SuccessMessage"] != null){
     }
 	</script>
 }
+<script>
+    const popupOuter = document.querySelector(".popup-outer");
+    const closeButtons = popupOuter.querySelectorAll(".close");
+    const textArea = popupOuter.querySelector("textarea");
+
+    // Assuming a button with an ID of "hireBtn" triggers the popup
+    const hireBtn = document.querySelector("#hireBtn");
+
+    hireBtn.addEventListener("click", () => {
+        popupOuter.classList.add("show");
+    });
+
+    closeButtons.forEach(closeBtn => {
+        closeBtn.addEventListener("click", () => {
+            popupOuter.classList.remove("show");
+            textArea.value = "";
+        });
+    });
+</script>

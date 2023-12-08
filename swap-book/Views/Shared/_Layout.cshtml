@@ -21,16 +21,19 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,600,600i,700,700i,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/custom.css">
     <link rel="stylesheet" href="~/css/plugins.css">
     <link rel="stylesheet" href="~/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/css/flag-icon.min.css" />
     <script src="~/js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css"
@@ -52,215 +55,216 @@
 <header id="wn__header" class="header__area header__absolute sticky__header">
 <div class="container-fluid">
 <div class="row">
-<div class="col-md-6 col-sm-6 col-6 col-lg-2">
-    <div class="logo">
-        <a asp-controller="home" asp-action="index">
-            <img src="~/images/logo/logo.png" alt="logo images">
-        </a>
+    <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+        <div class="logo">
+            <a asp-controller="home" asp-action="index">
+                <img src="~/images/logo/logo.png" alt="logo images">
+            </a>
+        </div>
     </div>
-</div>
-<div class="col-lg-8 d-none d-lg-block">
-    <nav class="mainmenu__nav">
-        <ul class="meninmenu d-flex justify-content-start">
-            <li class="drop with--one--item"><a localize-content asp-controller="home" asp-action="index">Home</a></li>
+    <div class="col-lg-8 d-none d-lg-block">
+        <nav class="mainmenu__nav">
+            <ul class="meninmenu d-flex justify-content-start">
+                <li class="drop with--one--item"><a localize-content asp-controller="home" asp-action="index">Home</a></li>
 
-            <li class="dropwith--one--item">
-                <a localize-content href="shop-grid.html">Books</a>
-            </li>
+                <li class="dropwith--one--item">
+                    <a localize-content href="shop-grid.html">Books</a>
+                </li>
 
-            <li class="drop">
-                <a localize-content href="#">Pages</a>
-                <div class="megamenu dropdown">
-                    <ul class="item item01">
-                                            <li><a localize-content href="about.html">About Page</a></li>
-                        <li class="label2">
-                            <a localize-content href="portfolio.html">Portfolio</a>
-                            <ul>
-                                                    <li><a localize-content href="portfolio.html">Portfolio</a></li>
-                                <li><a localize-content href="portfolio-details.html">Portfolio Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a localize-content href="my-account.html">My Account</a></li>
-                        <li><a localize-content href="cart.html">Cart Page</a></li>
-                        <li><a localize-content href="checkout.html">Checkout Page</a></li>
-                        <li><a localize-content href="wishlist.html">Wishlist Page</a></li>
-                        <li><a localize-content href="error404.html">404 Page</a></li>
-                        <li><a localize-content href="faq.html">Faq Page</a></li>
-                        <li><a localize-content href="team.html">Team Page</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="drop">
-                                    <a localize-content href="blog.html">Exchanges</a>
-                <div class="megamenu dropdown">
-                    <ul class="item item01">
-                        <li><a localize-content asp-controller="offers" asp-action="index">Exchanges</a></li>
-                        <li><a localize-content href="blog-details.html">Blog Details</a></li>
-                    </ul>
-                </div>
-            </li>            <li><a localize-content asp-controller="home" asp-action="contact">Contact</a></li>
-                                <li class="drop with--one--item">
-                                    <language-nav redirect-to-url="@(Url.RouteUrl(routeData))" style="display: flex;align-items: center;" cookie-handler-url="@Url.Action("SetCultureCookie", "Home", new { cltr = routeData["culture"] })">
-                                    </language-nav>
-                                </li>
-        </ul>
-    </nav>
-</div>
-<div class="col-md-6 col-sm-6 col-6 col-lg-2">
-    <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-        <li class="shop_search"><a class="search__active" href="#"></a></li>
-        <li class="wishlist"><a asp-controller="Wishlist" asp-action="GetWishlist" asp-route-userId="@UserManager.GetUserId(User)"></a></li>
-        <li class="shopcart">
-            <a class="cartbox_active" href="#"><span class="product_qun">3</span></a>
-            <!-- Start Shopping Cart -->
-            <div class="block-minicart minicart__active">
-                <div class="minicart-content-wrapper">
-                    <div class="micart__close">
-                        <span>close</span>
-                    </div>
-                    <div class="items-total d-flex justify-content-between">
-                        <span>3 items</span>
-                        <span>Cart Subtotal</span>
-                    </div>
-                    <div class="total_amount text-right">
-                        <span>$66.00</span>
-                    </div>
-                    <div class="mini_action checkout">
-                        <a class="checkout__btn" href="cart.html">Go to Checkout</a>
-                    </div>
-                    <div class="single__items">
-                        <div class="miniproduct">
-                            <div class="item01 d-flex">
-                                <div class="thumb">
-                                    <a href="product-details.html"><img src="images/product/sm-img/1.jpg" alt="product images"></a>
-                                </div>
-                                <div class="content">
-                                    <h6><a href="product-details.html">Voyage Yoga Bag</a></h6>
-                                    <span class="prize">$30.00</span>
-                                    <div class="product_prize d-flex justify-content-between">
-                                        <span class="qun">Qty: 01</span>
-                                        <ul class="d-flex justify-content-end">
-                                            <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item01 d-flex mt--20">
-                                <div class="thumb">
-                                    <a href="product-details.html"><img src="images/product/sm-img/3.jpg" alt="product images"></a>
-                                </div>
-                                <div class="content">
-                                    <h6><a href="product-details.html">Impulse Duffle</a></h6>
-                                    <span class="prize">$40.00</span>
-                                    <div class="product_prize d-flex justify-content-between">
-                                        <span class="qun">Qty: 03</span>
-                                        <ul class="d-flex justify-content-end">
-                                            <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item01 d-flex mt--20">
-                                <div class="thumb">
-                                    <a href="product-details.html"><img src="images/product/sm-img/2.jpg" alt="product images"></a>
-                                </div>
-                                <div class="content">
-                                    <h6><a href="product-details.html">Compete Track Tote</a></h6>
-                                    <span class="prize">$40.00</span>
-                                    <div class="product_prize d-flex justify-content-between">
-                                        <span class="qun">Qty: 03</span>
-                                        <ul class="d-flex justify-content-end">
-                                            <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mini_action cart">
-                        <a class="cart__btn" href="cart.html">View and edit cart</a>
-                    </div>
-                </div>
-            </div>
-            <!-- End Shopping Cart -->
-        </li>
-        <li class="setting__bar__icon">
-            <a class="setting__active" href="#"></a>
-            <div class="searchbar__content setting__block">
-                <div class="content-inner">
-                    <div class="switcher-currency">
-                        <strong class="label switcher-label">
-                                                <span localize-content>Language</span>
-                        </strong>
-                        <div class="switcher-options">
-                            <div class="switcher-currency-trigger">
-                                <span class="currency-trigger">English01</span>
-                                <ul class="switcher-dropdown">
-                                    <li>English02</li>
-                                    <li>English03</li>
-                                    <li>English04</li>
-                                    <li>English05</li>
+                <li class="drop">
+                    <a localize-content href="#">Pages</a>
+                    <div class="megamenu dropdown">
+                        <ul class="item item01">
+                            <li><a localize-content href="about.html">About Page</a></li>
+                            <li class="label2">
+                                <a localize-content href="portfolio.html">Portfolio</a>
+                                <ul>
+                                    <li><a localize-content href="portfolio.html">Portfolio</a></li>
+                                    <li><a localize-content href="portfolio-details.html">Portfolio Details</a></li>
                                 </ul>
+                            </li>
+                            <li><a localize-content href="my-account.html">My Account</a></li>
+                            <li><a localize-content href="cart.html">Cart Page</a></li>
+                            <li><a localize-content href="checkout.html">Checkout Page</a></li>
+                            <li><a localize-content href="wishlist.html">Wishlist Page</a></li>
+                            <li><a localize-content href="error404.html">404 Page</a></li>
+                            <li><a localize-content href="faq.html">Faq Page</a></li>
+                            <li><a localize-content href="team.html">Team Page</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="drop">
+                    <a localize-content href="blog.html">Exchanges</a>
+                    <div class="megamenu dropdown">
+                        <ul class="item item01">
+                            <li><a localize-content asp-controller="offers" asp-action="index">Exchanges</a></li>
+                            <li><a localize-content href="blog-details.html">Blog Details</a></li>
+                        </ul>
+                    </div>
+                </li> <li><a localize-content asp-controller="home" asp-action="contact">Contact</a></li>
+                <li class="drop with--one--item">
+                    <language-nav redirect-to-url="@(Url.RouteUrl(routeData))" style="display: flex;align-items: center;" cookie-handler-url="@Url.Action("SetCultureCookie", "Home", new { cltr = routeData["culture"] })">
+                    </language-nav>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+        <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+            <li class="shop_search"><a class="search__active" href="#"></a></li>
+            <li class="wishlist"><a asp-controller="Wishlist" asp-action="GetWishlist" asp-route-userId="@UserManager.GetUserId(User)"></a></li>
+            <li class="shopcart">
+                <a class="cartbox_active" href="#"><span class="product_qun">3</span></a>
+                <!-- Start Shopping Cart -->
+                <div class="block-minicart minicart__active">
+                    <div class="minicart-content-wrapper">
+                        <div class="micart__close">
+                            <span>close</span>
+                        </div>
+                        <div class="items-total d-flex justify-content-between">
+                            <span>3 items</span>
+                            <span>Cart Subtotal</span>
+                        </div>
+                        <div class="total_amount text-right">
+                            <span>$66.00</span>
+                        </div>
+                        <div class="mini_action checkout">
+                            <a class="checkout__btn" href="cart.html">Go to Checkout</a>
+                        </div>
+                        <div class="single__items">
+                            <div class="miniproduct">
+                                <div class="item01 d-flex">
+                                    <div class="thumb">
+                                        <a href="product-details.html"><img src="images/product/sm-img/1.jpg" alt="product images"></a>
+                                    </div>
+                                    <div class="content">
+                                        <h6><a href="product-details.html">Voyage Yoga Bag</a></h6>
+                                        <span class="prize">$30.00</span>
+                                        <div class="product_prize d-flex justify-content-between">
+                                            <span class="qun">Qty: 01</span>
+                                            <ul class="d-flex justify-content-end">
+                                                <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
+                                                <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item01 d-flex mt--20">
+                                    <div class="thumb">
+                                        <a href="product-details.html"><img src="images/product/sm-img/3.jpg" alt="product images"></a>
+                                    </div>
+                                    <div class="content">
+                                        <h6><a href="product-details.html">Impulse Duffle</a></h6>
+                                        <span class="prize">$40.00</span>
+                                        <div class="product_prize d-flex justify-content-between">
+                                            <span class="qun">Qty: 03</span>
+                                            <ul class="d-flex justify-content-end">
+                                                <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
+                                                <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item01 d-flex mt--20">
+                                    <div class="thumb">
+                                        <a href="product-details.html"><img src="images/product/sm-img/2.jpg" alt="product images"></a>
+                                    </div>
+                                    <div class="content">
+                                        <h6><a href="product-details.html">Compete Track Tote</a></h6>
+                                        <span class="prize">$40.00</span>
+                                        <div class="product_prize d-flex justify-content-between">
+                                            <span class="qun">Qty: 03</span>
+                                            <ul class="d-flex justify-content-end">
+                                                <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
+                                                <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="mini_action cart">
+                            <a class="cart__btn" href="cart.html">View and edit cart</a>
+                        </div>
                     </div>
-                    <div class="switcher-currency">
-                        <strong class="label switcher-label">
-                                                <span localize-content>My Account</span>
-                        </strong>
-                        <div class="switcher-options">
-                            <div class="switcher-currency-trigger">
-                                <div class="setting__menu">
-                                    @if (SignInManager.IsSignedIn(User))
-                                    {
-                                        var user = await SignInManager.UserManager.GetUserAsync(User);
-                                        if (user != null && user.PublicProfileLink != null)
+                </div>
+                <!-- End Shopping Cart -->
+            </li>
+            <li class="setting__bar__icon">
+                <a class="setting__active" href="#"></a>
+                <div class="searchbar__content setting__block">
+                    <div class="content-inner">
+                        <div class="switcher-currency">
+                            <strong class="label switcher-label">
+                                <span localize-content>Language</span>
+                            </strong>
+                            <div class="switcher-options">
+                                <div class="switcher-currency-trigger">
+                                    <span class="currency-trigger">English01</span>
+                                    <ul class="switcher-dropdown">
+                                        <li>English02</li>
+                                        <li>English03</li>
+                                        <li>English04</li>
+                                        <li>English05</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="switcher-currency">
+                            <strong class="label switcher-label">
+                                <span localize-content>My Account</span>
+                            </strong>
+                            <div class="switcher-options">
+                                <div class="switcher-currency-trigger">
+                                    <div class="setting__menu">
+                                        @if (SignInManager.IsSignedIn(User))
                                         {
-                                            <span localize-content> <a asp-controller="User" asp-action="PublicProfile" asp-route-publicProfileLink="@user.PublicProfileLink">My Account</a></span>
+                                            var user = await SignInManager.UserManager.GetUserAsync(User);
+                                            if (user != null && user.PublicProfileLink != null)
+                                            {
+                                                <span localize-content> <a asp-controller="User" asp-action="PublicProfile" asp-route-publicProfileLink="@user.PublicProfileLink">My Account</a></span>
+                                                <span localize-content><a href="~/Identity/Account/Manage">Manage Account</a></span>
+                                            }
+
+                                            <span><a localize-content href="#">My Wishlist</a></span>
+                                            <span>
+                                                <a>
+                                                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                        <button localize-content id="logout" type="submit" style="background-color:#ffffff; border: none; color: #797979; font-family: &quot;Poppins&quot;, sans-serif; padding: 0;">Logout</button>
+                                                    </form>
+                                                </a>
+                                            </span>
+
                                         }
-
-                                                            <span><a localize-content href="#">My Wishlist</a></span>
-                                        <span>
-                                            <a>
-                                                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                                                        <button localize-content id="logout" type="submit" style="background-color:#ffffff; border: none; color: #797979; font-family: &quot;Poppins&quot;, sans-serif; padding: 0;">Logout</button>
-                                                </form>
-                                            </a>
-                                        </span>
-
-                                    }
-                                    else
-                                    {
-                                        <span><a localize-content id="login" href="~/Identity/Account/Login">Login</a></span>
-                                        <span><a localize-content id="register" href="/Identity/Account/Register">Register</a></span>
-                                    }
+                                        else
+                                        {
+                                            <span><a localize-content id="login" href="~/Identity/Account/Login">Login</a></span>
+                                            <span><a localize-content id="register" href="/Identity/Account/Register">Register</a></span>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </li>
-    </ul>
-</div>
+            </li>
+        </ul>
+    </div>
 </div>
 <!-- Start Mobile Menu -->
 <div class="row d-none">
     <div class="col-lg-12 d-none">
         <nav class="mobilemenu__nav">
             <ul class="meninmenu">
-                                <li><a localize-content href="index.html">Home</a></li>
+                <li><a localize-content href="index.html">Home</a></li>
                 <li>
                     <a localize-content href="#">Pages</a>
                     <ul>
-                                        <li><a localize-content href="about.html">About Page</a></li>
+                        <li><a localize-content href="about.html">About Page</a></li>
                         <li>
                             <a localize-content href="portfolio.html">Portfolio</a>
                             <ul>
-                                                <li><a localize-content href="portfolio.html">Portfolio</a></li>
+                                <li><a localize-content href="portfolio.html">Portfolio</a></li>
                                 <li><a localize-content href="portfolio-details.html">Portfolio Details</a></li>
                             </ul>
                         </li>
@@ -276,7 +280,7 @@
                 <li>
                     <a localize-content href="shop-grid.html">Shop</a>
                     <ul>
-                                        <li><a localize-content href="shop-grid.html">Shop Grid</a></li>
+                        <li><a localize-content href="shop-grid.html">Shop Grid</a></li>
                         <li><a localize-content href="single-product.html">Single Product</a></li>
                     </ul>
                 </li>
@@ -287,7 +291,7 @@
                         <li><a localize-content href="blog-details.html">Blog Details</a></li>
                     </ul>
                 </li>
-                                <li><a localize-content href="contact.html">Contact</a></li>
+                <li><a localize-content href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </div>
@@ -316,7 +320,7 @@
                             <a href="index.html">
                                 <img src="~/images/logo/3.png" alt="logo">
                             </a>
-                                    <p localize-content>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</p>
+                            <p localize-content>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</p>
                         </div>
                         <div class="footer__content">
                             <ul class="social__net social__net--2 d-flex justify-content-center">
