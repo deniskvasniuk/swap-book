@@ -1,8 +1,8 @@
-﻿@model Book
+﻿@model BookDetailsViewModel
 @{
     ViewData["Title"] = "Book";
 
-    DateTime registrationDate = @Model.Owner.RegistrationDate;
+    DateTime registrationDate = DateTime.Now;
     string formattedDate = registrationDate.ToString("dd.MM.yyyy");
 }
 
@@ -10,7 +10,7 @@
     <div class="popup-box">
         <i id="close" class="bx bx-x close"></i>
         <div class="profile-text">
-            <a href="~/user/@Model.Owner.PublicProfileLink"><img src="~/Uploads/@Model.Owner.ProfilePicture" alt=""></a>
+            <a href="~/user/#"><img src="~/Uploads/@Model.Owner.ProfilePicture" alt=""></a>
             <div class="text">
                 <span class="name"><a href="~/user/@Model.Owner.PublicProfileLink">@Model.Owner.Name</a></span>
                 <span class="profession">User since: @formattedDate</span>
@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="bradcaump__inner text-center">
-					<h2 class="bradcaump-title" style="color: #2e2e2e">@Model.Name</h2>
+					<h2 class="bradcaump-title" style="color: #2e2e2e">@Model.Book.Name</h2>
 					<nav class="bradcaump-content">
 						<a style="color: #2e2e2e" asp-controller="Home" asp-action="Index">Home</a>
 						<span class="brd-separetor" style="color: #2e2e2e">/</span>
@@ -53,40 +53,40 @@
         <div class="col-lg-6 col-12">
             <div class="wn__fotorama__wrapper">
                 <div class="fotorama wn__fotorama__action" data-nav="thumbs">
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
-                    <a href="#"><img src="~/Uploads/@Model.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
+                    <a href="#"><img src="~/Uploads/@Model.Book.ImageUrl" alt=""></a>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 col-12">
             <div class="product__info__main">
-                <h1>@Model.Name</h1>
+                <h1>@Model.Book.Name</h1>
                 <div class="price-box">
-                    <span>@Model.Author</span>
+                    <span>@Model.Book.Author</span>
                 </div>
                 <div class="product__overview">
-                    <p>@Model.Description</p>
+                    <p>@Model.Book.Description</p>
 
                 </div>
                 <div class="box-tocart d-flex">
                     <div class="addtocart__actions">
-                        <button class="tocart" onclick="ShowExchangeModal(@Model.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal" title="Swap">Swap</button>
+                        <button class="tocart" onclick="ShowExchangeModal(@Model.Book.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal" title="Swap">Swap</button>
                     </div>
                     <div class="product-addto-links clearfix">
-                        <a class="wishlist" asp-action="AddToWishlist" asp-controller="Home" asp-route-bookId="@Model.BookId"></a>
+                        <a class="wishlist" asp-action="AddToWishlist" asp-controller="Home" asp-route-bookId="@Model.Book.BookId"></a>
                     </div>
                 </div>
                 <div class="product_meta">
                     <span class="posted_in">
                         Categories:
                         <ul class="custom_list">
-                            @foreach (var category in Model.BookCategories)
+                            @foreach (var category in Model.Book.BookCategories)
                             {
                                 <li><a href="#">@category.Category.CategoryName</a></li>
                             }
@@ -118,67 +118,6 @@
         </div>
     </div>
 </div>
-<script>
-                    function generateShareLink(platform) {
-                        const currentURL = window.location.href;
-
-                        switch (platform) {
-                            case 'twitter':
-                                return `https://twitter.com/intent/tweet?text=${currentURL}`;
-                            case 'telegram':
-                                return `https://telegram.me/share/url?url=${currentURL}&text=${currentURL}`;
-                            case 'facebook':
-                                return `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
-                            case 'linkedin':
-                                return `https://www.linkedin.com/share/article?mini=true&url=${currentURL}`;
-                            default:
-                                return currentURL;
-                        }
-                    }
-                    const socialIcons = document.querySelectorAll('.product-share ul li a');
-                    for (const icon of socialIcons) {
-                        const platform = icon.querySelector('i').dataset.platform;
-                        icon.addEventListener('click', () => {
-                            const shareLink = generateShareLink(platform);
-                            window.open(shareLink, '_blank');
-                        });
-                    }
-						function ShowExchangeModal(BookId) {
-							$.ajax({
-								url: "/Exchange/GetAllBooksForUser",
-								type: "GET",
-								dataType: "json",
-								success: function (data) {
-									var books = data;
-									var form = $("<form action='/Exchange/Create' method='post'></form>");
-									var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
-
-									for (var i = 0; i < books.length; i++) {
-										var book = books[i];
-										var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
-										select.append(option);
-									}
-
-									form.append(select);
-									var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
-									var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
-									form.append(button);
-									form.append(bookIdInput);
-									$("#ExchangeModal").on("click", ".btn-primary", function () {
-										var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
-									});
-									$("#ExchangeModal").modal("show");
-									$("#ExchangeModal").find(".modal-body").html(form);
-
-								},
-								error: function (xhr, ajaxOptions, thrownError) {
-									console.error("Error:", xhr.status, thrownError);
-									swal("Oops", "An error occurred while loading books. Please try again later.", "error");
-								}
-							});
-						}
-				</script>
-
 <div class="product__info__detailed">
     <div class="pro_details_nav nav justify-content-start" role="tablist">
         <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
@@ -187,7 +126,7 @@
         <!-- Start Single Tab Content -->
         <div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
             <div class="description__attribute">
-                <p>@Model.Description</p>
+                <p>@Model.Book.Description</p>
             </div>
         </div>
     </div>
@@ -198,7 +137,6 @@
 </div>
 <div class="row mt--60">
 <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
-<!-- Start Single Product -->
 <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
     <div class="product__thumb">
         <a class="first__img" href="single-product.html"><img src="images/books/1.jpg" alt="product image"></a>
@@ -444,9 +382,9 @@
         <aside class="wedget__categories poroduct--tag">
             <h3 class="wedget__title">Product Tags</h3>
             <ul>
-                @for (int i = 0; i < Model.BookCategories.Count; i++)
+                @for (int i = 0; i < Model.Book.BookCategories.Count; i++)
                 {
-                    <li><a href="#">@Model.BookCategories[i].Category.CategoryName</a></li>
+                    <li><a href="#">@Model.Book.BookCategories[i].Category.CategoryName</a></li>
                 }
             </ul>
         </aside>
@@ -524,4 +462,62 @@ else if(TempData["SuccessMessage"] != null){
             textArea.value = "";
         });
     });
+    function generateShareLink(platform) {
+                        const currentURL = window.location.href;
+
+                        switch (platform) {
+                            case 'twitter':
+                                return `https://twitter.com/intent/tweet?text=${currentURL}`;
+                            case 'telegram':
+                                return `https://telegram.me/share/url?url=${currentURL}&text=${currentURL}`;
+                            case 'facebook':
+                                return `https://www.facebook.com/sharer/sharer.php?u=${currentURL}`;
+                            case 'linkedin':
+                                return `https://www.linkedin.com/share/article?mini=true&url=${currentURL}`;
+                            default:
+                                return currentURL;
+                        }
+                    }
+                    const socialIcons = document.querySelectorAll('.product-share ul li a');
+                    for (const icon of socialIcons) {
+                        const platform = icon.querySelector('i').dataset.platform;
+                        icon.addEventListener('click', () => {
+                            const shareLink = generateShareLink(platform);
+                            window.open(shareLink, '_blank');
+                        });
+                    }
+						function ShowExchangeModal(BookId) {
+							$.ajax({
+								url: "/Exchange/GetAllBooksForUser",
+								type: "GET",
+								dataType: "json",
+								success: function (data) {
+									var books = data;
+									var form = $("<form action='/Exchange/Create' method='post'></form>");
+									var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
+
+									for (var i = 0; i < books.length; i++) {
+										var book = books[i];
+										var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
+										select.append(option);
+									}
+
+									form.append(select);
+									var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
+									var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
+									form.append(button);
+									form.append(bookIdInput);
+									$("#ExchangeModal").on("click", ".btn-primary", function () {
+										var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
+									});
+									$("#ExchangeModal").modal("show");
+									$("#ExchangeModal").find(".modal-body").html(form);
+
+								},
+								error: function (xhr, ajaxOptions, thrownError) {
+									console.error("Error:", xhr.status, thrownError);
+									swal("Oops", "An error occurred while loading books. Please try again later.", "error");
+								}
+							});
+						}
 </script>

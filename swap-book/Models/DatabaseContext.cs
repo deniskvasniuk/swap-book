@@ -20,7 +20,10 @@ namespace swap_book.Models
             : base(options)
         {
         }
-
+        public DatabaseContext() : base()
+        {
+           
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
