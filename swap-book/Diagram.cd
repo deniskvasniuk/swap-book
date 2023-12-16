@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="swap_book.Models.ApplicationUser">
+    <Position X="2" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAgAAAgAAAAAAQAgQAQAAAABABQAAAAAAA=</HashCode>
+      <FileName>Models\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Books" />
+      <Property Name="Wishlists" />
+      <Property Name="Exchanges" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="swap_book.Models.Book">
+    <Position X="7.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCAASACIAAAoEAAAgCAAAAQAAAAAIAAAAABQAAAAAAA=</HashCode>
+      <FileName>Models\Book.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Owner" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="BookCategories" />
+      <Property Name="Wishlists" />
+      <Property Name="Exchanges" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="swap_book.Models.BookCategory">
+    <Position X="13.5" Y="4" Width="1.5" />
+    <AssociationLine Name="Book" Type="swap_book.Models.Book">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.479" Y="0.409" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\BookCategory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Book" />
+      <Property Name="Category" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="swap_book.Models.Category">
+    <Position X="1.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAACAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Category.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="BookCategories" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="swap_book.Models.Exchange">
+    <Position X="4.5" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="swap_book.Models.Exchange.ExchangeStatus" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\Exchange.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAABCAAEAAAAAABAACAAAAgAAIAAAAAAAAAQAAABAAA=</HashCode>
+      <FileName>Models\Exchange.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Book" />
+      <Property Name="User" />
+      <Property Name="ExchangedBook" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="swap_book.Models.Wishlist">
+    <Position X="10.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADCAAAAAAAAABAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Wishlist.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Book" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BookWishlist">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAABAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\BookWishlist.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Book" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

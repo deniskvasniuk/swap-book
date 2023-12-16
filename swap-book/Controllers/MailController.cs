@@ -19,7 +19,8 @@ namespace swap_book.Controllers
         [HttpPost]
         public IActionResult Feedback(Mail model)
         {
-            if (!ModelState.IsValid)
+
+            if (model == null || !ModelState.IsValid)
             {
                 return View("Error");
             }
@@ -27,7 +28,6 @@ namespace swap_book.Controllers
             try
             {
                 _emailSender.SendMail(model.FirstName,model.LastName, model.Email, model.Msg);
-                _logger.LogInformation($"Mail: email is successfully sent to {model.Email}");
             }
             catch (Exception ex)
             {
@@ -36,5 +36,6 @@ namespace swap_book.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

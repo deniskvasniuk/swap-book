@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using swap_book.Models;
-
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using swap_book.Services;
-using EntityState = System.Data.Entity.EntityState;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -34,11 +31,10 @@ namespace swap_book.Controllers
 
                 return View(books);
             }
-            else
-            {
-                var currentUserBooks = _context.Books.Where(b => b.OwnerId == _userManager.GetUserId(User));
-                return View(currentUserBooks);
-            }
+
+            var currentUserBooks = _context.Books.Where(b => b.OwnerId == _userManager.GetUserId(User));
+            return View(currentUserBooks);
+            
         }
 
         public IActionResult Exchange()
@@ -57,17 +53,16 @@ namespace swap_book.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Admin, User")]
-        [HttpGet]
+
         public ActionResult EditBook(int? id)
         {
 
            var book = _context.Books.Find(id);
-            // Check if the user is an administrator or the owner of the book
+
             if (!User.IsInRole("Admin") && book?.OwnerId != _userManager.GetUserId(User))
             {
-                return Forbid(); // Return 403 Forbidden if not authorized
+                return Forbid(); 
             }
-
 
             if (id == null)
             {
@@ -148,42 +143,32 @@ namespace swap_book.Controllers
 
         [Authorize(Roles = "Admin,User")]
         [HttpPost]
-        public ActionResult AddBook(Book book)
+        public async Task<ActionResult> AddBook(Book book)
         {
             book.OwnerId = _userManager.GetUserId(User);
             book.BookLink = Guid.NewGuid();
 
-            try
+            var selectedCategoryIds = Request.Form["BookCategories"].Select(int.Parse);
+
+            var bookCategories = selectedCategoryIds.Select(categoryId => new BookCategory { BookId = book.BookId, CategoryId = categoryId });
+
+            book.BookCategories = bookCategories.ToList();
+            book.CreatedAt = DateTime.Now;
+            book.Exchangeable = true;
+            book.Owner = await _userManager.GetUserAsync(User);
+
+            var saveImageResult = _fileService.SaveImage(book.ImageFile);
+            if (saveImageResult.Item1 == 1)
             {
-                var selectedCategoryIds = Request.Form["BookCategories"].Select(int.Parse);
-
-                var bookCategories = selectedCategoryIds.Select(categoryId => new BookCategory { BookId = book.BookId, CategoryId = categoryId });
-
-                book.BookCategories = bookCategories.ToList();
-                book.CreatedAt = DateTime.Now;
-                book.Exchangeable = true;
-
-                var saveImageResult = _fileService.SaveImage(book.ImageFile);
-                if (saveImageResult.Item1 == 1)
-                {
-                    var oldImage = book.ImageUrl;
-                    book.ImageUrl = saveImageResult.Item2;
-                    var deleteResult = _fileService.DeleteImage(oldImage);
-                }
-
-                _context.Books.Add(book);
-                _context.SaveChanges();
+                var oldImage = book.ImageUrl;
+                book.ImageUrl = saveImageResult.Item2;
+                var deleteResult = _fileService.DeleteImage(oldImage);
             }
-            catch (DbUpdateException ex)
-            {
-                Console.WriteLine($"DbUpdateException: {ex.Message}");
 
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-            }
-            return RedirectToAction("Index", "MyOffers");
+            _context.Books.Add(book);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Offers");
         }
 
 
@@ -226,22 +211,26 @@ namespace swap_book.Controllers
         }
 
         [Route("book/{bookUrl}")]
-		public ActionResult BookPage(string bookUrl)
+        public async Task<ActionResult> BookPage(string bookUrl)
         {
-	        var book = _context.Books.FirstOrDefault(b => b.BookLink == new Guid(bookUrl));
-	        book.LoadCategories(_context);
-			Book result = book;
-			if (bookUrl == null)
-	        {
-		        return NotFound();
-	        }
+            var book = await _context.Books
+                .FirstOrDefaultAsync(b => b.BookLink == new Guid(bookUrl));
 
-	        if (book == null)
-	        {
-		        return NotFound();
-	        }
+            if (book == null)
+            {
+                return NotFound();
+            }
 
-			return View(result);
+            book.LoadCategories(_context);
+
+            var result = new BookDetailsViewModel
+            {
+                Book = book,
+                Owner = await _context.Users.FindAsync(book.OwnerId)
+            };
+            await result.LoadRelatedBooks(book, _context);
+
+            return View(result);
         }
     }
 }
