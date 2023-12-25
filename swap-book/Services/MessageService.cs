@@ -49,7 +49,8 @@ namespace swap_book.Services
 				SenderId = sender.Id,
 				RecipientId = recipient.Id,
 				Content = content,
-				SentDate = DateTime.UtcNow
+				SentDate = DateTime.UtcNow,
+				IsRead = false
 			};
 
 			await _context.Messages.AddAsync(message);
@@ -70,6 +71,7 @@ namespace swap_book.Services
 			message.SenderId = sender.Id;
 			message.RecipientId = recipient.Id;
 			message.SentDate = DateTime.UtcNow;
+            message.IsRead = false;
 
 			await _context.Messages.AddAsync(message);
 			await _context.SaveChangesAsync();

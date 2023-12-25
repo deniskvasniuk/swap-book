@@ -111,6 +111,11 @@ app.MapControllerRoute(
 	pattern: "book/{bookUrl}",
 	defaults: new { controller = "Offers", action = "BookPage" }
 );
+app.MapControllerRoute(
+    name: "default",
+    pattern: "/msg/sendMessage",
+    defaults: new { controller = "User", action = "SendMessage" }
+);
 
 
 using (var scope = app.Services.CreateScope())

@@ -8,6 +8,7 @@ public class BookDetailsViewModel
     public Book Book { get; set; }
     public ApplicationUser Owner { get; set; }
     public List<Book> RelatedBooks { get; set; }
+    public Message Message { get; set; }
     public BookDetailsViewModel()
     {
         RelatedBooks = new List<Book>();

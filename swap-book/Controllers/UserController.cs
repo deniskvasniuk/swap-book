@@ -41,6 +41,27 @@ namespace swap_book.Controllers
 
 			return View(messages);
 		}
+        [HttpPost]
+        public async Task<IActionResult> SendMessage(string message, string recipientId )
+        {
+            try
+            {
+       
+                // Отримайте значення messageText
+                //var messageText = message["messageText"].ToString();
+                // Отримайте користувачів з контексту або через параметри
+                var sender = await _userManager.GetUserAsync(HttpContext.User); ; // отримати SenderUser;
 
-	}
+
+                //await _messageService.SendMessage(sender, recipient, messageText);
+
+                // Поверніть успішну відповідь
+                return Redirect(HttpContext.Request.Headers["Referer"].ToString());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+    }
 }

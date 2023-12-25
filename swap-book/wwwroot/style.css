@@ -6426,7 +6426,7 @@ section .profile .profile-img {
     height: 150px;
     width: 150px;
     border-radius: 25%;
-    background: #4070f4;
+    background: #e59285;
     padding: 2px;
 }
 
@@ -6434,7 +6434,7 @@ section .profile .profile-img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 25%;
     border: 3px solid #fff;
 }
 
@@ -6450,13 +6450,14 @@ section .profile .profile-img {
 .profile .profession {
     font-weight: 400;
     font-size: 18px;
+    margin-top: 5px;
 }
 
 .profile .button {
     display: flex;
     align-items: center;
     padding: 12px 25px;
-    background: #4070f4;
+    background: #e59285;
     margin-top: 20px;
     border-radius: 6px;
     cursor: pointer;
@@ -6465,7 +6466,7 @@ section .profile .profile-img {
 }
 
     .profile .button:hover {
-        background: #275df1;
+        background: #986158;
     }
 
     .profile .button i {
