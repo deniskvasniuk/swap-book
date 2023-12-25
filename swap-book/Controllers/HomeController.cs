@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using swap_book.Services;
 using swap_book.Models;
 using System.Web;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 
 namespace swap_book.Controllers
@@ -19,7 +20,7 @@ namespace swap_book.Controllers
         private readonly IEmailSender _emailSender;
         private readonly UserManager<ApplicationUser> _userManager;
 
-		private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger, DatabaseContext context, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
         {
@@ -27,6 +28,7 @@ namespace swap_book.Controllers
             _context = context;
             _emailSender = emailSender;
             _userManager = userManager;
+
         }
 
         public async Task<IActionResult> Index()

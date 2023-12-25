@@ -13,6 +13,9 @@ using XLocalizer;
 using XLocalizer.Translate;
 using XLocalizer.Translate.MyMemoryTranslate;
 using swap_book.LocalizationResources;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +62,7 @@ builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddSingleton<IXResourceProvider, XmlResourceProvider>();
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient<ITranslator, MyMemoryTranslateService>();
+
 
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog();

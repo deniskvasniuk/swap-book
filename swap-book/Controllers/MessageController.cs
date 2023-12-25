@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using NuGet.Protocol.Plugins;
 using swap_book.Models;
@@ -28,15 +29,18 @@ namespace swap_book.Controllers
 
             try
             {
-                //var recipient = await _userManager.FindByIdAsync(recipientId);
                 var sender = await _userManager.GetUserAsync(User);
                 string content = Request.Form["userInput"];
                 string recipientId = Request.Form["recipientId"];
                 var recipient = await _userManager.FindByIdAsync(msg.RecipientId);
+
+                if (sender.Id == recipientId)
+                {
+                    TempData["AlertMessage"] = ($"You cant send message to yourself!");
+                    return Redirect(HttpContext.Request.Headers["Referer"].ToString());
+                }
                 
-
                 await _messageService.SendMessage(sender, recipient, content);
-
                 TempData["SuccessMessage"] = ($"Message is successfully send!");
 
                 return Redirect(HttpContext.Request.Headers["Referer"].ToString());
@@ -47,6 +51,18 @@ namespace swap_book.Controllers
                 
                 return StatusCode(500, ex.Message);
             }
+        }
+        public async Task<IActionResult> GetUnreadMessages()
+        {
+            var userId = _userManager.GetUserId(User); // Retrieve the current user's ID
+
+            var unreadMessages = await _context.Messages
+                .Where(m => m.RecipientId == userId && m.IsRead == false)
+                .ToListAsync();
+
+            // Optionally apply further filtering or sorting as needed
+
+            return View(unreadMessages); // Directly pass the list of messages to the view
         }
     }
 }

@@ -23,7 +23,13 @@ namespace swap_book.Controllers
 		}
 		public async Task<IActionResult> GetWishlist(string userId)
 		{
-			var user = await _userManager.FindByIdAsync(userId);
+            // Check for the refresh parameter and clear it
+            if (Request.Query.ContainsKey("refresh"))
+            {
+                // Redirect to the same action without the refresh parameter to clear it from the URL
+                return RedirectToAction("GetWishlist", new { userId });
+            }
+            var user = await _userManager.FindByIdAsync(userId);
 
 			if (user == null)
 			{
@@ -56,7 +62,8 @@ namespace swap_book.Controllers
 			_context.Wishlists.Remove(wishlistItem);
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("GetWishlist", new { userId = user.Id });
-		}
+            TempData["SuccessMessage"] = ($"Your wish is successfully deleted");
+            return RedirectToAction("GetWishlist", new { userId = user.Id, refresh = true, successMessage = TempData["SuccessMessage"] });
+        }
 	}
 }

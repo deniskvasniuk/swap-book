@@ -422,4 +422,24 @@
     <value>&lt;a href="/Identity/Account/Manage"&gt;Керування обліковим записом&lt;/a&gt;</value>
     <comment>Created by XLocalizer</comment>
   </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;&amp;#x41A;&amp;#x43E;&amp;#x431;&amp;#x437;&amp;#x430;&amp;#x440;&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;&amp;#x422;&amp;#x430;&amp;#x440;&amp;#x430;&amp;#x441; &amp;#x428;&amp;#x435;&amp;#x432;&amp;#x447;&amp;#x435;&amp;#x43D;&amp;#x43A;&amp;#x43E;&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>INVALID LANGUAGE PAIR SPECIFIED. EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;&amp;#x412;&amp;#x456;&amp;#x434;&amp;#x44C;&amp;#x43C;&amp;#x430;&amp;#x43A;. &amp;#x41E;&amp;#x441;&amp;#x442;&amp;#x430;&amp;#x43D;&amp;#x43D;&amp;#x454; &amp;#x431;&amp;#x430;&amp;#x436;&amp;#x430;&amp;#x43D;&amp;#x43D;&amp;#x44F;.&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;&amp;#x410;&amp;#x43D;&amp;#x436;&amp;#x435;&amp;#x439; &amp;#x421;&amp;#x430;&amp;#x43F;&amp;#x43A;&amp;#x43E;&amp;#x432;&amp;#x441;&amp;#x44C;&amp;#x43A;&amp;#x438;&amp;#x439;&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>INVALID LANGUAGE PAIR SPECIFIED. EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;h4&gt;&lt;a href="single-product.html"&gt;&amp;#x427;&amp;#x435;&amp;#x440;&amp;#x432;&amp;#x43E;&amp;#x43D;&amp;#x435; &amp;#x456; &amp;#x447;&amp;#x43E;&amp;#x440;&amp;#x43D;&amp;#x435;&lt;/a&gt;&lt;/h4&gt; &lt;ul class="prize d-flex"&gt; &lt;li&gt;&amp;#x421;&amp;#x442;&amp;#x435;&amp;#x43D;&amp;#x434;&amp;#x430;&amp;#x43B;&amp;#x44C;&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>INVALID LANGUAGE PAIR SPECIFIED. EXAMPLE: LANGPAIR=EN|IT USING 2 LETTER ISO OR RFC3066 LIKE ZH-CN. ALMOST ALL LANGUAGES SUPPORTED BUT SOME MAY HAVE NO CONTENT</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;a href="/user/002b571a-ee45-453d-a0ff-a1944c6c887b"&gt;My Account&lt;/a&gt;</key>
+    <value>&lt;a href="/user/002b571a-ee45-453d-a0ff-a1944c6c887b"&gt;Мій обліковий запис&lt;/a&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
 </root>

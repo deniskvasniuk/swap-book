@@ -22,7 +22,7 @@ namespace swap_book.Controllers
 		private readonly IMessageService _messageService;
 
 
-		public ExchangeController(DatabaseContext context, UserManager<ApplicationUser> userManager, IMessageService messageService)
+        public ExchangeController(DatabaseContext context, UserManager<ApplicationUser> userManager, IMessageService messageService)
 		{
 			_context = context;
 			_userManager = userManager;
@@ -58,7 +58,7 @@ namespace swap_book.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(int exchangedBookId)
+        public async Task <IActionResult> Create(int exchangedBookId)
         {
             var userId = _userManager.GetUserId(User);
             var bookId = int.Parse(Request.Form["BookId"]);
@@ -87,7 +87,8 @@ namespace swap_book.Controllers
             };
 
             _context.Exchanges.Add(exchange);
-            _context.SaveChanges();
+            await SendConfirmMessage(exchange);
+            await _context.SaveChangesAsync();
 
 
 			return Redirect(HttpContext.Request.Headers["Referer"].ToString());
@@ -106,11 +107,31 @@ namespace swap_book.Controllers
 			{
 				SenderId = sender.Id,
 				RecipientId = recipient.Id,
-				//Content = $"You have received a book exchange request from {sender.Name}.\n\nWould you like to accept the exchange?\n\nClick the link below to confirm.\n\n{_urlHelper.Action("ConfirmExchange", "Exchanges", new { id = exchange.ExchangeId })}",
+				Content = $"You have received a book exchange request from {sender.Name}.\n\nWould you like to accept the exchange?",
 				SentDate = DateTime.UtcNow
 			};
 
 			await _messageService.SendMessage(sender, recipient, message);
 		}
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmExchange(int exchangeId)
+        {
+            var exchange = await _context.Exchanges
+                .FirstOrDefaultAsync(e => e.ExchangeId == exchangeId);
+
+            if (exchange == null)
+            {
+
+                return NotFound();
+            }
+
+            exchange.Status = Exchange.ExchangeStatus.Accepted;
+
+            await _context.SaveChangesAsync();
+
+
+            return Redirect(HttpContext.Request.Headers["Referer"].ToString()); 
+        }
 	}
 }

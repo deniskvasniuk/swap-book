@@ -137,6 +137,47 @@ else if(TempData["SuccessMessage"] != null){
                         }
 
                     }
+                    <script>
+
+        function ShowExchangeModal(BookId)
+        {
+            $.ajax({
+                url: "/Exchange/GetAllBooksForUser",
+                type: "GET",
+                dataType: "json",
+                success: function (data)
+                {
+					var books = data;
+                    var form = $("<form action='/Exchange/Create' method='post'></form>");
+					var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
+
+                    for (var i = 0; i < books.length; i++)
+                    {
+                        var book = books[i];
+                        var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
+                        select.append(option);
+                    }
+
+                    form.append(select);
+					var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
+                    var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
+                    form.append(button);
+					form.append(bookIdInput);
+										$("#ExchangeModal").on("click", ".btn-primary", function () {
+											var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
+										});
+                    $("#ExchangeModal").modal("show");
+                    $("#ExchangeModal").find(".modal-body").html(form);
+
+                },
+					error: function (xhr, ajaxOptions, thrownError) {
+					console.error("Error:", xhr.status, thrownError);
+					swal("Oops","An error occurred while loading books. Please try again later.", "error");
+				}
+            });
+        }
+
+    </script>
                     <div class="product__content content--center">
                         <localize>
                             <h4><a href="single-product.html">@book.Name</a></h4>
@@ -2580,47 +2621,7 @@ else if(TempData["SuccessMessage"] != null){
         </div>
     </div>
 </div>
-<script>
 
-        function ShowExchangeModal(BookId)
-        {
-            $.ajax({
-                url: "/Exchange/GetAllBooksForUser",
-                type: "GET",
-                dataType: "json",
-                success: function (data)
-                {
-					var books = data;
-                    var form = $("<form action='/Exchange/Create' method='post'></form>");
-					var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
-
-                    for (var i = 0; i < books.length; i++)
-                    {
-                        var book = books[i];
-                        var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
-                        select.append(option);
-                    }
-
-                    form.append(select);
-					var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
-                    var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
-                    form.append(button);
-					form.append(bookIdInput);
-										$("#ExchangeModal").on("click", ".btn-primary", function () {
-											var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
-										});
-                    $("#ExchangeModal").modal("show");
-                    $("#ExchangeModal").find(".modal-body").html(form);
-
-                },
-					error: function (xhr, ajaxOptions, thrownError) {
-					console.error("Error:", xhr.status, thrownError);
-					swal("Oops","An error occurred while loading books. Please try again later.", "error");
-				}
-            });
-        }
-
-    </script>
 <style> 
 	.product__thumb { 
 		position: relative; 

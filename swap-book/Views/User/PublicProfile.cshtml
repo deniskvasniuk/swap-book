@@ -4,247 +4,519 @@
 @{
     ViewData["Title"] = "Profile";
 }
-@model swap_book.Models.ApplicationUser
+@model swap_book.ViewModels.PublicProfileViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
 
 
-<title>about me - Bootdey.com</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css">
-    	body{
-    margin-top:20px;
-}
-.section {
-    padding: 100px 0;
-    position: relative;
-}
-.gray-bg {
-  
-}
-img {
-    max-width: 100%;
-}
-img {
-    vertical-align: middle;
-    border-style: none;
-}
-/* About Me 
----------------------*/
-.about-text h3 {
-  font-size: 45px;
-  font-weight: 700;
-  margin: 0 0 6px;
-}
-@@media (max-width: 767px) {
-  .about-text h3 {
-    font-size: 35px;
-  }
-}
-.about-text h6 {
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-@@media (max-width: 767px) {
-  .about-text h6 {
-    font-size: 18px;
-  }
-}
-.about-text p {
-  font-size: 18px;
-  max-width: 450px;
-}
-.about-text p mark {
-  font-weight: 600;
-  color: #20247b;
-}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+        }
 
-.about-list {
-  padding-top: 10px;
-}
-.about-list .media {
-  padding: 5px 0;
-}
-.about-list label {
-  color: #20247b;
-  font-weight: 600;
-  width: 88px;
-  margin: 0;
-  position: relative;
-}
-.about-list label:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 11px;
-  width: 1px;
-  height: 12px;
-  background: #20247b;
-  -moz-transform: rotate(15deg);
-  -o-transform: rotate(15deg);
-  -ms-transform: rotate(15deg);
-  -webkit-transform: rotate(15deg);
-  transform: rotate(15deg);
-  margin: auto;
-  opacity: 0.5;
-}
-.about-list p {
-  margin: 0;
-  font-size: 15px;
-}
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
 
-@@media (max-width: 991px) {
-  .about-avatar {
-    margin-top: 30px;
-  }
-}
+        .gray-bg {
+        }
 
-.about-section .counter {
-  padding: 22px 20px;
-  margin-top: 15px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
-}
-.about-section .counter .count-data {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.about-section .counter .count {
-  font-weight: 700;
-  color: #20247b;
-  margin: 0 0 5px;
-}
-.about-section .counter p {
-  font-weight: 600;
-  margin: 0;
-}
-mark {
-    background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
-    background-size: 100% 3px;
-    background-repeat: no-repeat;
-    background-position: 0 bottom;
-    background-color: transparent;
-    padding: 0;
-    color: currentColor;
-}
-.theme-color {
-    color: #fc5356;
-}
-.dark-color {
-    color: #20247b;
-}
+        img {
+            max-width: 100%;
+        }
+
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+        /* About Me
+        ---------------------*/
+        .about-text h3 {
+            font-size: 45px;
+            font-weight: 700;
+            margin: 0 0 6px;
+        }
+
+        @@media (max-width: 767px) {
+            .about-text h3 {
+                font-size: 35px;
+            }
+        }
+
+        .about-text h6 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        @@media (max-width: 767px) {
+            .about-text h6 {
+                font-size: 18px;
+            }
+        }
+
+        .about-text p {
+            font-size: 18px;
+            max-width: 450px;
+        }
+
+            .about-text p mark {
+                font-weight: 600;
+                color: #20247b;
+            }
+
+        .about-list {
+            padding-top: 10px;
+        }
+
+            .about-list .media {
+                padding: 5px 0;
+            }
+
+            .about-list label {
+                color: #20247b;
+                font-weight: 600;
+                width: 88px;
+                margin: 0;
+                position: relative;
+            }
+
+                .about-list label:after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 11px;
+                    width: 1px;
+                    height: 12px;
+                    background: #20247b;
+                    -moz-transform: rotate(15deg);
+                    -o-transform: rotate(15deg);
+                    -ms-transform: rotate(15deg);
+                    -webkit-transform: rotate(15deg);
+                    transform: rotate(15deg);
+                    margin: auto;
+                    opacity: 0.5;
+                }
+
+            .about-list p {
+                margin: 0;
+                font-size: 15px;
+            }
+
+        @@media (max-width: 991px) {
+            .about-avatar {
+                margin-top: 30px;
+            }
+        }
+
+        .about-section .counter {
+            padding: 22px 20px;
+            margin-top: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+        }
+
+            .about-section .counter .count-data {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .about-section .counter .count {
+                font-weight: 700;
+                color: #20247b;
+                margin: 0 0 5px;
+            }
+
+            .about-section .counter p {
+                font-weight: 600;
+                margin: 0;
+            }
+
+        mark {
+            background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
+            background-size: 100% 3px;
+            background-repeat: no-repeat;
+            background-position: 0 bottom;
+            background-color: transparent;
+            padding: 0;
+            color: currentColor;
+        }
+
+        .theme-color {
+            color: #fc5356;
+        }
+
+        .dark-color {
+            color: #20247b;
+        }
 
         .about-avatar {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%; /* Якщо вам потрібно, щоб div займав 100% висоти батьківського контейнера */
+            height: 100%; 
         }
 
             .about-avatar img {
-                max-width: 100%; /* Забезпечте, щоб картинка не виходила за межі батьківського контейнера */
+                max-width: 100%; 
                 max-height: 100%;
-                padding: 25px;/* Забезпечте, щоб картинка не виходила за межі батьківського контейнера */
+                padding: 25px; 
                 border-radius: 25%;
             }
-
 
     </style>
 </head>
 <body>
-<section class="section about-section gray-bg" id="about">
-<div class="container">
-<div class="row align-items-center flex-row-reverse">
-<div class="col-lg-6">
-<div class="about-text go-to">
-<h3 class="dark-color">@Model.Name</h3>
-<h6 class="theme-color lead">A Lead UX &amp; UI designer based in Canada</h6>
-                        <p>@Model.Description</p>
-<div class="row about-list">
-<div class="col-md-6">
-<div class="media">
-<label>Birthday</label>
-<p>@(Model.DateOfBirth.HasValue ? Model.DateOfBirth.Value.ToShortDateString() : "N/A")</p>
-</div>
-<div class="media">
-    <label>Age</label>
-    <p>@(Model.DateOfBirth.HasValue ? (DateTime.Now.Year - Model.DateOfBirth.Value.Year) : "N/A") Yr</p>
-</div>
-<div class="media">
-<label>Residence</label>
-<p>Canada</p>
-</div>
-<div class="media">
-<label>Address</label>
-<p>California, USA</p>
-</div>
-</div>
-<div class="col-md-6">
-<div class="media">
-<label>E-mail</label>
-                                    <p><a href="mailto:@Model.Email">@Model.Email</a></p>
-</div>
-<div class="media">
-<label>Phone</label>
-                                    <p>@Model.PhoneNumber</p>
-</div>
-<div class="media">
-<label>Facebook</label>
-    <p><a href="@Model.Facebook" target="_blank">Link</a></p>
+    <section class="section about-section gray-bg" id="about">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-6">
+                    <div class="about-text go-to">
+                        <h3 class="dark-color">@Model.User.Name</h3>
+                        <h6 class="theme-color lead">@(Model.User.Description ?? "Common book enthusiast and word swapper")</h6>
+                        <div class="row about-list">
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>Birthday</label>
+                                    <p>@(Model.User.DateOfBirth.HasValue ? Model.User.DateOfBirth.Value.ToShortDateString() : "N/A")</p>
+                                </div>
+                                <div class="media">
+                                    <label>Age</label>
+                                    <p>@(Model.User.DateOfBirth.HasValue ? (DateTime.Now.Year - Model.User.DateOfBirth.Value.Year) : "N/A") Yr</p>
+                                </div>
+                                <div class="media">
+                                    <label>Facebook</label>
+                                    <p><a href="@(Model.User.Facebook ?? "#")" target="_blank">Link</a></p>
 
-</div>
-<div class="media">
-<label>Since</label>
-                                    <p>@Model.RegistrationDate.ToString("yyyy-MM-dd")</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="about-avatar">
-<img src="~/Uploads/@Model.ProfilePicture" width="315px" height="315px" title alt>
-</div>
-</div>
-</div>
-<div class="counter">
-<div class="row">
-<div class="col-6 col-lg-3">
-<div class="count-data text-center">
-<h6 class="count h2" data-to="500" data-speed="500">500</h6>
-<p class="m-0px font-w-600">Happy Clients</p>
-</div>
-</div>
-<div class="col-6 col-lg-3">
-<div class="count-data text-center">
-<h6 class="count h2" data-to="150" data-speed="150">150</h6>
-<p class="m-0px font-w-600">Project Completed</p>
-</div>
-</div>
-<div class="col-6 col-lg-3">
-<div class="count-data text-center">
-<h6 class="count h2" data-to="850" data-speed="850">850</h6>
-<p class="m-0px font-w-600">Photo Capture</p>
-</div>
-</div>
-<div class="col-6 col-lg-3">
-<div class="count-data text-center">
-<h6 class="count h2" data-to="190" data-speed="190">190</h6>
-<p class="m-0px font-w-600">Telephonic Talk</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-	
-</script>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>E-mail</label>
+                                    <p><a href="mailto:@Model.User.Email">@Model.User.Email</a></p>
+                                </div>
+                                <div class="media">
+                                    <label>Phone</label>
+                                    <p>@(Model.User.PhoneNumber ?? "N/A")</p>
+                                </div>
+                                <div class="media">
+                                    <label>Since</label>
+                                    <p>@Model.User.RegistrationDate.ToString("yyyy-MM-dd")</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-avatar">
+                        <img src="~/Uploads/@Model.User.ProfilePicture" width="315px" height="315px" title alt>
+                    </div>
+                </div>
+            </div>
+            <div class="counter">
+                <div class="row">
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="500" data-speed="500">@Model.BooksOnOffer</h6>
+                            <p class="m-0px font-w-600">Books on offer</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="150" data-speed="150">@Model.BooksWished</h6>
+                            <p class="m-0px font-w-600">Books wished</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="850" data-speed="850">@Model.BooksReceived</h6>
+                            <p class="m-0px font-w-600">Books received</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <div class="count-data text-center">
+                            <h6 class="count h2" data-to="190" data-speed="190">@Model.BooksSent</h6>
+                            <p class="m-0px font-w-600">Books sent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-danger nav-link active" style="border-radius:50px; background-color:#20247b; border-color: transparent; margin: 30px 20px;" data-toggle="tab" data-target="#nav-books-on-offer">Books on offer (@Model.BooksOnOffer)</button>
+                <button type="button" class="btn btn-danger nav-link" style="border-radius:50px; background-color:#20247b; border-color: transparent; margin: 30px 20px;" data-toggle="tab" data-target="#nav-books-wished">Books wished (@Model.BooksWished)</button>
+            </div>
+
+            <section class="wn__bestseller__area bg--white pb--30">
+                    <div class="tab__container">
+                        <div class="row single__tab tab-pane fade show active" id="nav-books-on-offer" role="tabpanel">
+                            <div class="product__indicator--4 arrows_style owl-carousel owl-theme">
+                                @foreach(var book in Model.BooksOnOfferList){
+                                    <div class="single__product">
+                                        <div class="product product__style--3" >
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                                <div class="product__thumb">
+                                                    <a class="first__img" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                    <a class="second__img animation1" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                </div>
+                                                @{
+                                                    DateTime now = DateTime.Now;
+
+                                                    DateTime publishedAt = @book.CreatedAt.Value;
+                                                    TimeSpan difference = now - publishedAt;
+
+                                                    string timeAgo = "";
+                                                    if (difference.TotalDays >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalDays)} days";
+                                                    }
+                                                    else if (difference.TotalHours >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalHours)} hours";
+                                                    }
+                                                    else if (difference.TotalMinutes >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalMinutes)} minutes";
+                                                    }
+                                                    else if (difference.TotalSeconds >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalSeconds)} seconds";
+                                                    }
+
+                                                }
+                                                <script>
+
+                                                    function ShowExchangeModal(BookId) {
+                                                        $.ajax({
+                                                            url: "/Exchange/GetAllBooksForUser",
+                                                            type: "GET",
+                                                            dataType: "json",
+                                                            success: function (data) {
+                                                                var books = data;
+                                                                var form = $("<form action='/Exchange/Create' method='post'></form>");
+                                                                var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
+
+                                                                for (var i = 0; i < books.length; i++) {
+                                                                    var book = books[i];
+                                                                    var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
+                                                                    select.append(option);
+                                                                }
+
+                                                                form.append(select);
+                                                                var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
+                                                                var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
+                                                                form.append(button);
+                                                                form.append(bookIdInput);
+                                                                $("#ExchangeModal").on("click", ".btn-primary", function () {
+                                                                    var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
+                                                                });
+                                                                $("#ExchangeModal").modal("show");
+                                                                $("#ExchangeModal").find(".modal-body").html(form);
+
+                                                            },
+                                                            error: function (xhr, ajaxOptions, thrownError) {
+                                                                console.error("Error:", xhr.status, thrownError);
+                                                                swal("Oops", "An error occurred while loading books. Please try again later.", "error");
+                                                            }
+                                                        });
+                                                    }
+
+                                                </script>
+                                                <div class="product__content content--center" style="padding-top: 0px;">
+                                                    <localize>
+                                                        <h4><a href="single-product.html">@book.Name</a></h4>
+                                                        <ul class="prize d-flex">
+                                                            <li>@book.Author</li>
+                                                        </ul>
+                                                    </localize>
+                                                    <ul class="prize d-flex">
+                                                        <p><span style="color:#ef365f">About @timeAgo</span> ago</p>
+                                                    </ul>
+
+                                                    <div class="action">
+                                                        <div class="actions_inner">
+                                                            <ul class="add_to_links">
+                                                                <li><a class="cart" href="javascript:void(0);" onclick="ShowExchangeModal(@book.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                                <li class="wishlist">
+                                                                    <a asp-action="AddToWishlist" asp-controller="Home" asp-route-bookId="@book.BookId">
+                                                                        <i class="bi bi-shopping-cart-full"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product__hover--content">
+                                                        <ul class="rating d-flex">
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="row single__tab tab-pane fade" id="nav-books-wished" role="tabpanel">
+                            <div class="product__indicator--4 arrows_style owl-carousel owl-theme">
+                                @foreach (var book in Model.BooksWishedList)
+                                {
+                                    <div class="single__product">
+                                        <div class="product product__style--3" style="padding-top: 0px;">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                                                <div class="product__thumb">
+                                                    <a class="first__img" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                    <a class="second__img animation1" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                </div>
+                                                @{
+                                                    DateTime now = DateTime.Now;
+
+                                                    DateTime publishedAt = @book.CreatedAt.Value;
+                                                    TimeSpan difference = now - publishedAt;
+
+                                                    string timeAgo = "";
+                                                    if (difference.TotalDays >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalDays)} days";
+                                                    }
+                                                    else if (difference.TotalHours >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalHours)} hours";
+                                                    }
+                                                    else if (difference.TotalMinutes >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalMinutes)} minutes";
+                                                    }
+                                                    else if (difference.TotalSeconds >= 1)
+                                                    {
+                                                        timeAgo = $"{(int)Math.Floor(difference.TotalSeconds)} seconds";
+                                                    }
+
+                                                }
+                                                <script>
+
+                                                    function ShowExchangeModal(BookId) {
+                                                        $.ajax({
+                                                            url: "/Exchange/GetAllBooksForUser",
+                                                            type: "GET",
+                                                            dataType: "json",
+                                                            success: function (data) {
+                                                                var books = data;
+                                                                var form = $("<form action='/Exchange/Create' method='post'></form>");
+                                                                var select = $("<select name='ExchangedBookId' class='form-select form-select-lg mb-3'></select>");
+
+                                                                for (var i = 0; i < books.length; i++) {
+                                                                    var book = books[i];
+                                                                    var option = $("<option value='" + book.id + "'>" + book.title + "</option>");
+                                                                    select.append(option);
+                                                                }
+
+                                                                form.append(select);
+                                                                var bookIdInput = $("<input type='hidden' name='BookId' value='" + BookId + "' />");
+                                                                var button = $("<button type='submit' class='btn btn-primary'>Відправити</button>");
+                                                                form.append(button);
+                                                                form.append(bookIdInput);
+                                                                $("#ExchangeModal").on("click", ".btn-primary", function () {
+                                                                    var selectedValue = $("#ExchangeModal").find("select[name='ExchangedBookId']").val();
+                                                                });
+                                                                $("#ExchangeModal").modal("show");
+                                                                $("#ExchangeModal").find(".modal-body").html(form);
+
+                                                            },
+                                                            error: function (xhr, ajaxOptions, thrownError) {
+                                                                console.error("Error:", xhr.status, thrownError);
+                                                                swal("Oops", "An error occurred while loading books. Please try again later.", "error");
+                                                            }
+                                                        });
+                                                    }
+
+                                                </script>
+                                                <div class="product__content content--center" style="padding-top: 0px;">
+                                                    <localize>
+                                                        <h4><a href="single-product.html">@book.Name</a></h4>
+                                                        <ul class="prize d-flex">
+                                                            <li>@book.Author</li>
+                                                        </ul>
+                                                    </localize>
+                                                    <ul class="prize d-flex">
+                                                        <p><span style="color:#ef365f">About @timeAgo</span> ago</p>
+                                                    </ul>
+
+                                                    <div class="action">
+                                                        <div class="actions_inner">
+                                                            <ul class="add_to_links">
+                                                                <li><a class="cart" href="javascript:void(0);" onclick="ShowExchangeModal(@book.BookId)" data-bs-toggle="modal" data-bs-target="#ExchangeModal"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                                <li class="wishlist">
+                                                                    <a asp-action="AddToWishlist" asp-controller="Home" asp-route-bookId="@book.BookId">
+                                                                        <i class="bi bi-shopping-cart-full"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                                                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product__hover--content">
+                                                        <ul class="rating d-flex">
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li class="on"><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                            <li><i class="fa fa-star-o"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+            </section>
+        </div>
+    </section>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Показано секцію booksOnOffer при завантаженні сторінки
+            $("#nav-books-on-offer").tab("show");
+
+            // При натисканні на кнопку
+            $(document).on("click", ".nav-link", function () {
+
+                // Деактивуємо попередню кнопку
+                $(this).closest(".row").find(".nav-link:not(:disabled)").not(this).removeClass("active");
+                if ($(this).hasClass("active")) {
+                    return;
+                }
+                // Приховуємо поточну активну секцію
+                $(".tab-pane.active").removeClass("active");
+
+
+                // Показуємо секцію, яка відповідає атрибуту data-target кнопки
+                $(this).attr("data-target").addClass("active");
+
+
+                // Якщо поточна секція вже є активною, то нічого не робимо
+                if ($(this).attr("data-target") === $(".tab-pane.active").attr("id")) {
+                    return;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
