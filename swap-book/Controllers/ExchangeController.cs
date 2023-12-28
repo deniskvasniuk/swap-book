@@ -134,7 +134,7 @@ namespace swap_book.Controllers
             exchange.Status = Exchange.ExchangeStatus.Accepted;
 
             await _context.SaveChangesAsync();
-
+            TempData["SuccessMessage"] = "Exchange is successfully confirmed!";
 
             return Redirect(HttpContext.Request.Headers["Referer"].ToString()); 
         }

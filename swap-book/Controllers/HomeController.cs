@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.Razor;
 using swap_book.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using swap_book.Services;
-using swap_book.Models;
-using System.Web;
-using Microsoft.AspNetCore.Mvc.Routing;
+
 
 
 namespace swap_book.Controllers
@@ -39,14 +35,12 @@ namespace swap_book.Controllers
 			   .Include(b => b.Owner)
 			   .ToList();
 
-		   // Select the latest books
 		   var latestBooks = books
 			   .OrderByDescending(b => b.CreatedAt)
 			   .Take(10).ToList();
 
 		   var currentUser = await _userManager.GetUserAsync(User);
 
-			// Prepare an instance of the ViewModel
 			var viewModel = new IndexViewModel(books, latestBooks, currentUser);
 
 		   return View(viewModel);
@@ -56,8 +50,17 @@ namespace swap_book.Controllers
 
             return View("~/Views/Contact/Index.cshtml");
         }
+        public IActionResult FAQ()
+        {
 
-        public IActionResult UserProfile()
+	        return View("~/Views/FAQ/Index.cshtml");
+        }
+        public IActionResult About()
+        {
+
+	        return View("~/Views/About/Index.cshtml");
+        }
+		public IActionResult UserProfile()
         {
 
             return View("~/Views/User/PublicProfile.cshtml");
@@ -178,7 +181,7 @@ namespace swap_book.Controllers
                 new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
             );
 
-            // Redirect to the return URL
+
             return LocalRedirect("/");
         }
         public void UpdateBookWishlist(Wishlist wishlist)
@@ -191,5 +194,6 @@ namespace swap_book.Controllers
 
             _context.SaveChanges();
         }
+
     }
 }

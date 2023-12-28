@@ -1889,13 +1889,13 @@ Header Styles
 		  color: #fff;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.shop_search > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/search_white.png") no-repeat scroll 0 center;
+		  background: rgba(0, 0, 0, 0) url("images/icons/message.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.wishlist > a {
 		  background: rgba(0, 0, 0, 0) url("images/icons/button-wishlist_white.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.shopcart > a {
-		  background: rgba(0, 0, 0, 0) url("images/icons/cart_white.png") no-repeat scroll 0 center;
+		  background: rgba(0, 0, 0, 0) url("images/icons/notification.png") no-repeat scroll 0 center;
 		}
 		.is-sticky.header__area .header__sidebar__right > li.setting__bar__icon > a {
 		  background: transparent url("images/icons/icon_setting_white.png") no-repeat scroll left center;

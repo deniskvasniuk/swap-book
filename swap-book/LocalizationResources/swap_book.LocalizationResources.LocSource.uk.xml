@@ -442,4 +442,29 @@
     <value>&lt;a href="/user/002b571a-ee45-453d-a0ff-a1944c6c887b"&gt;Мій обліковий запис&lt;/a&gt;</value>
     <comment>Created by XLocalizer</comment>
   </data>
+  <data isActive="false">
+    <key>FAQ</key>
+    <value>Поширені запитання</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>About us</key>
+    <value>Про нас</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;a href="/user/e9dc8fc6-533b-4759-b096-3a1e0df89ade"&gt;My Account&lt;/a&gt;</key>
+    <value>&lt;a href="/user/e9dc8fc6-533b-4759-b096-3a1e0df89ade"&gt;Мій обліковий запис&lt;/a&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>&lt;p &gt;Denis, you have no books to swap. Add one now!&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Use this page to add your used book.&lt;/li&gt; &lt;li&gt;Click "Add new book" button.&lt;/li&gt; &lt;li&gt;Add all necessary information about your book.&lt;/li&gt; &lt;li&gt;After this steps your will be able to swapping.&lt;/li&gt; &lt;/ul&gt;</key>
+    <value>&lt;p &gt;Денисе, тобі нема чого міняти книжками. Додайте один зараз!&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Використовуйте цю сторінку, щоб додати використану книгу.&lt;/li&gt; &lt;li&gt;Натисніть кнопку "Додати нову книгу".&lt;/li&gt; &lt;li&gt;Додайте всю необхідну інформацію про свою книгу.&lt;/li&gt; &lt;li&gt;Після цих кроків ви зможете помінятися місцями.&lt;/li&gt; &lt;/ul&gt;</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
+  <data isActive="false">
+    <key>Add new</key>
+    <value>Додати</value>
+    <comment>Created by XLocalizer</comment>
+  </data>
 </root>
