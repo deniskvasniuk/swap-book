@@ -101,9 +101,14 @@ namespace swap_book.Controllers
 			}
 
 			var sender = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == exchange.UserId);
-			var recipient = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == exchange.ExchangedBook.OwnerId);
+            var owner = await _context.Books
+                .Include(b => b.Owner) 
+                .FirstOrDefaultAsync(b => b.BookId == exchange.ExchangedBookId);
 
-			var message = new Message
+            var recipient = owner.Owner;
+            
+
+            var message = new Message
 			{
 				SenderId = sender.Id,
 				RecipientId = recipient.Id,

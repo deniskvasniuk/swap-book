@@ -17,16 +17,11 @@ namespace swap_book.Controllers
 			_userManager = userManager;
 			_context = context;
 		}
-		public IActionResult Index()
-		{
-			return View();
-		}
+
 		public async Task<IActionResult> GetWishlist(string userId)
 		{
-            // Check for the refresh parameter and clear it
             if (Request.Query.ContainsKey("refresh"))
             {
-                // Redirect to the same action without the refresh parameter to clear it from the URL
                 return RedirectToAction("GetWishlist", new { userId });
             }
             var user = await _userManager.FindByIdAsync(userId);

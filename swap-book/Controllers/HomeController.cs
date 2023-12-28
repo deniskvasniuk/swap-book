@@ -69,25 +69,7 @@ namespace swap_book.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpGet]
-        public ActionResult Exchange(int id)
-        {
-            ViewBag.BookId = id;
-            return View();
-        }
 
-        [HttpPost] 
-        public ActionResult PerformExchange(Exchange exchange)
-        {
-            //exchange.Date = DateTime.Now;
-            
-            //_context.Exchanges.Add(exchange);
-           
-            //_context.SaveChanges();
-
-            //ViewBag.Message = "Спасибі, " + exchange.Person + ", запит на обмін успішно надіслано!";
-            return RedirectToAction("Index", "Home");
-        }
 
         [HttpPost]
         public IActionResult SetLang(string culture, string returnUrl)
@@ -116,12 +98,11 @@ namespace swap_book.Controllers
                     _context.Subscribers.Add(model);
                     _context.SaveChanges();
 
-                    // Send a confirmation email to the subscriber
                     _emailSender.SendConfirmationEmail(model.SubscriberEmail, model.ConfirmationToken);
                 }
             }
 
-            // Return appropriate response, e.g., redirect to a thank you page
+
             return RedirectToAction("Index", "Home");
         }
         [HttpGet("/confirm-subscription")]
@@ -163,7 +144,7 @@ namespace swap_book.Controllers
 
             if (existingWishlistEntry == null)
             {
-                // Створити новий вішліст, якщо він не існує
+
                 var newWishlist = new Wishlist
                 {
                     UserId = currentUserId,
@@ -183,7 +164,7 @@ namespace swap_book.Controllers
             }
             else
             {
-                // Книга вже є у вішлісті, відобразити відповідне повідомлення
+
                 TempData["AlertMessage"] = ($"Book is already in your wishlist!");
             }
 

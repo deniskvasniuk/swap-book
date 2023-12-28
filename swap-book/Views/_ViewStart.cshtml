@@ -1,3 +1,14 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using swap_book.Models
+@using swap_book.Services
+@inject IMessageService MessageService
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@{
     Layout = "_Layout";
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var messages = await MessageService.GetСonfirmMessages(await UserManager.GetUserAsync(User));
+        ViewBag.Messages = messages;
+    }
 }

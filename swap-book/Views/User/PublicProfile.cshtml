@@ -214,7 +214,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="about-avatar">
-                        <img src="~/Uploads/@Model.User.ProfilePicture" width="315px" height="315px" title alt>
+                        <img src="~/Uploads/@Model.User.ProfilePicture" width="315px" height="315px">
                     </div>
                 </div>
             </div>
@@ -260,8 +260,8 @@
                                         <div class="product product__style--3" >
                                             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="product__thumb">
-                                                    <a class="first__img" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
-                                                    <a class="second__img animation1" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                    <a class="first__img" href="~/book/@book.BookLink" style="height: 389.61px; width: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                    <a class="second__img animation1" href="~/book/@book.BookLink" style="height: 389.61px; width: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
                                                 </div>
                                                 @{
                                                     DateTime now = DateTime.Now;
@@ -375,8 +375,8 @@
                                         <div class="product product__style--3" style="padding-top: 0px;">
                                             <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                                 <div class="product__thumb">
-                                                    <a class="first__img" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
-                                                    <a class="second__img animation1" href="book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                    <a class="first__img" href="~/book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
+                                                    <a class="second__img animation1" href="~/book/@book.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@book.ImageUrl" style="height: 389.61px; weight: 262.5px;" alt="product image"></a>
                                                 </div>
                                                 @{
                                                     DateTime now = DateTime.Now;
@@ -492,26 +492,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            // Показано секцію booksOnOffer при завантаженні сторінки
             $("#nav-books-on-offer").tab("show");
-
-            // При натисканні на кнопку
             $(document).on("click", ".nav-link", function () {
 
-                // Деактивуємо попередню кнопку
                 $(this).closest(".row").find(".nav-link:not(:disabled)").not(this).removeClass("active");
                 if ($(this).hasClass("active")) {
                     return;
                 }
-                // Приховуємо поточну активну секцію
+ 
                 $(".tab-pane.active").removeClass("active");
 
 
-                // Показуємо секцію, яка відповідає атрибуту data-target кнопки
+
                 $(this).attr("data-target").addClass("active");
 
 
-                // Якщо поточна секція вже є активною, то нічого не робимо
                 if ($(this).attr("data-target") === $(".tab-pane.active").attr("id")) {
                     return;
                 }

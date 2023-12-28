@@ -60,9 +60,8 @@ namespace swap_book.Controllers
                 .Where(m => m.RecipientId == userId && m.IsRead == false)
                 .ToListAsync();
 
-            // Optionally apply further filtering or sorting as needed
 
-            return View(unreadMessages); // Directly pass the list of messages to the view
+            return View(unreadMessages); 
         }
     }
 }

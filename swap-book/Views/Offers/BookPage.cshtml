@@ -5,6 +5,8 @@
     DateTime registrationDate = DateTime.Now;
     string formattedDate = registrationDate.ToString("dd.MM.yyyy");
 }
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 <div class="popup-outer">
     <div class="popup-box">
@@ -141,6 +143,7 @@
                         <div class="productcategory__slide--2 arrows_style owl-carousel owl-theme">
                             @foreach (var rbook in Model.RelatedBooks)
                             {
+                                var user = await UserManager.FindByIdAsync(rbook.OwnerId);
                                 <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="product__thumb">
                                         <a class="first__img" href="~/book/@rbook.BookLink" style="height: 389.61px; weight: 262.5px"><img src="~/Uploads/@rbook.ImageUrl"  style="height: 389.61px; weight: 262.5px;"  alt="product image"></a>
@@ -149,7 +152,7 @@
                                             <span class="hot-label">RELATED</span>
                                         </div>
                                         <div class="profile-photo">
-                                            <a href="~/user/@rbook.Owner.PublicProfileLink"><img src="~/Uploads/@rbook.Owner.ProfilePicture" alt="profile photo"></a>
+                                            <a href="~/user/@user.PublicProfileLink"><img src="~/Uploads/@user.ProfilePicture" alt="profile photo"></a>
                                         </div>
                                     </div>
                                     @{
@@ -237,8 +240,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- popup box start -->
 
     </div>
     <!-- End main Content -->

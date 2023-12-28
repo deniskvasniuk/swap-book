@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using swap_book.Models;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
+
 
 namespace swap_book.Services
 {
@@ -20,7 +20,9 @@ namespace swap_book.Services
 		Task<List<Message>> GetMessages(ApplicationUser user);
 		Task<List<Message>> GetUnreadMessages(ApplicationUser user);
 		Task MarkMessageAsRead(Message message);
-	}
+        Task<List<Message>> GetСonfirmMessages(ApplicationUser user);
+        Task<int> CountConfiimMessages(ApplicationUser user);
+    }
 	public class MessageService : IMessageService
 	{
 
@@ -83,8 +85,22 @@ namespace swap_book.Services
 				.Where(m => m.SenderId == user.Id || m.RecipientId == user.Id)
 				.ToListAsync();
 		}
+        public async Task<List<Message>> GetСonfirmMessages(ApplicationUser user)
+        {
+            return await _context.Messages
+                .Where(m => m.SenderId == user.Id || m.RecipientId == user.Id)
+                .Where(m => m.Content.StartsWith("You have received a book exchange request from"))  // Filter by content
+                .ToListAsync();
+        }
 
-		public async Task<List<Message>> GetUnreadMessages(ApplicationUser user)
+        public async Task<int> CountConfiimMessages(ApplicationUser user)
+        {
+            return await _context.Messages
+                .Where(m => m.SenderId == user.Id || m.RecipientId == user.Id)
+                .Where(m => m.Content.StartsWith("You have received a book exchange request from"))
+                .CountAsync();
+        }
+        public async Task<List<Message>> GetUnreadMessages(ApplicationUser user)
 		{
 			return await _context.Messages
 				.Where(m => m.RecipientId == user.Id && !m.IsRead)
