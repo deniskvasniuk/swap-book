@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace swap_book.Models
 {
+    [Table("AspNetUsers")]
     public class ApplicationUser:IdentityUser
     {
         public string? Name { get; set; }

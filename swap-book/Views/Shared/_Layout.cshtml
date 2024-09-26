@@ -41,8 +41,11 @@
 </head>
 @{
     var routeData = ViewContext.RouteData.Values;
-    routeData["culture"] = "{0}";
-    Console.WriteLine(routeData);
+    if (routeData != null)
+    {
+        routeData["culture"] = "{0}";
+        Console.WriteLine(routeData);
+    }
 }
 <body>
 
@@ -90,7 +93,7 @@
             <li class="shop_search"><a class="search__active" href="#"></a></li>
             <li class="wishlist"><a asp-controller="Wishlist" asp-action="GetWishlist" asp-route-userId="@UserManager.GetUserId(User)"></a></li>
             <li class="shopcart">
-                @if (ViewBag.Messages.Count != 0)
+                @if (ViewBag.Messages != null )
                 {
 
                     <a class="cartbox_active" href="#"><span class="product_qun">@ViewBag.Messages.Count</span></a>

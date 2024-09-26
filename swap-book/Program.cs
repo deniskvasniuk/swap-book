@@ -16,6 +16,7 @@ using swap_book.LocalizationResources;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc;
+using swap_book.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,13 +49,22 @@ builder.Services.Configure<RequestLocalizationOptions>(ops =>
 
 string connection = builder.Configuration.GetConnectionString("BookContext");
 
+builder.Services.AddDbContext<DatabaseContext>(options =>
+    options.UseSqlServer(connection, option =>
+    {
+        option.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+    })
+);
 
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{ 
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireNonAlphanumeric = false;
+})
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultUI()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddPasswordValidator<CustomPasswordValidator<IdentityUser>>();
 
 builder.Services.AddScoped<IEmailSender, MailService>();
 builder.Services.AddScoped<IFileService, FileService>();

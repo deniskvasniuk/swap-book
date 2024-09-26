@@ -26,6 +26,10 @@ namespace swap_book.Models
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("server=ACER;database=swap-book_new;trusted_connection=true; encrypt=false");
+            }
             optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()));
         }
 
