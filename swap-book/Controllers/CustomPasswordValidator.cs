@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using swap_book.Models;
 using System.Text.RegularExpressions;
 
 namespace swap_book.Controllers
 {
-    public class CustomPasswordValidator<TUser> : IPasswordValidator<TUser> where TUser : class
+    public class CustomPasswordValidator<TUser> : IPasswordValidator<TUser> where TUser : ApplicationUser
     {
         public Task<IdentityResult> ValidateAsync(UserManager<TUser> manager, TUser user, string password)
         {

@@ -64,7 +64,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<DatabaseContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders()
-    .AddPasswordValidator<CustomPasswordValidator<IdentityUser>>();
+    .AddPasswordValidator<CustomPasswordValidator<ApplicationUser>>();
 
 builder.Services.AddScoped<IEmailSender, MailService>();
 builder.Services.AddScoped<IFileService, FileService>();
