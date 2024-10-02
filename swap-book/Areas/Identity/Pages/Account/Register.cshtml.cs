@@ -130,7 +130,7 @@ namespace swap_book.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, Roles.User.ToString());
-                    _logger.LogInformation("User created a new account with password.");
+                    _logger.LogInformation("New user created successfully. User: {Email}", Input.Email);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -144,6 +144,8 @@ namespace swap_book.Areas.Identity.Pages.Account
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
+                    _logger.LogInformation("Confirmation email sent to user. User: {Email}", Input.Email);
+
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
@@ -151,14 +153,17 @@ namespace swap_book.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+                        _logger.LogInformation("User signed in after registration. User: {Email}", Input.Email);
                         return LocalRedirect(returnUrl);
                     }
                 }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
+                    _logger.LogWarning("User registration failed. Error: {Error}, User: {Email}", error.Description, Input.Email);
                 }
             }
+            _logger.LogWarning("User registration failed due to invalid model state. User: {Email}", Input.Email);
             return Page();
         }
 
