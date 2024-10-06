@@ -71,7 +71,18 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddSingleton<IXResourceProvider, XmlResourceProvider>();
 builder.Services.AddRazorPages();
+builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<ITranslator, MyMemoryTranslateService>();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 
 builder.Logging.ClearProviders();
@@ -98,7 +109,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseCors();
 
 app.UseAuthorization();
 

@@ -20,6 +20,9 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using swap_book.Constants;
 using swap_book.Models;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace swap_book.Areas.Identity.Pages.Account
 {
@@ -31,13 +34,17 @@ namespace swap_book.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _configuration;
+        private readonly HttpClient _httpClient;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IConfiguration configuration,
+            IHttpClientFactory httpClientFactory)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,56 +52,30 @@ namespace swap_book.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _configuration = configuration;
+            _httpClient = httpClientFactory.CreateClient();
         }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public string ReturnUrl { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-        /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-        ///     directly from your code. This API may change or be removed in future releases.
-        /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -103,9 +84,7 @@ namespace swap_book.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Name")]
             public string Name { get; set; }
-
         }
-
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -117,6 +96,17 @@ namespace swap_book.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            var captchaResponse = Request.Form["g-recaptcha-response"];
+            var secretKey = _configuration["reCaptcha:SecretKey"];
+            var verified = await VerifyCaptcha(secretKey, captchaResponse);
+
+            if (!verified)
+            {
+                ModelState.AddModelError(string.Empty, "Please complete the reCAPTCHA.");
+                return Page();
+            }
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -188,6 +178,30 @@ namespace swap_book.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<ApplicationUser>)_userStore;
+        }
+
+        private async Task<bool> VerifyCaptcha(string secretKey, string captchaResponse)
+        {
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("secret", secretKey),
+                new KeyValuePair<string, string>("response", captchaResponse)
+            });
+
+            var response = await _httpClient.PostAsync("https://www.google.com/recaptcha/api/siteverify", content);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResult = await response.Content.ReadFromJsonAsync<CaptchaResponse>();
+                return jsonResult.Success;
+            }
+
+            return false;
+        }
+
+        private class CaptchaResponse
+        {
+            public bool Success { get; set; }
+            public string[] ErrorCodes { get; set; }
         }
     }
 }

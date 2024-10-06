@@ -38,6 +38,7 @@
                             <input type="checkbox" name="agree-term" required="true" id="agree-term" class="agree-term"/>
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in <a href="#" class="term-service">Terms of service</a></label>
                         </div>
+                        <div class="g-recaptcha" data-sitekey="6LeN31UqAAAAAHyciS6qmQnGP7otnH16GlEHfnm2"></div><br>
                         <div class="form-group form-button">
                             <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                         </div>
@@ -55,4 +56,5 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
 }
